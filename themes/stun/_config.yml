@@ -142,7 +142,7 @@ header:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: http://i1.fuimg.com/733114/f9c084d55c82d5db.jpg
+    url: /images/background/head.jpg
   # Mask effect of the background image.
   mask:
     enable: true
@@ -168,7 +168,7 @@ body:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: http://i2.tiimg.com/733114/431ed279023ff6dc.jpg
+    url: /images/background/body.jpg
     # Whether to fixed the background image.
     fixed: true
     # Whether to repeat the image as much as possible to cover the entire area.
@@ -191,7 +191,7 @@ footer:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: http://i2.tiimg.com/733114/8a8d237c3ad72a0f.jpg
+    url: /images/background/foot.jpg
   # Mask effect of the background image.
   mask:
     enable: true
