@@ -142,7 +142,7 @@ header:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: http://i2.tiimg.com/733114/5688242ca3126ac8.jpg
+    url: http://i1.fuimg.com/733114/f9c084d55c82d5db.jpg
   # Mask effect of the background image.
   mask:
     enable: true
@@ -155,7 +155,7 @@ header:
     bg_color: "#333"
   # The icon that prompts the user to pull down.
   scroll_down_icon:
-    enable: false
+    enable: true
     # Icon name in FontAwesome, see: https://fontawesome.com/icons
     name: fas fa-angle-down
     animation: true
@@ -168,7 +168,7 @@ body:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: http://i2.tiimg.com/733114/efa7522eab18c183.gif
+    url: http://i2.tiimg.com/733114/431ed279023ff6dc.jpg
     # Whether to fixed the background image.
     fixed: true
     # Whether to repeat the image as much as possible to cover the entire area.
@@ -187,11 +187,11 @@ body:
 footer:
   # Background image of site footer.
   bg_image:
-    enable: ture
+    enable: true
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: http://i2.tiimg.com/733114/e7baabd6ac4ee909.jpg
+    url: http://i2.tiimg.com/733114/8a8d237c3ad72a0f.jpg
   # Mask effect of the background image.
   mask:
     enable: true
@@ -201,11 +201,11 @@ footer:
   copyright:
     enable: true
     # If not set, will be used `author` from Hexo main config (e.g. liuyib All Rights Reserved)
-    text: Edited by WuXiuBen
+    text: 吴秀奔
     # Start time. If not set, the current year will be used.
-    since: 开天辟地
+    since: 1998
     # End time. If not set, the current year will be used.
-    end: 海枯石烂
+    end:
   # The icon between the copyright and the owner.
   icon:
     enable: true
@@ -232,8 +232,8 @@ footer:
     icp:
   # Any custom text (e.g. Hosted by <a href="https://pages.github.com/" rel="noopener" target="_blank">Github Pages</a>)
   custom:
-    enable: ture
-    text: 托管于Github
+    enable: false
+    text:
 
 # Creative Commons 4.0 International License
 creative_commons:
@@ -295,7 +295,7 @@ author:
     # Optional values: turn | shake
     animation: turn
   # Your favorite motto.
-  motto: Mr.Wu
+  motto: 明日的效率总是最高的
 
 # Social links
 # Value before `||` is the target link, value after `||` is the name of FontAwesome icon.
@@ -304,19 +304,17 @@ author:
 # If you can`t find a suitable icon, you can choose to display text by adding the `origin:` prefix.
 # e.g. `origin:sf`, so `sf` will be displayed.
 social:
-  github: https://github.com/ || fab fa-github
-  google: https://plus.google.com/ || fab fa-google
-  twitter: https://twitter.com/ || fab fa-twitter
-  youtube: https://youtube.com/ || fab fa-youtube
+  github: https://XiubenWu.github.io || fab fa-github
   QQ: tencent://message?uin=1347097895 || fab fa-qq
-  QQmail: mailto:1347097895@qq.com || origin:QQ 邮箱
-  Gmail: mailto:xiubenwu543@gmail.com || origin:Gmail
+  # google: https://plus.google.com/ || fab fa-google
+  # twitter: https://twitter.com/ || fab fa-twitter
+  # youtube: https://youtube.com/ || fab fa-youtube
   # segmentfault: https://segmentfault.com/ || origin:sf
   # weibo: https://weibo.com/ || fab fa-weibo
   # zhihu: https://www.zhihu.com/ || origin:知
   # wechat: yournumber || fab fa-weixin
   # telegram: yournumber || fab fa-telegram
-  # qq: 1347097895 || fab fa-qq
+  # qq: yournumber || fab fa-qq
 
 social_setting:
   enable: true
@@ -343,7 +341,7 @@ toc:
 feed:
   enable: false
   # Enter your email subscription link (e.g. http://eepurl.com/guAE6j)
-  email: 1347097895@qq.com
+  email:
   # Enter the rss address of you set (e.g. /atom.xml)
   # Dependency: https://github.com/hexojs/hexo-generator-feed/
   # !!! Don't enable this before install dependency by `npm install hexo-generator-feed --save` in hexo root directory.
@@ -402,20 +400,20 @@ post_meta:
   # Dependency: https://github.com/willin/hexo-wordcount/
   # !!! Don't enable this before install dependency by `npm install hexo-wordcount --save` in hexo root directory.
   reading_time:
-    enable: false
+    enable: true
     # Icon name in FontAwesome, see: https://fontawesome.com/icons
     icon: far fa-clock
     # Set reading speed to count reading time.
     speed:
       # Reading speed of zh-CN.
-      zh: 200
+      zh: 150
       # Reading speed of en-US.
-      en: 80
+      en: 50
   # Counting the words of post.
   # Dependency: https://github.com/willin/hexo-wordcount/
   # !!! Don't enable this before install dependency by `npm install hexo-wordcount --save` in hexo root directory.
   word_count:
-    enable: false
+    enable: true
     # Icon name in FontAwesome, see: https://fontawesome.com/icons
     icon: far fa-file-word
 
@@ -440,9 +438,9 @@ post_widget:
     horizon_line: true
   # Article sharing
   share:
-    enable: false
+    enable: true
     # The text displayed before the share button.
-    label: "Share to: "
+    label: "分享给朋友~~:"
     # Optional values: qzone | qq | weibo | wechat | douban | linkedin | facebook | twitter | google
     target: qzone, qq, weibo, wechat, douban, linkedin, facebook, twitter, google
 
@@ -500,7 +498,7 @@ waline:
   # The number of comments per page.
   pageSize: 10
   # Optional values: en | zh-CN | zh-TW | jp
-  lang: zh-CN
+  lang: zh-CN,zh-TW,en
   # Article reading statistics.
   visitor: false
 
@@ -705,7 +703,7 @@ canvas_nest:
 # Math and Chart config
 # ---------------------------------------------------------------
 math:
-  enable: false
+  enable: true
   # If true, this function will be enabled on every page.
   # If false, this function will be enabled only if the page where `math: true` is set in `Front-matter`.
   per_page: false
@@ -735,7 +733,7 @@ math:
 
 # Fancybox
 # See: https://fancyapps.com/fancybox/3/
-fancybox: ture
+fancybox: false
 
 # Click to enlarge picture.
 zoom_image:
@@ -751,7 +749,7 @@ zoom_image:
 #   you can enable this to show images in waterfalls flow.
 # See: https://github.com/desandro/masonry/
 gallery_waterfall:
-  enable: false
+  enable: true
   col_width: 220px
   gap_x: 10px
   gap_y: 10px

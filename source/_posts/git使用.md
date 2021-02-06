@@ -6,6 +6,8 @@ categories:
     - [笔记]
 tags:
     - git
+photos:
+    - http://i2.tiimg.com/733114/5688242ca3126ac8.jpg
 ---
 # git常用命令
 
