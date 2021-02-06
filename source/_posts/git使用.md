@@ -1,14 +1,19 @@
 ---
-title: git使用
-excerpt: git常用命令笔记
+title: Git使用
+# excerpt: git常用命令笔记
 date: 2021-02-05 17:43:31
 categories:
     - [笔记]
 tags:
-    - git
-photos:
-    - http://i2.tiimg.com/733114/5688242ca3126ac8.jpg
+    - Git
+# photos:
+#     - http://i2.tiimg.com/733114/5688242ca3126ac8.jpg
 ---
+
+**Git常用命令笔记**   
+
+<!-- more -->
+
 # git常用命令
 
 ## 创建库

@@ -1,11 +1,17 @@
 ---
 title: Hexo搭建
-excerpt: HEXO搭建记录
+# excerpt: HEXO搭建记录
 date: 2021-02-04 17:20:17
-tags: HEXO
+tags: Hexo
 categories: 
     - [笔记]
+# photos:
+#   - http://i1.fuimg.com/733114/99a345d1aab8720c.png
 ---
+
+# **Hexo, a easy, fast, simple&powerful framework**
+HEXO搭建记录
+<!-- more -->
 
 # 准备工作
 * Git
@@ -38,4 +44,4 @@ deploy:
   repo: https://github.com/name/name.github.io.git
   branch: pages
 ```
-
+部署到时若出现网页与本地不一致，删除生成文件(public, .deploy_git等)再重新生成部署。

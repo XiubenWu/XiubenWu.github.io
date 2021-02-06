@@ -142,7 +142,7 @@ header:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: /images/background/head.jpg
+    url: http://i1.fuimg.com/733114/f9c084d55c82d5db.jpg
   # Mask effect of the background image.
   mask:
     enable: true
@@ -168,7 +168,7 @@ body:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: /images/background/body.jpg
+    url: http://i2.tiimg.com/733114/431ed279023ff6dc.jpg
     # Whether to fixed the background image.
     fixed: true
     # Whether to repeat the image as much as possible to cover the entire area.
@@ -191,7 +191,7 @@ footer:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: /images/background/foot.jpg
+    url: http://i2.tiimg.com/733114/8a8d237c3ad72a0f.jpg
   # Mask effect of the background image.
   mask:
     enable: true
@@ -295,7 +295,7 @@ author:
     # Optional values: turn | shake
     animation: turn
   # Your favorite motto.
-  motto: 明日的效率总是最高的
+  motto: 下一天的效率将会更高
 
 # Social links
 # Value before `||` is the target link, value after `||` is the name of FontAwesome icon.
