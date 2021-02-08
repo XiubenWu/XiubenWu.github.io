@@ -80,4 +80,3 @@ tags:
 
 ## 其他
 [图形化工具SourceTree官方网站](https://www.sourcetreeapp.com/)   
-[git命令大全](https://www.liaoxuefeng.com/wiki/896043488029600/900062620154944)
