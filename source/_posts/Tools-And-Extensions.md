@@ -1,7 +1,6 @@
 ---
 title: Tools And Extensions
 date: 2021-02-08 13:27:59
-tags:
 categories:
     - [Tools]
 tags:
@@ -10,7 +9,8 @@ tags:
 
 # 记录一些(一辈子也用不上的)工具
 内容持续更新(或许，可能)
-<!-- more --->
+
+<!-- more -->
 
 ## Chrome扩展系列
 新版的Edge浏览器也推出了扩展商店，而且不用vpn来访问。但作为一个Chrome的老用户并没有去尝试，不清楚是否比Chrome更好用。   
