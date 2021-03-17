@@ -712,7 +712,7 @@ math:
   # ! https://theme-stun.github.io/docs/zh-CN/advanced/third-part.html#mathjax
   # ! -------------------------------------------------------------------------------
   # Optional values: mathjax | katex
-  engine: katex
+  engine: mathjax
   mathjax:
     cdn: https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     # See: https://mhchem.github.io/MathJax-mhchem/
