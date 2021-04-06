@@ -1,12 +1,12 @@
 ---
 title: 外链图床(PicGo+Gitee)
-experct: 终究向图低了头
+excerpt: 终究向图低了头
 date: 2021-04-06 20:12:03
 tags:
-	-[图床]
+	- [图床]
 categories:
-	-笔记
-	-New Idea
+	- 笔记
+	- New Idea
 ---
 
 # 前言
