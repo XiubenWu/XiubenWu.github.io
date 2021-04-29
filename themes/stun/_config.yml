@@ -655,14 +655,19 @@ algolia_search:
 # Local Search
 # See: https://github.com/wzpan/hexo-generator-search/
 local_search:
-  enable: false
+  enable: true
+
+search:
+  path: search.json
+  field: post
+  content: true
 
 # Auxiliary search buttons
 # ! -----------------------------------------------------------------------------------------
 # ! This feature can only be enabled if either `algolia_search` or `local_search` is enabled.
 # ! -----------------------------------------------------------------------------------------
 assist_search:
-  enable: false
+  enable: true
   # Show the Google Search button. Use `www.google.com` to search for what you type.
   google: true
   # Show the Bing Search button. Use `www.bing.com` to search for what you type.
