@@ -5,8 +5,7 @@ date: 2021-04-06 20:12:03
 tags:
 	- [图床]
 categories:
-	- 笔记
-	- New Idea
+	- 随笔
 ---
 
 # 前言
