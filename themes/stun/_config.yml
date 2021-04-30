@@ -669,11 +669,11 @@ search:
 assist_search:
   enable: true
   # Show the Google Search button. Use `www.google.com` to search for what you type.
-  google: true
+  google: false
   # Show the Bing Search button. Use `www.bing.com` to search for what you type.
-  bing: true
+  bing: false
   # Show the Baidu Search button. Use `www.baidu.com` to search for what you type.
-  baidu: true
+  baidu: false
 
 # ---------------------------------------------------------------
 # Background config
