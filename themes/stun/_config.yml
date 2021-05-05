@@ -304,15 +304,15 @@ author:
 # If you can`t find a suitable icon, you can choose to display text by adding the `origin:` prefix.
 # e.g. `origin:sf`, so `sf` will be displayed.
 social:
-  github: https://XiubenWu.github.io || fab fa-github
+  github: https://github.com/XiubenWu || fab fa-github
   QQ: tencent://message?uin=1347097895 || fab fa-qq
-  # google: https://plus.google.com/ || fab fa-google
-  # twitter: https://twitter.com/ || fab fa-twitter
-  # youtube: https://youtube.com/ || fab fa-youtube
+  # wechat: wuxiuben543 || fab fa-weixin
+  google: https://plus.google.com/ || fab fa-google
+  twitter: https://twitter.com/System5431 || fab fa-twitter
+  youtube: https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw || fab fa-youtube
   # segmentfault: https://segmentfault.com/ || origin:sf
   # weibo: https://weibo.com/ || fab fa-weibo
   # zhihu: https://www.zhihu.com/ || origin:知
-  # wechat: yournumber || fab fa-weixin
   # telegram: yournumber || fab fa-telegram
   # qq: yournumber || fab fa-qq
 
