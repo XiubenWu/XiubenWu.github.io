@@ -7,8 +7,8 @@ tags:
     - [server]
 
 categories:
-	- 笔记
-    - server
+    -   笔记
+    -   server
 ---
 
 # 简介
