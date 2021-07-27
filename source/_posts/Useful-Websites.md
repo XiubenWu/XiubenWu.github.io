@@ -16,3 +16,11 @@ categories:
 
 
 
+[PythonTutor首页](http://pythontutor.com/index.html):内存查看
+
+[PythonTutor edit](http://pythontutor.com/visualize.html#mode=edit):编辑器
+
+
+
+[Google Colaborator](https://colab.research.google.com/):免费GPU
+
