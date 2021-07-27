@@ -104,5 +104,5 @@ theme: stun
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/XiubenWu/XiubenWu.github.io.git
+  repo: git@github.com:XiubenWu/XiubenWu.github.io.git # https://github.com/XiubenWu/XiubenWu.github.io.git
   branch: pages
