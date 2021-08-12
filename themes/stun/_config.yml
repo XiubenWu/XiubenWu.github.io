@@ -755,7 +755,7 @@ zoom_image:
 # See: https://github.com/desandro/masonry/
 gallery_waterfall:
   enable: true
-  col_width: 220px
+  col_width: 800px
   gap_x: 10px
   gap_y: 10px
 
