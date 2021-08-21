@@ -27,6 +27,7 @@ tags:
 * <kbd>[**科学上网**](https://github.com/bannedbook/fanqiang)</kbd>支持PC、移动端，内置各种代理(网速不咋地，但是免费)，每种代理各地区效率不一样，按顺序多多尝试即可。代理ip不定期更新。
 * <kbd>[**CopyTranslator**](https://github.com/CopyTranslator/CopyTranslator)</kbd>自动格式化并翻译(能自动解决复制来的各种乱七八糟的空格换行等)，新版本性能大大不如老版本，希望改善。
 * <kbd>[**IObit Unlocker**](https://iobit-unlocker.en.softonic.com/)</kbd> 强制解锁文件程序占用。
+* <kbd>[**FinalShell**](http://www.hostbuf.com/)</kbd>比XShell更强大的SSH免费工具。
 
 ## 娱乐系列
 * <kbd>[**Waifu2x**](https://github.com/AaronFeng753/Waifu2x-Extension-GUI)</kbd>一款基于神经网络的超分辨率工具，可处理图像视频。
