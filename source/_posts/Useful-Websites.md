@@ -24,3 +24,8 @@ categories:
 
 [Google Colaborator](https://colab.research.google.com/):免费GPU
 
+
+
+# 资源
+
+[https://www.aigei.com/ui/web/](https://www.aigei.com/ui/web/):免费HTML模板资源
