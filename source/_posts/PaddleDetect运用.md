@@ -110,10 +110,9 @@ OK
     - annotation/ 存放xml格式的标注文件
     - images/ 存放原始图片文件
     - ImageSets/ 数据集索引
-      - Main/
-        - label_list.txt 存放类别标签
-        - train.txt 训练集数据名称
-        - val.txt 验证集数据名称
+      - label_list.txt 存放类别标签
+      - train.txt 训练集数据名称
+      - val.txt 验证集数据名称
     - train.txt 最终的数据集索引格式(create_list.py制作)
     - val.txt 最终的数据集索引格式(create_list.py制作)
     - create_list.py 从ImageSets/Main/下的训练验证集制作数据索引
@@ -126,21 +125,22 @@ import os
 import random
 
 train_precent = 0.9
-path = './pipes'  # root path
-xml = path + "/annotation"
+path = './fruits'  # root path
+xml = path + "/Annotations"
 save = path + "/Main"
 total_xml = os.listdir(xml)
 
 num = len(total_xml)
 tr = int(num * train_precent)
-train = range(0, tr)
+index = list(range(num))
+random.shuffle(index)
 
-ftrain = open(path + "/ImageSets/Main/train.txt", "w")
-fval = open(path + "/ImageSets/Main/val.txt", "w")
+ftrain = open(path + "/ImageSets/train.txt", "w")
+fval = open(path + "/ImageSets/val.txt", "w")
 
 for i in range(num):
-    name = total_xml[i][:-4] + "\n"
-    if i in train:
+    name = total_xml[index[i]][:-4] + "\n"
+    if i < tr:
         ftrain.write(name)
     else:
         fval.write(name)
@@ -163,9 +163,9 @@ def get_dir(devkit_dir, type):
 
 
 def walk_dir(devkit_dir):
-    filelist_dir = get_dir(devkit_dir, 'ImageSets/Main')
-    annotation_dir = get_dir(devkit_dir, 'annotation')
-    img_dir = get_dir(devkit_dir, 'images')
+    filelist_dir = get_dir(devkit_dir, 'ImageSets/')
+    annotation_dir = get_dir(devkit_dir, 'Annotations')
+    img_dir = get_dir(devkit_dir, 'JPEGImages')
     trainval_list = []
     test_list = []
     added = set()

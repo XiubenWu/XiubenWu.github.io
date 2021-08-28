@@ -28,6 +28,8 @@ tags:
 * <kbd>[**CopyTranslator**](https://github.com/CopyTranslator/CopyTranslator)</kbd>自动格式化并翻译(能自动解决复制来的各种乱七八糟的空格换行等)，新版本性能大大不如老版本，希望改善。
 * <kbd>[**IObit Unlocker**](https://iobit-unlocker.en.softonic.com/)</kbd> 强制解锁文件程序占用。
 * <kbd>[**FinalShell**](http://www.hostbuf.com/)</kbd>比XShell更强大的SSH免费工具。
+* <kbd>[**NETRON**](https://www.electronjs.org/apps/netron)</kbd>:网络可视化工具，可从[github镜像下载](https://hub.fastgit.org/lutzroeder/netron/releases)
+* <kbd>[**treesize free**](https://www.jam-software.com/treesize_free)</kbd>:windows磁盘大小快捷查看。
 
 ## 娱乐系列
 * <kbd>[**Waifu2x**](https://github.com/AaronFeng753/Waifu2x-Extension-GUI)</kbd>一款基于神经网络的超分辨率工具，可处理图像视频。
