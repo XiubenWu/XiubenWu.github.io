@@ -186,7 +186,32 @@ head:
 -  myDatasets
   - annotations
   - images
+    - xxxx.jpg
+    - ......
   - labels
+    - xxxx.txt
+    - ......
+
+训练集和测试集隔离：
+
+-  myDatasets
+   - annotations
+   - images
+     - train
+       - xxxx.jpg
+       - ......
+     - val
+       - xxxx.jpg
+       - ......
+   - labels
+     - train
+       - xxxx.txt
+       - ......
+     - val
+       - xxxx.jpg
+       - ......
+
+
 
 annotations中存放源图像的xml标注格式。使用如下脚本将xml格式转换为txt格式，并将结果存放在labels文件夹中:
 
