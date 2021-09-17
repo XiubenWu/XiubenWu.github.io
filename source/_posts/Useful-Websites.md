@@ -29,3 +29,5 @@ categories:
 # 资源
 
 [https://www.aigei.com/ui/web/](https://www.aigei.com/ui/web/):免费HTML模板资源
+
+[https://www.php.cn/](https://www.php.cn/)：php中文网，特效素材等资源
