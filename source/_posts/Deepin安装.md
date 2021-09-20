@@ -1,6 +1,6 @@
 ---
 title: Deepin安装
-excerpt: 一款国产的linux系统
+excerpt: 一款优美的linux系统
 date: 2021-09-18 18:42:04
 tags:
   -	linux
@@ -28,7 +28,7 @@ categories:
 
 ## 分区类型
 
-需要在磁盘上新建一个分区来安装Deepin，建议使用UEFI+GPT格式安装，MBR的磁盘格式需进行额外设置。
+需要在磁盘上新建一个分区来安装Deepin，可以使用传统的Legacy+MBR和UEFI+GPT来安装系统，建议使用UEFI+GPT格式安装。
 
 ## 分区大小
 
