@@ -35,6 +35,8 @@ sudo passwd root
 
 # 设置
 
+## 源
+
 安装Pantheon Tweaks.这是 elementary OS 的必备应用。它提供了一些无法通过系统原生设置程序修改的额外的设置和配置选项，请打开终端并运行以下命令以安装 Pantheon Tweaks。注意：先前版本的 Tweak 工具叫做 elementary Tweaks，从 Odin 版本开始更名为 Pantheon Tweaks。
 
 ```
@@ -67,4 +69,30 @@ sudo mv io.elementary.appcenter-daemon.desktop io.elementary.appcenter-daemon.de
 sudo apt update
 sudo apt install git
 ```
+
+- 系统监视器
+
+```
+apt install gnome-system-monitor
+```
+
+- 安装gdebi，方便安装deb包。
+
+```
+sudo apt-get install gdebi
+```
+
+## 美化
+
+安装tweaks，下载图标包和主题包：
+
+[图标包](https://github.com/keeferrourke/la-capitaine-icon-theme)，放置在` /usr/share/icons/`下
+
+[主题包](https://github.com/yarik-vv/OS-X-buttons)，放置在`/usr/share/themes/`下
+
+注销后更换生效。
+
+
+
+
 
