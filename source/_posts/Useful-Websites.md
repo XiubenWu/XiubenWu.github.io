@@ -34,3 +34,13 @@ categories:
 
 [snapcraft](https://snapcraft.io/)：Linux的应用商店
 
+[mac镜像](https://mirrors.dtops.cc/ISO/MacOS/)
+
+# Tweak主题
+
+[Ant](https://github.com/EliverLara/Ant)------[other](https://www.opendesktop.org/p/1099856/)
+
+[Vim](https://github.com/vinceliuice/vimix-gtk-themes)-----[other](https://www.gnome-look.org/p/1013698/)
+
+[X-Arc-Collection](https://gitlab.com/LinxGem33/X-Arc-White)-----[gitee](https://gitee.com/ostheme/X-Arc-White/)-----[other](https://www.gnome-look.org/p/1167049/)
+
