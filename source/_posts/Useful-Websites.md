@@ -20,7 +20,7 @@ categories:
 
 [PythonTutor edit](http://pythontutor.com/visualize.html#mode=edit):编辑器
 
-
+[https://www.programcreek.com/python/](https://www.programcreek.com/python/):python各种库函数使用查询(样例、项目)
 
 [Google Colaborator](https://colab.research.google.com/):免费GPU
 
@@ -35,6 +35,16 @@ categories:
 [snapcraft](https://snapcraft.io/)：Linux的应用商店
 
 [mac镜像](https://mirrors.dtops.cc/ISO/MacOS/)
+
+[http://www.lib4dev.in/](http://www.lib4dev.in/)：源码搜索
+
+[https://github.com/dair-ai/ml-visuals](https://github.com/dair-ai/ml-visuals):ML绘图资源
+
+
+
+# 工具
+
+[神经网络可视化工具：3D、彩色、可定制，还能可视化参数重要性](https://github.com/julrog/nn_vis)
 
 # Tweak主题
 
