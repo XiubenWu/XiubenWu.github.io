@@ -40,7 +40,9 @@ categories:
 
 [https://github.com/dair-ai/ml-visuals](https://github.com/dair-ai/ml-visuals):ML绘图资源
 
+[https://github.com/rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book)：matplotlib科学计算可视化教程
 
+[https://readpaper.com/](https://readpaper.com/)：文献阅读helper
 
 # 工具
 
