@@ -2,7 +2,7 @@
 title: Manjaro
 excerpt: -----
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211223manjaro0.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211223manjaro0.png
 date: 2021-12-23 15:12:09
 tags:
   -	笔记
@@ -135,7 +135,7 @@ sudo pacman -S docker  # docker 容器
 
 在<kbd>Manjaro Hello</kbd>中的<kbd>Applications</kbd>中安装fcitx，可以避免手动配置.xprofile
 
-![Manjaro Applications](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211223majaro1.png)
+![Manjaro Applications](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211223majaro1.png)
 
 安装搜狗输入法
 

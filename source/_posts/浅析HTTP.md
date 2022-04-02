@@ -23,7 +23,7 @@ HTTP 是超⽂文本传输协议，即HyperText Transfer Protocol.
 
 它们之间的关系如下：
 
-![image-20210413214817316](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210413http1.png)
+![image-20210413214817316](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210413http1.png)
 
 ## 超文本
 

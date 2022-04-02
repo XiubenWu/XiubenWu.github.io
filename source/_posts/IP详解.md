@@ -60,7 +60,7 @@ IPv4的地址是32位的，大约可以提供42亿个地址，但是早在2011�
 
 互联网诞生之初，IP地址显得很充裕，于是计算机科学家们设计了分类地址。IP地址分类成了5种类型，分别是A类、B类、C类、D类、E类。其中对于A、B、C类主要分为两个部分,分别是**网络号和主机号**。
 
-![image-20210822234439207](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210822IP1.png)
+![image-20210822234439207](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210822IP1.png)
 
 最大主机个数，就是要看主机号的位数，ABC三类的最大主机数如下：
 
@@ -81,7 +81,7 @@ IPv4的地址是32位的，大约可以提供42亿个地址，但是早在2011�
 
 不管是路由器还是主机解析到一个IP地址时候，我们判断其IP地址的首位是否为0，为0则为A类地址，那么就能很快的找出网络地址和主机地址。
 
-![image-20210822235735548](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210822IP2.png)
+![image-20210822235735548](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210822IP2.png)
 
 ### IP分类的缺点
 
@@ -101,7 +101,7 @@ A、B、C类有个尴尬处境，就是不能很好的与现实网络匹配。
 
 由于IP分类存在许多缺点，所以后面提出了无分类地址的方案，即CIDR 。这种方式不再有分类地址的概念，32比特的IP地址被划分为两部分，前面是网络号，后面是主机号。表示形式**a.b.c.d/x** ，其中 /x表示前×位属于网络号，x的范围是0～32，这就使得IP地址更加具有灵活性。比如10.100.122.2/24，这种地址表示形式就是 CIDR，/24表示前24位是网络号，剩余的8位是主机号。
 
-![image-20210823000245250](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210822IP3.png)
+![image-20210823000245250](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210822IP3.png)
 
 
 
@@ -111,7 +111,7 @@ A、B、C类有个尴尬处境，就是不能很好的与现实网络匹配。
 
 子网掩码也是一种划分网络号和主机号的方式。掩码可用于掩盖掉主机号，剩下的就是网络号。（**将子网掩码和IP地址按位计算AND，就可得到网络号**）
 
-![image-20210823223237596](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210823IP4.png)
+![image-20210823223237596](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210823IP4.png)
 
 子网掩码除了划分主机和网络地址外，还可以划分子网。
 
@@ -121,7 +121,7 @@ A、B、C类有个尴尬处境，就是不能很好的与现实网络匹配。
 
 在A、B、C分类地址，实际上有分公有IP地址和私有IP地址。平时我们办公室、家里、学校用的IP地址，一般都是私有IP地址。因为这些地址允许组织内部的IT人员自己管理、自己分配，而且可以重复。
 
-![image-20210823223819995](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210823IP5.png)
+![image-20210823223819995](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210823IP5.png)
 
 
 
@@ -145,7 +145,7 @@ IP地址的网络地址这一部分是用于进行路由控制。路由控制表
 
 浏览器首先看一下自己的缓存里有没有，如果没有就向操作系统的缓存要，还没有就检查本机域名解析文件 hosts ，如果还是没有，就会DNS 服务器进行查询，查询的过程如下:
 
-![image-20210823224853359](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210823IP6.png)
+![image-20210823224853359](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210823IP6.png)
 
 
 
@@ -206,7 +206,7 @@ IPv4的地址是非常紧缺的，在前面我们也提到可以通过无分类�
 图中有两个客户端192.168.1.10和192.168.1.11同时与服务器183.232.231.172进行通信，并且这两个客户端的本地端口都是1025。此时，两个私有IP地址都转换IP地址为公有地址120.229.176.121，但是以不同的端口号作为区分。
 于是，生成一个NAPT路由器的转换表，就可以正确地转换地址跟端口的组合，令客户端A、B能同时与服务器之间进行通信。这种转换表在NAT路由器上自动生成。例如，在TCP的情况下，建立TCP连接首次握手时的SYN包一经发出，就会生成这个表。而后又随着收到关闭连接时发出FIN包的确认应答从表中被删除。
 
-![image-20210823231020092](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210823IP7.png)
+![image-20210823231020092](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210823IP7.png)
 
 
 
@@ -241,7 +241,7 @@ ICMP大致可以分为两大类:
 - 一类是用于诊断的查询消息，也就是「查询报文类型」
 - 另一类是通知出错原因的错误消息，也就是「差错报文类型」
 
-![image-20210823231945110](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210823IP8.png)
+![image-20210823231945110](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210823IP8.png)
 
 
 

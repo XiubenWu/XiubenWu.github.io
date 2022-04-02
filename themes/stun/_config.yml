@@ -142,7 +142,7 @@ header:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/head.png
+    url: https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/head.png
   # Mask effect of the background image.
   mask:
     enable: true
@@ -168,7 +168,7 @@ body:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/body.png
+    url: https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/body.png
     # Whether to fixed the background image.
     fixed: true
     # Whether to repeat the image as much as possible to cover the entire area.
@@ -191,7 +191,7 @@ footer:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/foot.png
+    url: https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/foot.png
   # Mask effect of the background image.
   mask:
     enable: true
@@ -286,7 +286,7 @@ author:
     # In theme directory (source/images): /images/avatar.png
     # In site directory (source/uploads): /uploads/avatar.png
     # You can also use a link of image.
-    url: https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/author.gif
+    url: https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif
     # If true, the avatar would be displayed in a circle.
     rounded: true
     # Opacity of avatar (value: 0 ~ 1)

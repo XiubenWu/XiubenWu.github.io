@@ -14,13 +14,13 @@ categories:
 
 前往[Elementary官网](https://elementary.io/)下载ISO镜像，将价格改为0之后可以直接下载：
 
-![image-20210920140851567](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210920ElementaryOS.png)
+![image-20210920140851567](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210920ElementaryOS.png)
 
 启动U盘制作器官方推荐[Etcher](https://www.balena.io/etcher/)，可以自行选择[rufus](https://rufus.ie/zh/)等。
 
 使用Etcher制作U盘镜像：
 
-![image-20210920141845398](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210920Elementary2.png)
+![image-20210920141845398](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210920Elementary2.png)
 
 # root
 

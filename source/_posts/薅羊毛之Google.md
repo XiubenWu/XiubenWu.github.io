@@ -27,11 +27,11 @@ categories:
 
 - 创建文件
 
-![image-20210727211250174](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210727Colab1.png)
+![image-20210727211250174](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab1.png)
 
 - 文件概况
 
-![image-20210727211535104](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/202107272Colab2.png)
+![image-20210727211535104](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/202107272Colab2.png)
 
 ## 2.基本使用
 
@@ -43,11 +43,11 @@ categories:
 !pip install pyqt5
 ```
 
-![image-20210727212306863](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210727Colab3.png)
+![image-20210727212306863](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab3.png)
 
 此运行环境本质上是一个linux虚拟机。新建的环境默认使用CPU我们需要将其更改为GPU，在**代码执行程序——>更改运行时类型**中将其改为GPU：
 
-![image-20210727212827529](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210727Colab4.png)
+![image-20210727212827529](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab4.png)
 
 `!nvidia-smi`查看一下Google所分配的GPU，是**Tesla T4**,16G的显存足以应付一般的模型。
 
@@ -76,7 +76,7 @@ vcode = getpass.getpass()
 
 运行之后出现如下结果：
 
-![image-20210727214018841](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210727Colab5.png)
+![image-20210727214018841](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab5.png)
 
 此时需要点击链接登录google账号复制密匙进行授权(上图为授权完毕后的状态)。每一个Notebook需要进行一次授权。
 

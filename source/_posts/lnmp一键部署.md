@@ -2,7 +2,7 @@
 title: lnmp一键部署
 excerpt: ---
 photos:
-  - https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210817lnmp0.png
+  - https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210817lnmp0.png
 date: 2021-08-17 12:30:57
 tags:
   -	linux
@@ -73,7 +73,7 @@ nps restart
 
 这样访问ip地址调用80端口就可以直接出现lnmp的界面了。
 
-![image-20210817130530024](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210817lnmp1.png)
+![image-20210817130530024](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210817lnmp1.png)
 
 
 

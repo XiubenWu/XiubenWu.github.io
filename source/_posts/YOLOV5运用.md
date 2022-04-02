@@ -1,7 +1,7 @@
 ---
 title: YOLOV5运用
 photos:
-  - https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210826YOLOv5.png
+  - https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826YOLOv5.png
 excerpt: ----
 date: 2021-08-26 22:59:19
 tags:

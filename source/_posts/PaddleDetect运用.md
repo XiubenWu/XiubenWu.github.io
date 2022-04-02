@@ -1,7 +1,7 @@
 ---
 title: PaddleDetect运用
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210826Paddle.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826Paddle.png
 excerpt: ----
 date: 2021-08-26 18:36:55
 tags:

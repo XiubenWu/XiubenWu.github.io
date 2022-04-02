@@ -2,7 +2,7 @@
 title: CSS选择器
 math: true
 photos:
-	-	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210913CSS0.png
+	-	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210913CSS0.png
 excerpt: ----
 date: 2021-09-13 22:02:45
 tags:

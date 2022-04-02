@@ -15,13 +15,13 @@ categories:
 
 新建会话，名称按需填写，主机名称填写要连接的服务器的ip地址，服务器的端口号默认22即可。
 
-![image-20210811142220907](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210811XShell1.png)
+![image-20210811142220907](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210811XShell1.png)
 
 
 
 用户身份验证中输入远程主机的用户名的密码，连接即可。
 
-![image-20210811142328871](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210811XShell2.png)
+![image-20210811142328871](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210811XShell2.png)
 
 
 

@@ -38,7 +38,7 @@ categories:
 
 在[Gitee](https://gitee.com/)上面注册一个账号，新建立一个仓库，在个人中心的设置中开启一个私人密匙(token). 此密匙需记录好，离开页面后就会消失，不会再次出现，只能重新生成。
 
-![image-20210406204053178](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210406token.png)
+![image-20210406204053178](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210406token.png)
 ***
 
 
@@ -46,7 +46,7 @@ categories:
 
 现在打开安装好的PicGo, 默认的图床中是没有gitee图床的，需要安装插件。在插件选项中搜索gitee，安装好gitee图床插件。
 
-![image-20210406204506519](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210406PicGo1.png)
+![image-20210406204506519](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210406PicGo1.png)
 ***
 现在需要对gitee图床进行配置，使它和gitee的服务端对接起来：
 
@@ -56,12 +56,12 @@ categories:
 * path自定义填写，既然用作图床，文件夹名就命名为img；
 * 其他的可不给予填写，留空即可。
 
-![image-20210406205014650](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210406PicGo2.png)
+![image-20210406205014650](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210406PicGo2.png)
 ***
 
 此外，PicGo还有其他的一些设置可按自己喜好配置，推荐将上传前重命名选上，方便为每张图做自己的标识(但是每次上传会弹出重命名窗口，效率会率低，不喜欢可以关掉)，时间戳重命名可以有效避免文件的冲突，也推荐选上。
 
-![image-20210406205215384](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210406PicGo3.png)
+![image-20210406205215384](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210406PicGo3.png)
 ***
 
 
@@ -69,13 +69,13 @@ categories:
 
 在Typora中打开文件 --->偏好设置(Ctrl+逗号)。
 
-![image-20210406205534526](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210406Typora1.png)
+![image-20210406205534526](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210406Typora1.png)
 ***
 
 
 在偏好设置中将图像中的插入图片时自动上传图片启用，然后上传服务配置为PicGo.
 
-![image-20210406205827909](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210406Typora2.png)
+![image-20210406205827909](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210406Typora2.png)
 ***
 
 # 尾

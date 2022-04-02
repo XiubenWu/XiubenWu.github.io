@@ -2,7 +2,7 @@
 title: kmp解析
 math: true
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211212kmp0.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211212kmp0.png
 excerpt: ------
 date: 2021-12-11 19:13:35
 tags:

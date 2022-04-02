@@ -2,7 +2,7 @@
 title: Pytorch的网络可视化
 excerpt: -----
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20220310pytorchnet0.jpg
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20220310pytorchnet0.jpg
 date: 2022-03-10 18:08:46
 tags:
   - 随笔
@@ -67,7 +67,7 @@ torch.onnx.export(model, x, "CNN.onnx")
 
 - 用netron打开后的模型结果：
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20220310pytorchnet1.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20220310pytorchnet1.png)
 
 
 
@@ -127,7 +127,7 @@ g.render("test")
 
 - 最终可以生成PDF文件；
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20220310pytorchnet2.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20220310pytorchnet2.png)
 
 模型结构相较于netron来说更为冗杂。
 

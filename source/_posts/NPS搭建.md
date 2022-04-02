@@ -58,21 +58,21 @@ web_key_file=conf/server.key
 
 **nps** web端登录界面：
 
-![image-20210627222122777](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627npslogin.png)
+![image-20210627222122777](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npslogin.png)
 
 **nps** web配置界面：
 
-![image-20210627222254529](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627npsWeb.png)
+![image-20210627222254529](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npsWeb.png)
 
 **新增一个客户端**：
 
-![image-20210627222504249](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-3.png)
+![image-20210627222504249](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-3.png)
 
-![image-20210627222749706](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-4.png)
+![image-20210627222749706](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-4.png)
 
 留意客户端id及唯一验证密匙，之后会用到：
 
-![image-20210627222956319](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-key.png)
+![image-20210627222956319](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-key.png)
 
 ## 客户端
 
@@ -99,13 +99,13 @@ compress=true
 
 之后直接运行npc.exe即可连接至服务端。也可以命令行使用start命令运行。之后可以看到服务端的已连接上：
 
-![image-20210627224109081](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-5.png)
+![image-20210627224109081](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-5.png)
 
 ## 添加隧道
 
 此时公网ip服务器已和本地连接，可以添加端口映射：
 
-![image-20210627224408860](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-6.png)
+![image-20210627224408860](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-6.png)
 
 配置端口后，浏览器访问`公网ip:服务端端口`后可以映射至`内网地址:端口`
 
@@ -117,15 +117,15 @@ compress=true
 
 在云服务器ECS中创建新的安全组：
 
-![image-20210627224917076](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-7.png)
+![image-20210627224917076](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-7.png)
 
 可选择打开所需的端口，此处设置全部打开，设置完成后创建安全组。
 
-![image-20210627225139193](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-8.png)
+![image-20210627225139193](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-8.png)
 
 最后将刚才创建的安全组加入实例中：
 
-![image-20210627225332450](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210627nps-9.png)
+![image-20210627225332450](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-9.png)
 
 端口打开完成。
 END

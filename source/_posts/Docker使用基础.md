@@ -2,7 +2,7 @@
 title: Docker使用基础
 excerpt: -----
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210812Docker0.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210812Docker0.png
 date: 2021-08-12 21:04:11
 
 tags:
@@ -45,7 +45,7 @@ $ sudo yum remove docker \
 
 默认的DockerHub仓库在国外，从国内拉取速度较慢，国内许多云服务商提供了镜像加速服务。以阿里云为例，前往[容器镜像服务网站](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors):
 
-![image-20210812133532470](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210812Docker1.png)
+![image-20210812133532470](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210812Docker1.png)
 
 获取自己的加速地址并按照操作文档中的步骤进行配置。
 

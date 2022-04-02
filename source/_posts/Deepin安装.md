@@ -14,13 +14,13 @@ categories:
 
 [Deepin](https://www.deepin.org/zh/download/)官网下载ios镜像文件。
 
-![image-20210918205728743](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210918Deepin1.png)
+![image-20210918205728743](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210918Deepin1.png)
 
 # 启动U盘制作
 
 下载的镜像文件中有制作启动盘的程序，直接制作即可。
 
-![image-20210918210018693](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210918Deepin2.png)
+![image-20210918210018693](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210918Deepin2.png)
 
 
 
@@ -42,7 +42,7 @@ categories:
 
 # root权限
 
-![a~1](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210918Deepin3.png)
+![a~1](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210918Deepin3.png)
 
 新装系统没有root用户,需要先设置root:
 

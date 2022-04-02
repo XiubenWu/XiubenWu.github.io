@@ -2,7 +2,7 @@
 title: snap
 excerpt: -----
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210921snap0.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210921snap0.png
 date: 2021-09-21 11:07:00
 tags:
   -	linux
@@ -27,7 +27,7 @@ apt-get install snapd
 
 在snapcraft商店找到要安装的软件，使用`snap install `安装：
 
-![image-20210921120039888](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210921snap1.png)
+![image-20210921120039888](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210921snap1.png)
 
 ```
 snap list # 列出已安装的snap应用

@@ -3,7 +3,7 @@ title: python函数调用关系分析
 math: true
 excerpt: -----
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz0.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz0.png
 date: 2021-12-13 15:45:07
 tags:
   -	Tools
@@ -20,7 +20,7 @@ categories:
 
 在Pycharm的专业版中，提供了一个分析项目性能的工具`run->Profile`，可以将工程运行时各函数的调用次数和所用时间记录下来，提供静态数据和关系图表两种表达方式。
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz1.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz1.png)
 
 只需轻轻一点，统计数据和图表关系一览无遗，确实方便。但是此方法局限性很大，一是必须使用pycharm，这样使用其他ide如VS Code的用户就没法使用了；二是它不仅要使用pychram，还得是专业版，专业版是要收费的(破解和学生版除外)，这又是一道坎挡在了我们的路上。那么有其他的方法来进行类似的分析吗？当然是有的。
 
@@ -84,9 +84,9 @@ fdp 用于无向图
 
 看看graphviz都能画些什么样的图：
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz2.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz2.png)
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz3.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz3.png)
 
 安装并配置好graphviz后，需要安装pycallgraph，直接使用pip安装即可:
 
@@ -172,11 +172,11 @@ class GraphvizOutput(Output):
         self.prepare_graph_attributes()
 ```
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz4.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz4.png)
 
 可见此方式对函数的调用关系展示得较为清晰明了，其缺点是制作的图分辨率不高，略显模糊。下为yolov5的调用关系图。
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz5.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz5.png)
 
 # cProfile+snakeviz
 
@@ -213,5 +213,5 @@ pip install snakeviz
 
 
 
-![](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211213pyviz6.png)
+![](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz6.png)
 

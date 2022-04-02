@@ -2,7 +2,7 @@
 title: tinyproxy代理
 excerpt: 访问代理
 photos:
-	-	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20220124tinyproxy0.jpg
+	-	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20220124tinyproxy0.jpg
 date: 2022-01-24 00:01:57
 tags:
 	-	随笔

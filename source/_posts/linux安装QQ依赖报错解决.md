@@ -29,7 +29,7 @@ sudo apt install com.qq.im.deepin
 E: 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系
 ```
 
-![image-20211024133350448](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211024qq1.png)
+![image-20211024133350448](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211024qq1.png)
 
 
 
@@ -41,7 +41,7 @@ E: 无法修正错误，因为您要求某些软件包保持现状，就是它�
 
 软件包地址:[https://packages.ubuntu.com/zh-cn/focal/libffi7](https://packages.ubuntu.com/zh-cn/focal/libffi7)，可以在新立得软件包(synaptic)直接搜索安装：
 
-![image-20211024133908507](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211024qq2.png)
+![image-20211024133908507](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211024qq2.png)
 
 ## 安装python-gi
 

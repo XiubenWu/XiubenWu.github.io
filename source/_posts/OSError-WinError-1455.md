@@ -25,13 +25,13 @@ categories:
 
 将自动管理所有驱动器分页文件大小取消勾选：
 
-![image-20210828151406390](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210828error1.png)
+![image-20210828151406390](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210828error1.png)
 
 
 
 找到python的安装目录(虚拟环境目录)所在的盘符，自定义大小>设置初始值和最大值>点击设置确认，看情况重启一下电脑生效，大功告成。调小batchsize也可减小空间的占用。
 
-![image-20210828151545223](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20210828error2.png)
+![image-20210828151545223](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210828error2.png)
 
 ***
 

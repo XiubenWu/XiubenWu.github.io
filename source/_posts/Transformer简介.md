@@ -3,7 +3,7 @@ title: Transformer简介
 excerpt: ------
 math: true
 photos:
-  -	https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer1.png
+  -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer1.png
 date: 2021-11-13 19:58:09
 tags:
   -	[DL]
@@ -15,7 +15,7 @@ categories:
 
 现在主流的序列模型都是基于复杂的循环神经网络或者是卷积神经网络构造而来的Encoder-Decoder模型，并且就算是目前性能最好的序列模型也都是基于注意力机制下的Encoder-Decoder架构。为什么作者会不停的提及这些传统的Encoder-Decoder模型呢？接着，作者在介绍部分谈到，由于传统的Encoder-Decoder架构在建模过程中，下一个时刻的计算过程会依赖于上一个时刻的输出，而这种固有的属性就限制了传统的Encoder-Decoder模型就不能以并行的方式进行计算。谷歌2017年所发表的一篇论文，名字叫做”Attention is all you need“，在这篇论文中，作者首次提出了一种全新的Transformer架构来解决这一问题。当然，Transformer架构的优点在于它完全摈弃了传统的循环结构，取而代之的是只通过注意力机制来计算模型输入与输出的隐含表示，而这种注意力的名字就是大名鼎鼎的自注意力机制（self-attention）。
 
-![image-20211113200639554](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer1.png)
+![image-20211113200639554](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer1.png)
 
 总体来说，**所谓自注意力机制就是通过某种运算来直接计算得到句子在编码过程中每个位置上的注意力权重；然后再以权重和的形式来计算得到整个句子的隐含向量表示**。最终，Transformer架构就是基于这种的自注意力机制而构建的Encoder-Decoder模型。
 
@@ -32,15 +32,15 @@ $Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V$
 - 首先，对于输入序列的每个单词，它都有三个向量编码，分别为：Query、Key、Value。这三个向量是用embedding向量与三个矩阵（ $W^Q,W^k,W^V$​）相乘得到的结果。这三个矩阵的值在BP的过程中会一直进行更新。
 - 第二步计算Self-Attention的分数值，该分数值决定了当我们在某个位置encode一个词时，对输入句子的其他部分的关注程度。这个分数值的计算方法是用该词语的Q与句子中其他词语的Key做点乘。以下图为例，假设我们在为这个例子中的第一个词“Thinking”计算自注意力向量，我们需要拿输入句子中的每个单词对“Thinking”打分。这些分数决定了在编码单词“Thinking”的过程中重视句子其它部分的程度。
 
-![image-20211113203629321](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer2.png)
+![image-20211113203629321](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer2.png)
 
 -  再对每个分数除以 $\sqrt{d}$​（d是维度），之后做softmax。
 
-![image-20211113203726025](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer3.png)
+![image-20211113203726025](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer3.png)
 
 - 把每个Value向量和softmax得到的值进行相乘，然后对相乘的值进行相加，得到的结果即是一个词语的self-attention embedding值。
 
-![image-20211113203814342](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer4.png)
+![image-20211113203814342](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer4.png)
 
 这样，自注意力的计算就完成了。得到的向量就可以传递给前馈神经网络。
 
@@ -48,7 +48,7 @@ $Attention(Q,K,V)=softmax(\frac{QK^T}{\sqrt{d_k}})V$
 
 上面我们也提到了自注意力机制的缺陷就是：**模型在对当前位置的信息进行编码时，会过度的将注意力集中于自身的位置，** 因此作者提出了通过多头注意力机制来解决这一问题。同时，使用多头注意力机制还能够给予注意力层的输出包含有不同子空间中的编码表示信息，从而增强模型的表达能力。
 
-![image-20211113203940863](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer5.png)
+![image-20211113203940863](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer5.png)
 
 # 位置编码
 
@@ -78,7 +78,7 @@ Positional Embedding可以弥补自注意力机制不能捕捉序列时序信息
 
 # Transformer网络结构
 
-![image-20211113200639554](https://gitee.com/xiubenwu/xiubenwu-images/raw/master/img/20211113Transformer1.png)
+![image-20211113200639554](https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211113Transformer1.png)
 
 ## Encoder
 
