@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Sky
-subtitle: Learn Everything But Know Nothing
+title: XBW's Blog
+subtitle: More And More
 description: ''
 keywords: 点滴随笔
-author: 吴秀奔
+author: XiubenWu
 language: zh-CN
 timezone: ''
 
@@ -98,7 +98,14 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: stun
+theme: next
+
+# 搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 500
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
