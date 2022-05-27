@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="空间换时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="差分数组">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/07/23/%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="空间换时间">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210723diffarr.png">
+<meta property="article:published_time" content="2021-07-23T11:45:22.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.738Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="特色算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210723diffarr.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/07/23/%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/07/23/%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84/","path":"2021/07/23/差分数组/","title":"差分数组"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>差分数组 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E8%A7%A3%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">暴力解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84%E8%A7%A3%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">差分数组解法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/07/23/%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="差分数组 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          差分数组
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-23 19:45:22" itemprop="dateCreated datePublished" datetime="2021-07-23T19:45:22+08:00">2021-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介">简介</h1>
+<p>差分数组是一种对频繁修改区间数据（频繁对一个区间中的每一个元素进行修改）问题的一种优化时间复杂度的操作（空间换时间）。</p>
+<p>假如有一个很大的数据<code>a.size = 1e+999</code>，需要多次对一个特定的区间<code>[left,right]</code>中的所有数据加上或减去一个固定的数值。一个通常的做法是进行模拟，依次对<code>a[left]~a[right]</code>中的每一个数据进行增加或删除操作，其时间复杂度为<span class="math inline">\(O(n*max(right-left))\)</span>，其中<span class="math inline">\(n\)</span>为操作次数。若采用差分数组，其时间复杂度为<span class="math inline">\(O(n+l)\)</span>，其中<span class="math inline">\(n\)</span>为查询次数，<span class="math inline">\(l\)</span>为差分数组长度。以下为其主要思想。</p>
+<hr />
+<h1 id="method">Method</h1>
+<ul>
+<li><code>a</code>为初始未进行任何操作的数组；</li>
+<li>建立差分数组<code>diff</code>，其尺寸与<code>a</code>一致，<code>diff[0]=a[0];diff[i]=a[i]-a[i-1]</code>，即记录<code>a</code>中相邻元素的差值；</li>
+<li>当对<code>a</code>中的区间<code>[left,right]</code>进行一次修改操作时(例如增加<code>x</code>)，仅需<code>diff[left]+=x;diff[right+1]-=x</code>，<code>diff</code>中的其他数据不需要进行变动，因为对整个区间做修改仅仅会影响到边界的差值，其他位置的差值保持不变，每一次修改的时间复杂度为<span class="math inline">\(O(1)\)</span>；</li>
+<li>多次修改操作后需要将差分数组变换成原数组修改后的数组，根据差分数组的性质，直接求差分数组的前缀和即可得到修改后的数组。</li>
+</ul>
+<p>简单差分示例：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210723diffarr.png" alt="image-20210723203808006" /><figcaption>image-20210723203808006</figcaption>
+</figure>
+<hr />
+<h1 id="例子">例子</h1>
+<p><strong>(取自leetcode1893)</strong></p>
+<p>给你一个二维整数数组 ranges 和两个整数 <code>left</code>和 <code>right</code> 。每个<code>ranges[i] = [starti, endi]</code> 表示一个从 <code>starti</code>到<code>endi</code>的 闭区间 。</p>
+<p>如果闭区间<code>[left, right]</code>内每个整数都被<code>ranges</code>中 至少一个 区间覆盖，那么请你返回<code>true</code> ，否则返回 <code>false</code> 。</p>
+<p>已知区间 <code>ranges[i] = [starti, endi]</code> ，如果整数<code>x</code> 满足<code>starti &lt;= x &lt;= endi</code> ，那么我们称整数x 被覆盖了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">示例 1：</span><br><span class="line"></span><br><span class="line">输入：ranges &#x3D; [[1,2],[3,4],[5,6]], left &#x3D; 2, right &#x3D; 5</span><br><span class="line">输出：true</span><br><span class="line">解释：2 到 5 的每个整数都被覆盖了：</span><br><span class="line"></span><br><span class="line">- 2 被第一个区间覆盖。</span><br><span class="line">- 3 和 4 被第二个区间覆盖。</span><br><span class="line">- 5 被第三个区间覆盖。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 示例 2：</span><br><span class="line"></span><br><span class="line">输入：ranges &#x3D; [[1,10],[10,20]], left &#x3D; 21, right &#x3D; 21</span><br><span class="line">输出：false</span><br><span class="line">解释：21 没有被任何一个区间覆盖。</span><br></pre></td></tr></table></figure>
+<p>此外，题中限定了输入数据的范围：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;&#x3D; ranges.length &lt;&#x3D; 50</span><br><span class="line">1 &lt;&#x3D; starti &lt;&#x3D; endi &lt;&#x3D; 50</span><br><span class="line">1 &lt;&#x3D; left &lt;&#x3D; right &lt;&#x3D; 50</span><br></pre></td></tr></table></figure>
+<p>我们可以据此方便的建立差分数组。</p>
+<h2 id="暴力解法">暴力解法</h2>
+<p>建立一个数组，0代表没有覆盖，1代表有覆盖，遍历ranges中的区间，将a中的可覆盖的索引处都置1，然后遍历a中的<code>[left,right]</code>区间查看是否有0，有则未全覆盖，无则全覆盖。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isCovered</span>(<span class="params">self, ranges: List[List[<span class="built_in">int</span>]], left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; bool:</span></span><br><span class="line">        a = [<span class="number">0</span>]*<span class="number">52</span> <span class="comment"># 建立数组尺寸稍大，防止越界</span></span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> ranges: <span class="comment"># 遍历每一个区间</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(r[<span class="number">0</span>],r[<span class="number">1</span>]+<span class="number">1</span>): <span class="comment"># 遍历每一个区间中的每一个索引</span></span><br><span class="line">                a[i]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(left,right+<span class="number">1</span>): <span class="comment"># 对目标区间进行检查</span></span><br><span class="line">            <span class="keyword">if</span> a[i]==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="差分数组解法">差分数组解法</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isCovered</span>(<span class="params">self, ranges: List[List[<span class="built_in">int</span>]], left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; bool:</span></span><br><span class="line">        diff = [<span class="number">0</span>]*<span class="number">52</span> <span class="comment"># 建立差分数组</span></span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> ranges: <span class="comment"># 对差分数组进行修改操作，记录每个索引被区间覆盖的次数</span></span><br><span class="line">            diff[r[<span class="number">0</span>]] += <span class="number">1</span></span><br><span class="line">            diff[r[<span class="number">1</span>]+<span class="number">1</span>] -= <span class="number">1</span></span><br><span class="line">        prefix = <span class="number">0</span> <span class="comment"># 未建立前缀和数组，节约空间</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(right+<span class="number">1</span>): <span class="comment"># 还原每个索引处的覆盖次数</span></span><br><span class="line">            prefix += diff[i]</span><br><span class="line">            <span class="keyword">if</span> prefix&lt;=<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> i&gt;=left: <span class="comment"># 在目标区间中发现覆盖次数小于1（即未被覆盖），直接返回False</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%B9%E8%89%B2%E7%AE%97%E6%B3%95/" rel="tag"># 特色算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/15/Useful-Websites/" rel="prev" title="Useful Websites">
+                  <i class="fa fa-chevron-left"></i> Useful Websites
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/27/%E5%BE%97%E5%88%B0%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/" rel="next" title="得到子序列的最少操作次数">
+                  得到子序列的最少操作次数 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

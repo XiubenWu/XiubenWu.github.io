@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="-----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Manjaro">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/12/23/manjaro/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="-----">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211223manjaro0.png">
+<meta property="article:published_time" content="2021-12-23T07:12:09.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.731Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211223manjaro0.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/12/23/manjaro/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/12/23/manjaro/","path":"2021/12/23/manjaro/","title":"Manjaro"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Manjaro | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#init"><span class="nav-number">2.</span> <span class="nav-text">Init</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85deb%E5%8C%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装deb包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">常用软件与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-archlinux-%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E4%BB%93%E5%BA%93"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 添加 archlinux 中文社区仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 安装常用软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%B3%95%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">输入法安装</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211223manjaro0.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/12/23/manjaro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Manjaro | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Manjaro
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-23 15:12:09" itemprop="dateCreated datePublished" datetime="2021-12-23T15:12:09+08:00">2021-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介">简介</h1>
+<p>Manjaro Linux是快速的、用户友好的、面向桌面的、基于Arch Linux的操作系统。它的一些显著特性包括：一份直观的安装程序、自动硬件检测、稳定的滚动式发布模式、对安装多个内核的支持、用于管理图形卡的特别Bash脚本、高度的桌面可配置性。Manjaro Linux提供Xfce桌面作为核心选项，并为高级用户提供一份最小主义的Net版本。用户还可以获得社区支持的GNOME 3/Cinnamon及KDE版本。Manjaro的社区论坛可提供帮助并充满活力，用户受益其中。</p>
+<ul>
+<li>桌面环境：GNOME, KDE Plasma, Xfce</li>
+<li>软件包管理：Flatpak, Pacman, snap</li>
+<li>发布模式：Rolling</li>
+</ul>
+<hr />
+<h1 id="init">Init</h1>
+<p>Manjaro 装好后，需要运行的第一条命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy ## 强制更新 package 目录</span><br><span class="line">sudo pacman-mirrors --interactive --country China  # 列出所有国内的镜像源，并提供交互式的界面手动选择镜像源</span><br><span class="line">sudo pacman -Syyu  # 强制更新 package 目录，并尝试更新已安装的所有 packages.</span><br><span class="line">sudo pacman -S yay  # 安装 yay</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S base-devel </span><br><span class="line"><span class="comment"># 安装 fakeroot、binutils 等打包基本工具否则安装软件时报错：</span></span><br><span class="line"><span class="comment"># Cannot find the fakeroot binary. ==&gt; 错误： Cannot find the strip binary required for object fil...</span></span><br><span class="line"><span class="comment"># 错误： Cannot find the fakeroot binary. ==&gt; 错误： Cannot find the strip binary required for object file stripping. ==&gt; 错误：Makepkg 无法构建 deepin-wine-wechat.</span></span><br></pre></td></tr></table></figure>
+<p>pacman 是 arch/manjaro 的官方包管理器，而刚刚安装的 yay，则是一个能查询 arch linux 的 aur 仓库的第三方包管理器，非常流行。</p>
+<p>pacman 的常用命令语法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pacman -S package_name        <span class="comment"># 安装软件  </span></span><br><span class="line">pacman -S extra/package_name  <span class="comment"># 安装不同仓库中的版本</span></span><br><span class="line">pacman -Syu                   <span class="comment"># 升级整个系统，y是更新数据库，yy是强制更新，u是升级软件</span></span><br><span class="line">pacman -Ss string             <span class="comment"># 在包数据库中查询软件</span></span><br><span class="line">pacman -Si package_name       <span class="comment"># 显示软件的详细信息</span></span><br><span class="line">pacman -Sc                    <span class="comment"># 清除软件缓存，即/var/cache/pacman/pkg目录下的文件</span></span><br><span class="line">pacman -R package_name        <span class="comment"># 删除单个软件</span></span><br><span class="line">pacman -Rs package_name       <span class="comment"># 删除指定软件及其没有被其他已安装软件使用的依赖关系</span></span><br><span class="line">pacman -Qs string             <span class="comment"># 查询已安装的软件包</span></span><br><span class="line">pacman -Qi package_name       <span class="comment"># 查询本地安装包的详细信息</span></span><br><span class="line">pacman -Ql package_name       <span class="comment"># 获取已安装软件所包含的文件的列表</span></span><br><span class="line">pacman -U package.tar.zx      <span class="comment"># 从本地文件安装</span></span><br><span class="line">pactree package_name          <span class="comment"># 显示软件的依赖树</span></span><br></pre></td></tr></table></figure>
+<p>yay 的用法和 pacman 完全类似，上述所有 <code>pacman xxx</code> 命令，均可替换成 <code>yay xxx</code> 执行。</p>
+<p>此外，还有一条 <code>yay</code> 命令值得记一下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -c  <span class="comment"># 卸载所有无用的依赖。类比 apt-get autoremove</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装deb包">安装deb包</h2>
+<p>pacman系的不能直接安装debian系的软件包，需要进行一定转化，安装<kbd>debtap</kbd>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yay -S debtap</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yaourt -S debtap</span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">pacaur -S debtap</span><br><span class="line"><span class="comment"># 三种方式选一,但必须先安装三种工具:</span></span><br><span class="line"> sudo pacman -S XXX  <span class="comment"># XXX 可为 yaourt、yay、pacaur </span></span><br></pre></td></tr></table></figure>
+<p>更新 debtap</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo debtap -u</span><br></pre></td></tr></table></figure>
+<p><strong>deb</strong> 包转为 <strong>tar.xz</strong> 包，在此过程中，会要求输入包装名（packager name）和许可证（License）（可输入比如 GPL 或者不输入）。对生成的 tar.xz 包，使用 pacman 进行安装。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo debtap XXX.deb</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -U XXX.tar.xz</span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="常用软件与配置">常用软件与配置</h2>
+<h3 id="添加-archlinux-中文社区仓库">1. 添加 archlinux 中文社区仓库</h3>
+<p><a target="_blank" rel="noopener" href="https://www.archlinuxcn.org/archlinux-cn-repo-and-mirror/">Arch Linux 中文社区仓库</a> 是由 Arch Linux 中文社区驱动的非官方用户仓库，包含一些额外的软件包以及已有软件的 git 版本等变种。部分软件包的打包脚本来源于 AUR。</p>
+<p>一些国内软件，如果直接从 aur 安装，那就会有一个编译过程，有点慢。而 archlinuxcn 有已经编译好的包，可以直接安装。更新速度也很快，推荐使用。</p>
+<p>配置方法见 <a target="_blank" rel="noopener" href="https://github.com/archlinuxcn/repo">Arch Linux Chinese Community Repository</a>。</p>
+<h3 id="安装常用软件">2. 安装常用软件</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S google-chrome  firefox         <span class="comment"># 浏览器</span></span><br><span class="line">sudo pacman -S netease-cloud-music     <span class="comment"># 网易云音乐</span></span><br><span class="line">sudo pacman -S noto-fonts-cjk wqy-bitmapfont wqy-microhei wqy-zenhei   <span class="comment"># 中文字体：思源系列、文泉系列</span></span><br><span class="line">sudo pacman -S wps-office ttf-wps-fonts</span><br><span class="line"></span><br><span class="line">sudo pacman -S vim                     <span class="comment"># 命令行编辑器</span></span><br><span class="line">sudo pacman -S git                     <span class="comment"># 版本管理工具</span></span><br><span class="line">sudo pacman -S clang make cmake gdb    <span class="comment"># 编译调试环境</span></span><br><span class="line">sudo pacman -S visual-studio-code-bin  <span class="comment"># 代码编辑器</span></span><br><span class="line"></span><br><span class="line">sudo pacman -S wireshark-qt  mitmproxy         <span class="comment"># 抓包工具</span></span><br><span class="line">sudo pacman -S docker  <span class="comment"># docker 容器</span></span><br></pre></td></tr></table></figure>
+<h2 id="输入法安装">输入法安装</h2>
+<p>在<kbd>Manjaro Hello</kbd>中的<kbd>Applications</kbd>中安装fcitx，可以避免手动配置.xprofile</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211223majaro1.png" alt="Manjaro Applications" /><figcaption>Manjaro Applications</figcaption>
+</figure>
+<p>安装搜狗输入法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-sogoupinyin</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">sudo pacman -S fcitx-sogoupinyin</span><br></pre></td></tr></table></figure>
+<p>搜狗经常报错，安装google输入法亦可：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-googlepinyin</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/22/ssh%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%BF%9E%E6%8E%A5%E8%A7%A3%E5%86%B3/" rel="prev" title="ssh无法正常连接解决">
+                  <i class="fa fa-chevron-left"></i> ssh无法正常连接解决
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/01/django/" rel="next" title="django">
+                  django <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

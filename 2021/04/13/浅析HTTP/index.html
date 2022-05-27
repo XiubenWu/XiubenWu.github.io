@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="HTTP（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种网络传输协议">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析HTTP">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/04/13/%E6%B5%85%E6%9E%90HTTP/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="HTTP（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种网络传输协议">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210413http1.png">
+<meta property="article:published_time" content="2021-04-13T13:40:50.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.744Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210413http1.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/04/13/%E6%B5%85%E6%9E%90HTTP/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/04/13/%E6%B5%85%E6%9E%90HTTP/","path":"2021/04/13/浅析HTTP/","title":"浅析HTTP"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>浅析HTTP | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">HTTP简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E6%96%87%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">超文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93"><span class="nav-number">1.2.</span> <span class="nav-text">传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#htttp%E7%9A%84%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">HTTTP的常见状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http%E7%9A%84%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">HTTP的常见字段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#host"><span class="nav-number">3.1.</span> <span class="nav-text">Host</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#content-length"><span class="nav-number">3.2.</span> <span class="nav-text">Content-Length</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection"><span class="nav-number">3.3.</span> <span class="nav-text">Connection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#content-type"><span class="nav-number">3.4.</span> <span class="nav-text">Content-Type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accept"><span class="nav-number">3.5.</span> <span class="nav-text">Accept</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#content-encoding"><span class="nav-number">3.6.</span> <span class="nav-text">Content-Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accept-encoding"><span class="nav-number">3.7.</span> <span class="nav-text">Accept-Encoding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#get%E6%96%B9%E6%B3%95%E4%B8%8Epost%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">GET方法与POST方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-number">4.1.</span> <span class="nav-text">GET</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post"><span class="nav-number">4.2.</span> <span class="nav-text">Post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E8%80%85%E5%AE%89%E5%85%A8%E4%B8%94%E7%AD%89%E5%B9%82"><span class="nav-number">4.3.</span> <span class="nav-text">两者安全且等幂？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http-%E4%B8%8E-https"><span class="nav-number">5.</span> <span class="nav-text">HTTP 与 HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#https%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">5.1.</span> <span class="nav-text">HTTPS工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">5.2.</span> <span class="nav-text">HTTPS的优缺点</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/04/13/%E6%B5%85%E6%9E%90HTTP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="浅析HTTP | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅析HTTP
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-13 21:40:50" itemprop="dateCreated datePublished" datetime="2021-04-13T21:40:50+08:00">2021-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="http简介">HTTP简介</h1>
+<p>HTTP 是超⽂文本传输协议，即HyperText Transfer Protocol.</p>
+<p>正如其名，HTTP可以分为以下三个部分：</p>
+<ul>
+<li>超文本</li>
+<li>传输</li>
+<li>协议</li>
+</ul>
+<p>它们之间的关系如下：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210413http1.png" alt="image-20210413214817316" /><figcaption>image-20210413214817316</figcaption>
+</figure>
+<h2 id="超文本">超文本</h2>
+<p>在互联⽹网早期的时候文本仅仅指代只是简单的字符⽂字，但现在文本的涵义已经可以扩展为图片、视频、压缩包等，在 HTTP 眼⾥里这些都算作文本。</p>
+<p>超文本就是超过普通文本的一种文本，它是⽂字、图片、视频等的混合体，最关键有超链接，能从一个超⽂文本跳转到另外一个超文本。</p>
+<p>比如说常见的HTML就是一个超文本，它本身是纯文本文件，但是其中可以使用标签来定义图片、视频的链接，再通过浏览器对它进行解析，就能得到一个文字、画面共存的网页了。</p>
+<h2 id="传输">传输</h2>
+<p>传输就是把一堆东西从一个地方搬到另一个地方，在网络上体现为服务器、客户端之间的数据交换。我们在浏览网页的时候，浏览器是请求⽅方 ，网站就是应答⽅。双方约定用 HTTP 协议来通信，于是浏览器把请求数据发送给网站，网站再把一些数据返回给浏览器，最后由浏览器渲染在屏幕，就可以看到图片、视频了。</p>
+<h2 id="协议">协议</h2>
+<p>协议代表的是对参与者的一种行为约定和规范。</p>
+<p>HTTP是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计算机之间交流通信的规范(两个以上的参与者),以及相关的各种控制和错误处理方式(行为约定和规范）。</p>
+<p>最终可以将HTTP简单定义为：一个在计算机世界里专门在<strong>两点</strong>之间<strong>传输</strong>文字、图片、音频、视频等<strong>超文本</strong>数据 的<strong>约定和规范 </strong>。</p>
+<hr />
+<h1 id="htttp的常见状态码">HTTTP的常见状态码</h1>
+<p>HTTP常见的状态码有以下五大类：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">状态码</th>
+<th style="text-align: left;">含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1xx</td>
+<td style="text-align: left;">提示信息，表示目前是协议处理的中间状态，还需进行后续操作</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2xx</td>
+<td style="text-align: left;">成功，报文已接收并被正确处理</td>
+<td>200、204、206</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3xx</td>
+<td style="text-align: left;">重定向，资源位置发生变动，需要客户端重新发送请求</td>
+<td>301、302、304</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4xx</td>
+<td style="text-align: left;">客户端错误，请求报文有误，服务器无法处理</td>
+<td>400、403、404</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5xx</td>
+<td style="text-align: left;">服务器错误，服务器在请求时内部发生了错误</td>
+<td>500、501、502、503</td>
+</tr>
+</tbody>
+</table>
+<p>示例解析：</p>
+<blockquote>
+<p>1xx</p>
+<blockquote>
+<p>此类状态码属于提示信息,是协议处理中的一种中间状态,实际用到的比较少。</p>
+</blockquote>
+<p>2xx</p>
+<blockquote>
+<p>此类状态码表示服务器成功处理了客户端的请求，也是我们最愿意看到的状态。</p>
+<p><strong>200 OK</strong> 请求成功。一般用于GET与POST请求。</p>
+<p><strong>201 Created</strong> 已创建。成功请求并创建了新的资源。</p>
+<p><strong>202 Accepted</strong> 已接受。已经接受请求，但未处理完成。</p>
+</blockquote>
+<p>3xx</p>
+<blockquote>
+<p><strong>301 Moved Permanently</strong> 表示永久重定向,说明请求的资源已经不存在了,需改用新的URL再次访问。</p>
+<p><strong>302 Found</strong> 表示临时重定向，说明请求的资源还在，但暂时需要⽤用另一个 URL 来访问。</p>
+<p><strong>304 Not Modified</strong> 不具有跳转的含义，表示资源未修改，重定向已存在的缓冲⽂文件，也称缓存重定向，用于缓存控制。</p>
+<p><strong>305 Use Proxy</strong> 使用代理。所请求的资源必须通过代理访问。</p>
+<p><strong>306 Unused</strong> 已经被废弃的HTTP状态码。</p>
+</blockquote>
+<p>4xx</p>
+<blockquote>
+<p><strong>400 Bad Reques</strong> 表示客户端请求的报文有错误，但只是个笼统的错误。</p>
+<p><strong>401 Unauthorized</strong> 请求要求用户的身份认证。</p>
+<p><strong>402 Payment Required</strong> 保留，将来使用。</p>
+<p><strong>403 Forbidden</strong> 表示服务器禁止访问资源，并不是客户端的请求出错。</p>
+<p><strong>404 Not Found</strong> 表示请求的资源在服务器上不存在或未找到，所以无法提供给客户端。</p>
+<p><strong>405 Method Not Allowed</strong> 客户端请求中的方法被禁止。</p>
+<p><strong>406 Not Acceptable</strong> 服务器无法根据客户端请求的内容特性完成请求。</p>
+<p><strong>408 Request Time-out</strong> 服务器等待客户端发送的请求时间过长，超时。</p>
+</blockquote>
+<p>5xx</p>
+<blockquote>
+<p><strong>500 Internal Server Error</strong> 与 400 类型，是个笼统通用的错误码，服务器发生了什么错误，我们并不知道。</p>
+<p><strong>501 Not Implemented</strong> 表示客户端请求的功能还不支持。</p>
+<p><strong>502 Bad Gateway</strong> 通常是服务器作为网关或代理时返回的错误码，表示服务器自身工作正常，访问后端服务器发生了错误。</p>
+<p><strong>503 Service Unavailable</strong> 表示服务器当前很忙，暂时无法响应服务器。</p>
+<p><strong>504 Gateway Time-out</strong> 充当网关或代理的服务器，未及时从远端服务器获取请求。</p>
+<p><strong>505 HTTP Version not supported</strong> 服务器不支持请求的HTTP协议的版本，无法完成处理。</p>
+</blockquote>
+</blockquote>
+<hr />
+<h1 id="http的常见字段">HTTP的常见字段</h1>
+<h2 id="host">Host</h2>
+<p>Host 的作用是客户端发送请求时，用来指定服务器的域名。例如<code>Host: www.baidu.com.</code></p>
+<h2 id="content-length">Content-Length</h2>
+<p>服务器在返回数据时，会有Content-Length字段，表明本次回应的数据长度。<code>Content-Length: 1000</code></p>
+<h2 id="connection">Connection</h2>
+<p>Connection字段最常用于客户端要求服务器使用 TCP 持久连接，以便其他请求复用。<code>Connection: keep-alive</code></p>
+<h2 id="content-type">Content-Type</h2>
+<p>用于服务器回应时，告诉客户端，本次数据是什么格式。<code>Content-Type: text/html; charset=utf-8</code></p>
+<h2 id="accept">Accept</h2>
+<p>客户端请求的时候，可以使用Accept字段声明自己可以接受哪些数据格式。<code>Accept: */*</code>表明接受任何格式的数据。</p>
+<h2 id="content-encoding">Content-Encoding</h2>
+<p>说明数据的压缩⽅方法。表示服务器返回的数据使⽤用了什么压缩格式。<code>Content-Encoding: gzip</code></p>
+<h2 id="accept-encoding">Accept-Encoding</h2>
+<p>客户端在请求时，⽤用Accept-Encoding字段说明自己可以接受哪些压缩方法。<code>Accept-Encoding: gzip, deflate</code></p>
+<hr />
+<h1 id="get方法与post方法">GET方法与POST方法</h1>
+<h2 id="get">GET</h2>
+<p>Get为获取的意思，此方法的含义是请求从服务器获取资源，这个资源可以是静态的文本、页面、图片视频等。</p>
+<p>当打开一个网页，浏览器就会发送Get请求到服务器，服务器将会返回文本及资源。</p>
+<h2 id="post">Post</h2>
+<p>此方法是想服务器提交数据，具体内容放在报文的body里面，与请求头拼接在一起发送给服务器。</p>
+<h2 id="两者安全且等幂">两者安全且等幂？</h2>
+<ul>
+<li>安全指的是请求方法不会破坏服务器上的资源</li>
+<li>等幂指的是多次执行相同的操作，结果都是相同的</li>
+</ul>
+<p>显然，Get方法是安全且等幂的，Post方法是不安全且不等幂的。</p>
+<hr />
+<h1 id="http-与-https">HTTP 与 HTTPS</h1>
+<p>HTTP 由于是明文传输，所以安全上存在以下三个风险：</p>
+<ul>
+<li>窃听风险，比如通信链路路上可以获取通信内容，用户号容易被盗。</li>
+<li>篡改风险，比如强制植入垃圾广告，视觉污染。</li>
+<li>冒充风险，比如冒充淘宝网等购物网站。</li>
+</ul>
+<p>HTTPS在 HTTP 与 TCP 层之间加入了SSL/TLS协议，可以很好的解决了上述的风险。</p>
+<p>HTTPS（全称：Hyper Text Transfer Protocol over SecureSocket Layer），主要由两部分组成：HTTP + SSL / TLS，也就是在 HTTP 上又加了一层处理加密信息的模块。服务端和客户端的信息传输都会通过 TLS 进行加密，所以传输的数据都是加密后的数据。</p>
+<h2 id="https工作流程">HTTPS工作流程</h2>
+<ol type="1">
+<li>客户端将它所支持的算法列表和一个用作产生密钥的随机数发送给服务器；</li>
+<li>服务器从算法列表中选择一种加密算法，并将它和一份包含服务器公用密钥的证书发送给客户端；该证书还包含了用于认证目的的服务器标识，服务器同时还提供了一个用作产生密钥的随机数；</li>
+<li>客户端对服务器的证书进行验证（有关验证证书，可以参考数字签名），并抽取服务器的公用密钥；然后，再产生一个称作 pre_master_secret 的随机密码串，并使用服务器的公用密钥对其进行加密（参考非对称加 / 解密），并将加密后的信息发送给服务器；</li>
+<li>客户端与服务器端根据 pre_master_secret 以及客户端与服务器的随机数值独立计算出加密和 MAC密钥（参考 DH密钥交换算法）；</li>
+<li>客户端将所有握手消息的 MAC 值发送给服务器</li>
+<li>服务器将所有握手消息的 MAC 值发送给客户端</li>
+</ol>
+<h2 id="https的优缺点">HTTPS的优缺点</h2>
+<ul>
+<li>优点：确保数据发送到正确的客户机和服务器，防止数据在传输过程中被窃取、改变，确保数据的完整性。</li>
+<li>缺点：页面的加载时间延长近 50%，影响缓存，增加数据开销和功耗，增加成本；HTTPS 协议的安全是有范围的，在黑客攻击、拒绝服务攻击和服务器劫持等方面几乎起不到什么作用。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/07/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E7%A1%80/" rel="prev" title="二叉树基础">
+                  <i class="fa fa-chevron-left"></i> 二叉树基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%A1%B6%E6%8E%92%E5%BA%8F/" rel="next" title="排序算法——桶排序">
+                  排序算法——桶排序 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

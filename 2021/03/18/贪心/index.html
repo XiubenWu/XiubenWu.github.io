@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最优化问题的求解往往需要通过一系列步骤，每个步骤面临许多选择。对于一些简单的问题若使用动态规划来求解有些大材小用的感觉。 贪心算法(Greedy) 便是一种更简单、更高效的算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贪心">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/03/18/%E8%B4%AA%E5%BF%83/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="最优化问题的求解往往需要通过一系列步骤，每个步骤面临许多选择。对于一些简单的问题若使用动态规划来求解有些大材小用的感觉。 贪心算法(Greedy) 便是一种更简单、更高效的算法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-18T13:37:59.000Z">
+<meta property="article:modified_time" content="2021-05-25T13:56:50.548Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="基础算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/03/18/%E8%B4%AA%E5%BF%83/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/03/18/%E8%B4%AA%E5%BF%83/","path":"2021/03/18/贪心/","title":"贪心"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>贪心 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83%E4%B8%8E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">贪心与动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">贪心过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E5%8C%85%E5%92%8C%E5%88%86%E6%95%B0%E8%83%8C%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">0-1背包和分数背包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E5%8C%85"><span class="nav-number">3.1.</span> <span class="nav-text">0-1 背包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%95%B0%E8%83%8C%E5%8C%85"><span class="nav-number">3.2.</span> <span class="nav-text">分数背包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83%E9%80%82%E7%94%A8%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">贪心适用性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">归纳法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E8%AE%BA%E8%AF%81%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">交换论证法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/03/18/%E8%B4%AA%E5%BF%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="贪心 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          贪心
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-18 21:37:59" itemprop="dateCreated datePublished" datetime="2021-03-18T21:37:59+08:00">2021-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-25 21:56:50" itemprop="dateModified" datetime="2021-05-25T21:56:50+08:00">2021-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最优化问题的求解往往需要通过一系列步骤，每个步骤面临许多选择。对于一些简单的问题若使用动态规划来求解有些大材小用的感觉。 <strong>贪心算法(Greedy)</strong> 便是一种更简单、更高效的算法。 <span id="more"></span> # 概述 贪心算法对一个多步骤逐步求解的问题，将在每一步都选择当前最优的策略，而不去关注之前或后续的步骤。贪心算法在大部分问题上都不会取得最优解，因为它并没有测试所有的可能解，容易过早的做决定。对于有的问题只能得到一个近似最优解，但是在某些问题上它确实能够获得最优解，如求图中的最小生成树、求哈夫曼编码。一旦某问题可以用贪心来求解，那么贪心一般是最高效的解决方式。可以用贪心算法解决的题目需要满足以下性质： * 最优子结构：一个问题的最优解包含其子问题的最优解 * 贪心选择性：所求问题的整体最优解可以通过一系列局部最优的选择来到达，即通过贪心选择来达到</p>
+<h1 id="贪心与动态规划">贪心与动态规划</h1>
+<p>在动态规划中，每一个步骤都要进行选择，这个选择通常依赖于子问题；而贪心算法并不需要考虑子问题，直接选择看起来最优的解。所以动态规划通常是递推形式，先计算较小的子问题，为较大的问题提供铺垫；在贪心算法中，我们常常自顶向下求解问题，每一次选择局部最优解，最后留下一个唯一的子问题。</p>
+<h1 id="贪心过程">贪心过程</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">从问题的某一初始解出发</span><br><span class="line">    while (能朝给定总目标前进一步) </span><br><span class="line">        do</span><br><span class="line">            选择当前最优解作为可行解的一个解元素；</span><br><span class="line">    由所有解元素组合成问题的一个可行解。</span><br></pre></td></tr></table></figure>
+<h1 id="背包和分数背包">0-1背包和分数背包</h1>
+<p>若有三个物体，他们的重量和价值分别为<code>weight = [1, 2, 3]</code>；<code>value = [6, 10, 12]</code>. 他们的平均价值分别为<code>[6, 5, 4]</code>，现在有一个可以装5重量的背包，要如何装才能使得收益最大化？<br />
+* 0-1背包：每一种物体只能选择装或者不装。 * 分数背包： 每一种物体可以划分开来装。</p>
+<h2 id="背包">0-1 背包</h2>
+<p>对于0-1背包问题采用贪心策略：<strong>优先装平均收益最大的物体</strong>。最终的背包将会装下物体1和物体2而不能装下物体3，背包占用3剩余2，总价值为16.但是显而易见的装物体2和物体3才是最优策略，此时背包刚好被占满，总价值为22.所以贪心在0-1背包并不适用。</p>
+<h2 id="分数背包">分数背包</h2>
+<p>分数背包可以适用贪心获取最优解。证明也是很简单的：背包的容量有限，要是价值最大，其中物体的平均价值就得最大，所以优先装平均价值最大的物体，最终的总价值也将会最高。最终背包装了物体1、物体2和<span class="math inline">\(\frac{2}{3}\)</span>的物体3，最终价值为24.</p>
+<h1 id="贪心适用性证明">贪心适用性证明</h1>
+<p>贪心策略很容易理解，但一个问题是否适用于贪心算法的证明是最难的。</p>
+<h2 id="归纳法">归纳法</h2>
+<p>数学归纳法的一般步骤为： 1. 证明<span class="math inline">\(n=1\)</span>时命题成立 2. 假设<span class="math inline">\(n=k\)</span>时命题成立 3. 证明<span class="math inline">\(n=k+1\)</span>时命题成立</p>
+<h2 id="交换论证法">交换论证法</h2>
+<ul>
+<li>分析一般最优解与贪心法的解的区别，然后定义一种转换规则，使得从任意一个最优解出发，经过不断对解的某些成分的排列次序进行交换或者用其他元素替换，将这个解最终能够转变成贪心法的解。</li>
+<li>证明在上述转换中解得优化函数值不会变坏。</li>
+<li>证明上述转换在有限步结束。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" rel="tag"># 基础算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="prev" title="动态规划">
+                  <i class="fa fa-chevron-left"></i> 动态规划
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/20/PyCharm%E4%B8%8D%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E8%80%8C%E6%84%8F%E5%A4%96%E7%BB%88%E6%AD%A2%E7%A8%8B%E5%BA%8F%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" rel="next" title="PyCharm不抛出异常而意外终止程序处理方式">
+                  PyCharm不抛出异常而意外终止程序处理方式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

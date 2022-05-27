@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="服务器代理，内网穿透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NPS搭建">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/06/27/NPS%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="服务器代理，内网穿透">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npslogin.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npsWeb.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-3.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-4.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-key.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-5.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-6.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-7.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-8.png">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-9.png">
+<meta property="article:published_time" content="2021-06-27T13:53:15.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.726Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npslogin.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/06/27/NPS%E6%90%AD%E5%BB%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/06/27/NPS%E6%90%AD%E5%BB%BA/","path":"2021/06/27/NPS搭建/","title":"NPS搭建"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NPS搭建 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">3.1.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.2.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%9A%A7%E9%81%93"><span class="nav-number">3.3.</span> <span class="nav-text">添加隧道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.4.</span> <span class="nav-text">云服务器配置</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/06/27/NPS%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NPS搭建 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NPS搭建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-27 21:53:15" itemprop="dateCreated datePublished" datetime="2021-06-27T21:53:15+08:00">2021-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介">简介</h1>
+<p><strong>NPS</strong>是一款轻量级、高性能、功能强大的<strong>内网穿透</strong>代理服务器。目前支持<strong>tcp、udp流量转发</strong>，可支持任何<strong>tcp、udp</strong>上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），此外还<strong>支持内网http代理、内网socks5代理</strong>、<strong>p2p等</strong>，并带有功能强大的web管理端。</p>
+<hr />
+<h1 id="准备工作">准备工作</h1>
+<ul>
+<li>带有公网IP的服务器(此处以阿里云为例)</li>
+<li>本地服务器</li>
+<li>NPS服务端和客户端</li>
+</ul>
+<hr />
+<h1 id="步骤">步骤</h1>
+<p>前往<a target="_blank" rel="noopener" href="https://github.com/ehang-io/nps" class="uri">https://github.com/ehang-io/nps</a>可查看NPS相关信息。在公网服务器和本地服务器<strong>分别</strong>下载安装服务端和客户端(<a target="_blank" rel="noopener" href="https://github.com/ehang-io/nps/releases">根据所用系统自行选择</a>)。</p>
+<h2 id="服务端">服务端</h2>
+<p><strong>在公网IP服务器下载server安装包并配置</strong></p>
+<p>将nps的压缩包解压到自定义安装位置，其中的conf文件夹中nps.conf配置文件可以配置相关参数，主要修改用于配置nps的web端的用户名和密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#web</span><br><span class="line">web_host&#x3D;a.o.com</span><br><span class="line">web_username&#x3D;admin  &lt;-可不修改</span><br><span class="line">web_password&#x3D;123    &lt;-建议修改，提高安全性</span><br><span class="line">web_port &#x3D; 8080</span><br><span class="line">web_ip&#x3D;0.0.0.0</span><br><span class="line">web_base_url&#x3D;</span><br><span class="line">web_open_ssl&#x3D;false</span><br><span class="line">web_cert_file&#x3D;conf&#x2F;server.pem</span><br><span class="line">web_key_file&#x3D;conf&#x2F;server.key</span><br><span class="line"># if web under proxy use sub path. like http:&#x2F;&#x2F;host&#x2F;nps need this.</span><br><span class="line">#web_base_url&#x3D;&#x2F;nps</span><br></pre></td></tr></table></figure>
+<p>使用管理员运行cmd命令行。路径变换到nps的<strong>安装目录</strong>，执行<code>nps install</code>，此时会在<code>C:\Program Files</code>文件夹下产生新的nps配置文件，之后的nps配置直接配置此处文件生效。使用<code>nps start</code>启用服务端，<code>nps stop</code>停止服务，<code>nps restart</code>重启服务。</p>
+<p>服务端启用后进入<code>ip:web_port</code>(默认端口为8080)进行web端部署，输入用户名及密码(同配置文件)登录。</p>
+<p><strong>nps</strong> web端登录界面：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npslogin.png" alt="image-20210627222122777" /><figcaption>image-20210627222122777</figcaption>
+</figure>
+<p><strong>nps</strong> web配置界面：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627npsWeb.png" alt="image-20210627222254529" /><figcaption>image-20210627222254529</figcaption>
+</figure>
+<p><strong>新增一个客户端</strong>：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-3.png" alt="image-20210627222504249" /><figcaption>image-20210627222504249</figcaption>
+</figure>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-4.png" alt="image-20210627222749706" /><figcaption>image-20210627222749706</figcaption>
+</figure>
+<p>留意客户端id及唯一验证密匙，之后会用到：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-key.png" alt="image-20210627222956319" /><figcaption>image-20210627222956319</figcaption>
+</figure>
+<h2 id="客户端">客户端</h2>
+<p><strong>在本地服务器下载client安装包并配置</strong></p>
+<p><strong>npc</strong>的和<strong>nps</strong>的命令使用方式相似。npc直接在其安装目录下的conf文件夹中的npc.conf文件中进行配置，删除掉冗余信息，只保留常规配置中的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr&#x3D;ip:8024    &lt;-填入公网ip即客户端连接端口(默认8024)</span><br><span class="line">conn_type&#x3D;tcp</span><br><span class="line">vkey&#x3D;3raa67c9m18yflr4  &lt;-填入唯一验证密匙</span><br><span class="line">auto_reconnection&#x3D;true</span><br><span class="line">max_conn&#x3D;1000</span><br><span class="line">flow_limit&#x3D;1000</span><br><span class="line">rate_limit&#x3D;1000</span><br><span class="line">basic_username&#x3D;11</span><br><span class="line">basic_password&#x3D;3</span><br><span class="line">web_username&#x3D;user</span><br><span class="line">web_password&#x3D;1234</span><br><span class="line">crypt&#x3D;true</span><br><span class="line">compress&#x3D;true</span><br></pre></td></tr></table></figure>
+<p>之后直接运行npc.exe即可连接至服务端。也可以命令行使用start命令运行。之后可以看到服务端的已连接上：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-5.png" alt="image-20210627224109081" /><figcaption>image-20210627224109081</figcaption>
+</figure>
+<h2 id="添加隧道">添加隧道</h2>
+<p>此时公网ip服务器已和本地连接，可以添加端口映射：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-6.png" alt="image-20210627224408860" /><figcaption>image-20210627224408860</figcaption>
+</figure>
+<p>配置端口后，浏览器访问<code>公网ip:服务端端口</code>后可以映射至<code>内网地址:端口</code></p>
+<h2 id="云服务器配置">云服务器配置</h2>
+<p>有的云服务器没有开放响应端口，此时诸多功能限制，如客户端与服务端无法连接等。以阿里云为开放所有端口。</p>
+<p>在云服务器ECS中创建新的安全组：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-7.png" alt="image-20210627224917076" /><figcaption>image-20210627224917076</figcaption>
+</figure>
+<p>可选择打开所需的端口，此处设置全部打开，设置完成后创建安全组。</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-8.png" alt="image-20210627225139193" /><figcaption>image-20210627225139193</figcaption>
+</figure>
+<p>最后将刚才创建的安全组加入实例中：</p>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210627nps-9.png" alt="image-20210627225332450" /><figcaption>image-20210627225332450</figcaption>
+</figure>
+<p>端口打开完成。 END</p>
+<hr />
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/25/%E6%AD%BB%E4%BA%A1%E5%AF%86%E7%A0%81/" rel="prev" title="死亡密码">
+                  <i class="fa fa-chevron-left"></i> 死亡密码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/10/SCP/" rel="next" title="SCP">
+                  SCP <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

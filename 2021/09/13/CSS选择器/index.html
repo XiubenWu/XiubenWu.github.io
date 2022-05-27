@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS选择器">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/09/13/CSS%E9%80%89%E6%8B%A9%E5%99%A8/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="----">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210913CSS0.png">
+<meta property="article:published_time" content="2021-09-13T14:02:45.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.722Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210913CSS0.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/09/13/CSS%E9%80%89%E6%8B%A9%E5%99%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/09/13/CSS%E9%80%89%E6%8B%A9%E5%99%A8/","path":"2021/09/13/CSS选择器/","title":"CSS选择器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS选择器 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">基本选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">分组选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">组合器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%AA%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">伪选择器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">速查表</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210913CSS0.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/09/13/CSS%E9%80%89%E6%8B%A9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CSS选择器 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS选择器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-13 22:02:45" itemprop="dateCreated datePublished" datetime="2021-09-13T22:02:45+08:00">2021-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介">简介</h1>
+<p><strong>CSS 选择器</strong>规定了 CSS 规则会被应用到哪些元素上。js中的<strong>querySelector</strong>也可以通过CSS选择器来查询html中的元素。</p>
+<hr />
+<h1 id="基本选择器">基本选择器</h1>
+<table>
+<thead>
+<tr class="header">
+<th>选择器</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><code>*</code></strong></td>
+<td>通用元素选择器，匹配任何元素</td>
+</tr>
+<tr class="even">
+<td><strong>elementname</strong></td>
+<td>标签选择器，匹配所有使用elementname标签的元素</td>
+</tr>
+<tr class="odd">
+<td><strong>.classname</strong></td>
+<td>class选择器，匹配所有class属性中包含classname的元素</td>
+</tr>
+<tr class="even">
+<td><strong>#idname</strong></td>
+<td>id选择器，匹配所有id属性等于idname的元素</td>
+</tr>
+<tr class="odd">
+<td><strong>[attr]</strong></td>
+<td>属性选择器选择含有attr属性的元素，属性选择器有多种匹配表达式</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="分组选择器">分组选择器</h2>
+<ul>
+<li><p>选择器列表</p>
+<p><code>,</code> 是将不同的选择器组合在一起的方法，它选择所有能被列表中的任意一个选择器选中的节点。 <strong>语法</strong>：<code>A, B</code> <strong>示例</strong>：<code>div, span</code> 会同时匹配 <code>div</code>元素和 <code>span</code>元素。</p>
+<hr /></li>
+</ul>
+<h2 id="组合器">组合器</h2>
+<ul>
+<li><p>后代组合器</p>
+<p><code></code>（空格）组合器选择前一个元素的后代节点。 <strong>语法：</strong><code>A B</code> <strong>例子：</strong><code>div span</code> 匹配所有位于任意<code>div</code>元素之内的后代<code>span</code>元素。</p></li>
+<li><p>直接子代组合器</p>
+<p><code>&gt;</code> 组合器选择前一个元素的直接子代的节点。 <strong>语法</strong>：<code>A &gt; B</code> <strong>例子</strong>：<code>ul &gt; li</code> 匹配在<code>ul</code>的直系后代<code>li</code>元素。</p></li>
+<li><p>一般兄弟组合器</p>
+<p><code>~</code> 组合器选择兄弟元素，也就是说，后一个节点在前一个节点后面的任意位置，并且共享同一个父节点。 <strong>语法</strong>：<code>A ~ B</code> <strong>例子</strong>：<code>p ~ span</code> 匹配同一父元素下，<code>&lt;p&gt;</code>元素后的所有 <code>&lt;span&gt;</code> 元素。</p></li>
+<li><p>紧邻兄弟组合器</p>
+<p><code>+</code> 组合器选择相邻元素，即后一个元素紧跟在前一个之后，并且共享同一个父节点。 <strong>语法：</strong><code>A + B</code></p></li>
+<li><p>列组合器</p>
+<p><code>||</code> 组合器选择属于某个表格行的节点。 <strong>语法：</strong> <code>A || B</code></p>
+<hr /></li>
+</ul>
+<h1 id="伪选择器">伪选择器</h1>
+<p>伪类</p>
+<p><code>:</code> 伪选择器支持按照未被包含在文档树中的状态信息来选择元素。 <strong>例子：</strong><code>a:visited</code> 匹配所有曾被访问过的 <code>&lt;a&gt;</code>元素。</p>
+<p><code>a:hover</code>匹配鼠标悬停在<code>&lt;a&gt;</code>元素上时的样式。</p>
+<p>伪元素</p>
+<p><code>::</code> 伪选择器用于表示无法用 HTML 语义表达的实体。 <strong>例子：</strong><code>p::first-line</code> 匹配所有<code>&lt;p&gt;</code>元素的第一行。</p>
+<hr />
+<h1 id="速查表">速查表</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">选择器</th>
+<th style="text-align: left;">例子</th>
+<th style="text-align: left;">例子描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_class.asp">.<em>class</em></a></td>
+<td style="text-align: left;">.intro</td>
+<td style="text-align: left;">选择 class=&quot;intro&quot; 的所有元素。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">.<em>class1</em>.<em>class2</em></td>
+<td style="text-align: left;">.name1.name2</td>
+<td style="text-align: left;">选择 class 属性中同时有 name1 和 name2 的所有元素。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">.<em>class1</em> .<em>class2</em></td>
+<td style="text-align: left;">.name1 .name2</td>
+<td style="text-align: left;">选择作为类名 name1 元素后代的所有类名 name2 元素。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_id.asp">#<em>id</em></a></td>
+<td style="text-align: left;">#firstname</td>
+<td style="text-align: left;">选择 id=&quot;firstname&quot; 的元素。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_all.asp">*</a></td>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">选择所有元素。</td>
+</tr>
+</tbody>
+</table>
+| <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element.asp"><em>element</em></a> | p | 选择所有
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_class.asp"><em>element</em>.<em>class</em></a> | p.intro | 选择 class=&quot;intro&quot; 的所有
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_comma.asp"><em>element</em>,<em>element</em></a> | div, p | 选择所有
+<div>
+元素和所有
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_element.asp"><em>element</em> <em>element</em></a> | div p | 选择
+<div>
+元素内的所有
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_gt.asp"><em>element</em>&gt;<em>element</em></a> | div &gt; p | 选择父元素是
+<div>
+的所有
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_element_plus.asp"><em>element</em>+<em>element</em></a> | div + p | 选择紧跟
+<div>
+元素的首个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_gen_sibling.asp"><em>element1</em>~<em>element2</em></a> | p ~ ul | 选择前面有
+<p>
+元素的每个
+<ul>
+元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attribute.asp"><em>attribute</em>]</a> | [target] | 选择带有 target 属性的所有元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attribute_value.asp"><em>attribute</em>=<em>value</em>]</a> | [target=_blank] | 选择带有 target=&quot;_blank&quot; 属性的所有元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attribute_value_contain.asp"><em>attribute</em>~=<em>value</em>]</a> | [title~=flower] | 选择 title 属性包含单词 &quot;flower&quot; 的所有元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attribute_value_start.asp"><em>attribute</em>|=<em>value</em>]</a> | [lang|=en] | 选择 lang 属性值以 &quot;en&quot; 开头的所有元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attr_begin.asp"><em>attribute</em>^=<em>value</em>]</a> | a[href^=&quot;https&quot;] | 选择其 src 属性值以 &quot;https&quot; 开头的每个 <a> 元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attr_end.asp"><em>attribute</em>$=<em>value</em>]</a> | a[href$=&quot;.pdf&quot;] | 选择其 src 属性以 &quot;.pdf&quot; 结尾的所有 <a> 元素。 | | [<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_attr_contain.asp">*attribute**=<em>value</em>]</a> | a[href*=&quot;w3schools&quot;] | 选择其 href 属性值中包含 &quot;abc&quot; 子串的每个 <a> 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_active.asp">:active</a> | a:active | 选择活动链接。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_after.asp">::after</a> | p::after | 在每个
+<p>
+的内容之后插入内容。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_before.asp">::before</a> | p::before | 在每个
+<p>
+的内容之前插入内容。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_checked.asp">:checked</a> | input:checked | 选择每个被选中的 <input> 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_default.asp">:default</a> | input:default | 选择默认的 <input> 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_disabled.asp">:disabled</a> | input:disabled | 选择每个被禁用的 <input> 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_empty.asp">:empty</a> | p:empty | 选择没有子元素的每个
+<p>
+元素（包括文本节点）。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_enabled.asp">:enabled</a> | input:enabled | 选择每个启用的 <input> 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-child.asp">:first-child</a> | p:first-child | 选择属于父元素的第一个子元素的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-letter.asp">::first-letter</a> | p::first-letter | 选择每个
+<p>
+元素的首字母。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-line.asp">::first-line</a> | p::first-line | 选择每个
+<p>
+元素的首行。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_first-of-type.asp">:first-of-type</a> | p:first-of-type | 选择属于其父元素的首个
+<p>
+元素的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_focus.asp">:focus</a> | input:focus | 选择获得焦点的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_fullscreen.asp">:fullscreen</a> | :fullscreen | 选择处于全屏模式的元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_hover.asp">:hover</a> | a:hover | 选择鼠标指针位于其上的链接。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_in-range.asp">:in-range</a> | input:in-range | 选择其值在指定范围内的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_indeterminate.asp">:indeterminate</a> | input:indeterminate | 选择处于不确定状态的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_invalid.asp">:invalid</a> | input:invalid | 选择具有无效值的所有 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_lang.asp">:lang(<em>language</em>)</a> | p:lang(it) | 选择 lang 属性等于 &quot;it&quot;（意大利）的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_last-child.asp">:last-child</a> | p:last-child | 选择属于其父元素最后一个子元素每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_last-of-type.asp">:last-of-type</a> | p:last-of-type | 选择属于其父元素的最后
+<p>
+元素的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_link.asp">:link</a> | a:link | 选择所有未访问过的链接。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_not.asp">:not(<em>selector</em>)</a> | :not(p) | 选择非
+<p>
+元素的每个元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-child.asp">:nth-child(<em>n</em>)</a> | p:nth-child(2) | 选择属于其父元素的第二个子元素的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-last-child.asp">:nth-last-child(<em>n</em>)</a> | p:nth-last-child(2) | 同上，从最后一个子元素开始计数。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-of-type.asp">:nth-of-type(<em>n</em>)</a> | p:nth-of-type(2) | 选择属于其父元素第二个
+<p>
+元素的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_nth-last-of-type.asp">:nth-last-of-type(<em>n</em>)</a> | p:nth-last-of-type(2) | 同上，但是从最后一个子元素开始计数。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_only-of-type.asp">:only-of-type</a> | p:only-of-type | 选择属于其父元素唯一的
+<p>
+元素的每个
+<p>
+元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_only-child.asp">:only-child</a> | p:only-child | 选择属于其父元素的唯一子元素的每个
+<p>
+<p>元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_optional.asp">:optional</a> | input:optional | 选择不带 &quot;required&quot; 属性的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_out-of-range.asp">:out-of-range</a> | input:out-of-range | 选择值超出指定范围的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_placeholder.asp">::placeholder</a> | input::placeholder | 选择已规定 &quot;placeholder&quot; 属性的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_read-only.asp">:read-only</a> | input:read-only | 选择已规定 &quot;readonly&quot; 属性的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_read-write.asp">:read-write</a> | input:read-write | 选择未规定 &quot;readonly&quot; 属性的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_required.asp">:required</a> | input:required | 选择已规定 &quot;required&quot; 属性的 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_root.asp">:root</a> | :root | 选择文档的根元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_selection.asp">::selection</a> | ::selection | 选择用户已选取的元素部分。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_target.asp">:target</a> | #news:target | 选择当前活动的 #news 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_valid.asp">:valid</a> | input:valid | 选择带有有效值的所有 input 元素。 | | <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/selector_visited.asp">:visited</a> | a:visited | 选择所有已访问的链接。 |</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/12/%E5%B7%A7%E8%A7%A3%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/" rel="prev" title="巧解有效括号">
+                  <i class="fa fa-chevron-left"></i> 巧解有效括号
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/13/%E5%BC%97%E6%B4%9B%E4%BC%8A%E5%BE%B7%E6%B3%95/" rel="next" title="弗洛伊德法">
+                  弗洛伊德法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="-----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python函数调用关系分析">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/12/13/python%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="-----">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz0.png">
+<meta property="article:published_time" content="2021-12-13T07:45:07.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.732Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz0.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/12/13/python%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/12/13/python%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90/","path":"2021/12/13/python函数调用关系分析/","title":"python函数调用关系分析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python函数调用关系分析 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#profile"><span class="nav-number">1.</span> <span class="nav-text">profile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pycallgraph"><span class="nav-number">2.</span> <span class="nav-text">pycallgraph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cprofilesnakeviz"><span class="nav-number">3.</span> <span class="nav-text">cProfile+snakeviz</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cprofile"><span class="nav-number">3.1.</span> <span class="nav-text">cProfile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#snakeviz"><span class="nav-number">4.</span> <span class="nav-text">snakeviz</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz0.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/12/13/python%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="python函数调用关系分析 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python函数调用关系分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-13 15:45:07" itemprop="dateCreated datePublished" datetime="2021-12-13T15:45:07+08:00">2021-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在Pycharm的专业版中，提供了一个分析项目性能的工具<code>run-&gt;Profile</code>，可以将工程运行时各函数的调用次数和所用时间记录下来，提供静态数据和关系图表两种表达方式。</p>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz1.png" /></p>
+<p>只需轻轻一点，统计数据和图表关系一览无遗，确实方便。但是此方法局限性很大，一是必须使用pycharm，这样使用其他ide如VS Code的用户就没法使用了；二是它不仅要使用pychram，还得是专业版，专业版是要收费的(破解和学生版除外)，这又是一道坎挡在了我们的路上。那么有其他的方法来进行类似的分析吗？当然是有的。</p>
+<hr />
+<h1 id="profile">profile</h1>
+<p>profile可以分析函数运行时的性能消耗情况，调用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> profile</span><br><span class="line">profile.run(<span class="string">&quot;main()&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>main()即为需要分析的入口函数，以字符串形式传入。运行之后可以得到如下的输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">19 function calls in 0.000 seconds</span><br><span class="line"></span><br><span class="line">   Ordered by: standard name</span><br><span class="line"></span><br><span class="line">   ncalls  tottime  percall  cumtime  percall filename:lineno(function)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 :0(exec)</span><br><span class="line">        4    0.000    0.000    0.000    0.000 :0(len)</span><br><span class="line">        4    0.000    0.000    0.000    0.000 :0(print)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 :0(setprofile)</span><br><span class="line">        2    0.000    0.000    0.000    0.000 :0(sleep)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 &lt;string&gt;:1(&lt;module&gt;)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 profile:0(main())</span><br><span class="line">        0    0.000             0.000          profile:0(profiler)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 test.py:1(next_cal)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 test.py:16(__init__)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 test.py:19(search_string)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 test.py:36(__next_arr)</span><br><span class="line">        1    0.000    0.000    0.000    0.000 test.py:51(main)</span><br></pre></td></tr></table></figure>
+<p>虽然函数调用情况可以得到的，但是分析起来比较麻烦，函数之间的调用关系也没有给出。此方式虽然简单但是不够直观。</p>
+<hr />
+<h1 id="pycallgraph">pycallgraph</h1>
+<p>在pycallgraph之前不得不先提及一下<strong><a target="_blank" rel="noopener" href="http://www.graphviz.org/">Graphviz</a></strong>，毕竟pycallgraph是基于Graphviz的。Graphviz是开源的图形可视化软件，能够将结构信息表示为抽象图和网络图的方法。至官网下载并安装Graphviz：<a target="_blank" rel="noopener" href="http://www.graphviz.org/download/" class="uri">http://www.graphviz.org/download/</a>，同时在将<code>graphviz\bin</code>添加到环境变量中。graphviz中有多种布局器，pycallgraph所使用的便是其中的dot.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dot 默认布局方式，主要用于有向图</span><br><span class="line">neato 基于spring-model(又称force-based)算法</span><br><span class="line">twopi 径向布局</span><br><span class="line">circo 圆环布局</span><br><span class="line">fdp 用于无向图</span><br></pre></td></tr></table></figure>
+<p>看看graphviz都能画些什么样的图：</p>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz2.png" /></p>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz3.png" /></p>
+<p>安装并配置好graphviz后，需要安装pycallgraph，直接使用pip安装即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pycallgraph</span><br></pre></td></tr></table></figure>
+<p>之后可以通过命令行或代码来生成函数调用关系图。</p>
+<p>命令行(windows中不识别pycallgraph，应该还要需要配置其环境变量):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pycallgraph graphviz -- .&#x2F;main.py</span><br></pre></td></tr></table></figure>
+<p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pycallgraph <span class="keyword">import</span> PyCallGraph</span><br><span class="line"><span class="keyword">from</span> pycallgraph.output <span class="keyword">import</span> GraphvizOutput</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> PyCallGraph(output=GraphvizOutput(output_file=<span class="string">&quot;test.png&quot;</span>)):</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>当然可以配置显示或不显示哪些函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pycallgraph <span class="keyword">import</span> Config</span><br><span class="line"><span class="keyword">from</span> pycallgraph <span class="keyword">import</span> PyCallGraph</span><br><span class="line"><span class="keyword">from</span> pycallgraph.output <span class="keyword">import</span> GraphvizOutput</span><br><span class="line">config = Config()</span><br><span class="line"><span class="comment"># 关系图中包括(include)哪些函数名。</span></span><br><span class="line"><span class="comment"># 如果是某一类的函数，例如类gobang，则可以直接写&#x27;gobang.*&#x27;，表示以gobang.开头的所有函数。（利用正则表达式）。</span></span><br><span class="line"><span class="comment"># config.trace_filter = GlobbingFilter(include=[</span></span><br><span class="line"><span class="comment">#     &#x27;draw_chessboard&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;draw_chessman&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;draw_chessboard_with_chessman&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;choose_save&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;choose_turn&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;choose_mode&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;choose_button&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;save_chess&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;load_chess&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;play_chess&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;pop_window&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;tip&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;get_score&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;max_score&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;win&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;key_control&#x27;</span></span><br><span class="line"><span class="comment"># ])</span></span><br><span class="line"><span class="comment"># 该段作用是关系图中不包括(exclude)哪些函数。(正则表达式规则)</span></span><br><span class="line"><span class="comment"># config.trace_filter = GlobbingFilter(exclude=[</span></span><br><span class="line"><span class="comment">#     &#x27;pycallgraph.*&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;*.secret_function&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;FileFinder.*&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;ModuleLockManager.*&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;SourceFilLoader.*&#x27;</span></span><br><span class="line"><span class="comment"># ])</span></span><br><span class="line">graphviz = GraphvizOutput()</span><br><span class="line">graphviz.output_file = <span class="string">&#x27;test.png&#x27;</span></span><br><span class="line"><span class="keyword">with</span> PyCallGraph(output=graphviz, config=config):</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
+<p>运行后再当前目录下生成test.png文件绘制了函数调用关系(默认文件名是pycallgraph.png)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GraphvizOutput</span>(<span class="params">Output</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, **kwargs</span>):</span></span><br><span class="line">        self.tool = <span class="string">&#x27;dot&#x27;</span></span><br><span class="line">        self.output_file = <span class="string">&#x27;pycallgraph.png&#x27;</span></span><br><span class="line">        self.output_type = <span class="string">&#x27;png&#x27;</span></span><br><span class="line">        self.font_name = <span class="string">&#x27;Verdana&#x27;</span></span><br><span class="line">        self.font_size = <span class="number">7</span></span><br><span class="line">        self.group_font_size = <span class="number">10</span></span><br><span class="line">        self.group_border_color = Color(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.8</span>)</span><br><span class="line"></span><br><span class="line">        Output.__init__(self, **kwargs)</span><br><span class="line"></span><br><span class="line">        self.prepare_graph_attributes()</span><br></pre></td></tr></table></figure>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz4.png" /></p>
+<p>可见此方式对函数的调用关系展示得较为清晰明了，其缺点是制作的图分辨率不高，略显模糊。下为yolov5的调用关系图。</p>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz5.png" /></p>
+<h1 id="cprofilesnakeviz">cProfile+snakeviz</h1>
+<p>使用<strong>cProfie</strong>可以将函数运行分析结果保存为.prof文件，然后使用其他工具进行可视化，此处以<strong>snakeviz</strong>为例。</p>
+<h2 id="cprofile">cProfile</h2>
+<p>使用cProfile分析工程，可以使用命令行和代码两种方式。</p>
+<ul>
+<li>cmd</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m cProfile -o result.prof test.py</span><br></pre></td></tr></table></figure>
+<ul>
+<li>code</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cProfile</span><br><span class="line">cProfile.run(<span class="string">&quot;main()&quot;</span>, filename=<span class="string">&#x27;result.prof&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>不推荐使用命令行形式，针对，整个文件，会打包过多的无用函数，影响观感。使用code方式针对特定函数分析即可。</p>
+<h1 id="snakeviz">snakeviz</h1>
+<p>安装snakeviz:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install snakeviz</span><br></pre></td></tr></table></figure>
+<p>直接调用cProfile生成的文件，在浏览器中可以打开交互式网页，查看分析结果。缺点：虽然能够从图中获知函数调用顺序，但是函数调用关系依旧不够直观。</p>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz6.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/Tools/" rel="tag"># Tools</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/11/KMP%E8%A7%A3%E6%9E%90/" rel="prev" title="kmp解析">
+                  <i class="fa fa-chevron-left"></i> kmp解析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/14/%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%AE%80%E4%BB%8B/" rel="next" title="经典网络简介">
+                  经典网络简介 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

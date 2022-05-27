@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YOLOV5运用">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/08/26/YOLOV5%E8%BF%90%E7%94%A8/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="----">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826YOLOv5.png">
+<meta property="article:published_time" content="2021-08-26T14:59:19.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.729Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="DL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826YOLOv5.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/08/26/YOLOV5%E8%BF%90%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/08/26/YOLOV5%E8%BF%90%E7%94%A8/","path":"2021/08/26/YOLOV5运用/","title":"YOLOV5运用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>YOLOV5运用 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">源码下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">检测方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">3.1.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">4.</span> <span class="nav-text">自建数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">训练模型:</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826YOLOv5.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/08/26/YOLOV5%E8%BF%90%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="YOLOV5运用 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          YOLOV5运用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-26 22:59:19" itemprop="dateCreated datePublished" datetime="2021-08-26T22:59:19+08:00">2021-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="源码下载">源码下载</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5">ultralytics团队贡献源码</a>，以及官方<a target="_blank" rel="noopener" href="https://docs.ultralytics.com/">帮助文档</a>.</p>
+<ul>
+<li>下载</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov5.git</span><br></pre></td></tr></table></figure>
+<ul>
+<li>依赖安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="检测方式">检测方式</h1>
+<p>提供从Pytorch Hub进行检测和本地py文件检测方式。</p>
+<ul>
+<li>Pytorch Hub检测：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># Model</span></span><br><span class="line">model = torch.hub.load(<span class="string">&#x27;ultralytics/yolov5&#x27;</span>, <span class="string">&#x27;yolov5s&#x27;</span>)  <span class="comment"># or yolov5m, yolov5l, yolov5x, custom</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Images</span></span><br><span class="line">img = <span class="string">&#x27;https://ultralytics.com/images/zidane.jpg&#x27;</span>  <span class="comment"># or file, Path, PIL, OpenCV, numpy, list</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Inference</span></span><br><span class="line">results = model(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Results</span></span><br><span class="line">results.print()  <span class="comment"># or .show(), .save(), .crop(), .pandas(), etc.</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>本地检测：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ python detect.py --source 0  # webcam</span><br><span class="line">                            file.jpg  # image </span><br><span class="line">                            file.mp4  # video</span><br><span class="line">                            path&#x2F;  # directory</span><br><span class="line">                            path&#x2F;*.jpg  # glob</span><br><span class="line">                            &#39;https:&#x2F;&#x2F;youtu.be&#x2F;NUsoVlDFqZg&#39;  # YouTube</span><br><span class="line">                            &#39;rtsp:&#x2F;&#x2F;example.com&#x2F;media.mp4&#39;  # RTSP, RTMP, HTTP stream</span><br></pre></td></tr></table></figure>
+<p>注意调节命令行<strong>argparse</strong>参数。</p>
+<hr />
+<h1 id="目录结构">目录结构</h1>
+<ul>
+<li>data/:主要作用为存放各类数据集中的yaml配置文件，<strong>coco128.yaml</strong>示例如下，主要配置其中的path(数据集根目录)、train/val/test(path下的训练集、验证集、测试集，测试集可省略)。根据自己的需要定制nc(目标种类数量)以及names(物体名称)。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># YOLOv5 🚀 by Ultralytics, GPL-3.0 license</span></span><br><span class="line"><span class="comment"># COCO128 dataset https://www.kaggle.com/ultralytics/coco128 (first 128 images from COCO train2017)</span></span><br><span class="line"><span class="comment"># Example usage: python train.py --data coco128.yaml</span></span><br><span class="line"><span class="comment"># parent</span></span><br><span class="line"><span class="comment"># ├── yolov5</span></span><br><span class="line"><span class="comment"># └── datasets</span></span><br><span class="line"><span class="comment">#     └── coco128  ← downloads here</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]</span></span><br><span class="line"><span class="attr">path:</span> <span class="string">./datasets/coco128</span>  <span class="comment"># dataset root dir</span></span><br><span class="line"><span class="attr">train:</span> <span class="string">images/train2017</span>  <span class="comment"># train images (relative to &#x27;path&#x27;) 128 images</span></span><br><span class="line"><span class="attr">val:</span> <span class="string">images/train2017</span>  <span class="comment"># val images (relative to &#x27;path&#x27;) 128 images</span></span><br><span class="line"><span class="attr">test:</span>  <span class="comment"># test images (optional)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Classes</span></span><br><span class="line"><span class="attr">nc:</span> <span class="number">80</span>  <span class="comment"># number of classes</span></span><br><span class="line"><span class="attr">names:</span> [<span class="string">&#x27;person&#x27;</span>, <span class="string">&#x27;bicycle&#x27;</span>, <span class="string">&#x27;car&#x27;</span>, <span class="string">&#x27;motorcycle&#x27;</span>, <span class="string">&#x27;airplane&#x27;</span>, <span class="string">&#x27;bus&#x27;</span>, <span class="string">&#x27;train&#x27;</span>, <span class="string">&#x27;truck&#x27;</span>, <span class="string">&#x27;boat&#x27;</span>, <span class="string">&#x27;traffic light&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;fire hydrant&#x27;</span>, <span class="string">&#x27;stop sign&#x27;</span>, <span class="string">&#x27;parking meter&#x27;</span>, <span class="string">&#x27;bench&#x27;</span>, <span class="string">&#x27;bird&#x27;</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;dog&#x27;</span>, <span class="string">&#x27;horse&#x27;</span>, <span class="string">&#x27;sheep&#x27;</span>, <span class="string">&#x27;cow&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;elephant&#x27;</span>, <span class="string">&#x27;bear&#x27;</span>, <span class="string">&#x27;zebra&#x27;</span>, <span class="string">&#x27;giraffe&#x27;</span>, <span class="string">&#x27;backpack&#x27;</span>, <span class="string">&#x27;umbrella&#x27;</span>, <span class="string">&#x27;handbag&#x27;</span>, <span class="string">&#x27;tie&#x27;</span>, <span class="string">&#x27;suitcase&#x27;</span>, <span class="string">&#x27;frisbee&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;skis&#x27;</span>, <span class="string">&#x27;snowboard&#x27;</span>, <span class="string">&#x27;sports ball&#x27;</span>, <span class="string">&#x27;kite&#x27;</span>, <span class="string">&#x27;baseball bat&#x27;</span>, <span class="string">&#x27;baseball glove&#x27;</span>, <span class="string">&#x27;skateboard&#x27;</span>, <span class="string">&#x27;surfboard&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tennis racket&#x27;</span>, <span class="string">&#x27;bottle&#x27;</span>, <span class="string">&#x27;wine glass&#x27;</span>, <span class="string">&#x27;cup&#x27;</span>, <span class="string">&#x27;fork&#x27;</span>, <span class="string">&#x27;knife&#x27;</span>, <span class="string">&#x27;spoon&#x27;</span>, <span class="string">&#x27;bowl&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;sandwich&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;broccoli&#x27;</span>, <span class="string">&#x27;carrot&#x27;</span>, <span class="string">&#x27;hot dog&#x27;</span>, <span class="string">&#x27;pizza&#x27;</span>, <span class="string">&#x27;donut&#x27;</span>, <span class="string">&#x27;cake&#x27;</span>, <span class="string">&#x27;chair&#x27;</span>, <span class="string">&#x27;couch&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;potted plant&#x27;</span>, <span class="string">&#x27;bed&#x27;</span>, <span class="string">&#x27;dining table&#x27;</span>, <span class="string">&#x27;toilet&#x27;</span>, <span class="string">&#x27;tv&#x27;</span>, <span class="string">&#x27;laptop&#x27;</span>, <span class="string">&#x27;mouse&#x27;</span>, <span class="string">&#x27;remote&#x27;</span>, <span class="string">&#x27;keyboard&#x27;</span>, <span class="string">&#x27;cell phone&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;microwave&#x27;</span>, <span class="string">&#x27;oven&#x27;</span>, <span class="string">&#x27;toaster&#x27;</span>, <span class="string">&#x27;sink&#x27;</span>, <span class="string">&#x27;refrigerator&#x27;</span>, <span class="string">&#x27;book&#x27;</span>, <span class="string">&#x27;clock&#x27;</span>, <span class="string">&#x27;vase&#x27;</span>, <span class="string">&#x27;scissors&#x27;</span>, <span class="string">&#x27;teddy bear&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;hair drier&#x27;</span>, <span class="string">&#x27;toothbrush&#x27;</span>]  <span class="comment"># class names</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Download script/URL (optional)</span></span><br><span class="line"><span class="attr">download:</span> <span class="string">https://github.com/ultralytics/yolov5/releases/download/v1.0/coco128.zip</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>models/:文件夹中主要存放模型结构配置文件<strong>yolov5s.yaml</strong>如下所示，主要更改其中的nc参数。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># YOLOv5 🚀 by Ultralytics, GPL-3.0 license</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Parameters</span></span><br><span class="line"><span class="attr">nc:</span> <span class="number">2</span>  <span class="comment"># number of classes</span></span><br><span class="line"><span class="attr">depth_multiple:</span> <span class="number">0.33</span>  <span class="comment"># model depth multiple</span></span><br><span class="line"><span class="attr">width_multiple:</span> <span class="number">0.50</span>  <span class="comment"># layer channel multiple</span></span><br><span class="line"><span class="attr">anchors:</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="number">10</span>,<span class="number">13</span>, <span class="number">16</span>,<span class="number">30</span>, <span class="number">33</span>,<span class="number">23</span>]  <span class="comment"># P3/8</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="number">30</span>,<span class="number">61</span>, <span class="number">62</span>,<span class="number">45</span>, <span class="number">59</span>,<span class="number">119</span>]  <span class="comment"># P4/16</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="number">116</span>,<span class="number">90</span>, <span class="number">156</span>,<span class="number">198</span>, <span class="number">373</span>,<span class="number">326</span>]  <span class="comment"># P5/32</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># YOLOv5 backbone</span></span><br><span class="line"><span class="attr">backbone:</span></span><br><span class="line">  <span class="comment"># [from, number, module, args]</span></span><br><span class="line">  [[<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Focus</span>, [<span class="number">64</span>, <span class="number">3</span>]],  <span class="comment"># 0-P1/2</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">128</span>, <span class="number">3</span>, <span class="number">2</span>]],  <span class="comment"># 1-P2/4</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">3</span>, <span class="string">C3</span>, [<span class="number">128</span>]],</span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">256</span>, <span class="number">3</span>, <span class="number">2</span>]],  <span class="comment"># 3-P3/8</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">9</span>, <span class="string">C3</span>, [<span class="number">256</span>]],</span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">512</span>, <span class="number">3</span>, <span class="number">2</span>]],  <span class="comment"># 5-P4/16</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">9</span>, <span class="string">C3</span>, [<span class="number">512</span>]],</span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">1024</span>, <span class="number">3</span>, <span class="number">2</span>]],  <span class="comment"># 7-P5/32</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">SPP</span>, [<span class="number">1024</span>, [<span class="number">5</span>, <span class="number">9</span>, <span class="number">13</span>]]],</span><br><span class="line">   [<span class="number">-1</span>, <span class="number">3</span>, <span class="string">C3</span>, [<span class="number">1024</span>, <span class="literal">False</span>]],  <span class="comment"># 9</span></span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># YOLOv5 head</span></span><br><span class="line"><span class="attr">head:</span></span><br><span class="line">  [[<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>]],</span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">nn.Upsample</span>, [<span class="string">None</span>, <span class="number">2</span>, <span class="string">&#x27;nearest&#x27;</span>]],</span><br><span class="line">   [[<span class="number">-1</span>, <span class="number">6</span>], <span class="number">1</span>, <span class="string">Concat</span>, [<span class="number">1</span>]],  <span class="comment"># cat backbone P4</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">3</span>, <span class="string">C3</span>, [<span class="number">512</span>, <span class="literal">False</span>]],  <span class="comment"># 13</span></span><br><span class="line"></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">256</span>, <span class="number">1</span>, <span class="number">1</span>]],</span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">nn.Upsample</span>, [<span class="string">None</span>, <span class="number">2</span>, <span class="string">&#x27;nearest&#x27;</span>]],</span><br><span class="line">   [[<span class="number">-1</span>, <span class="number">4</span>], <span class="number">1</span>, <span class="string">Concat</span>, [<span class="number">1</span>]],  <span class="comment"># cat backbone P3</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">3</span>, <span class="string">C3</span>, [<span class="number">256</span>, <span class="literal">False</span>]],  <span class="comment"># 17 (P3/8-small)</span></span><br><span class="line"></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">256</span>, <span class="number">3</span>, <span class="number">2</span>]],</span><br><span class="line">   [[<span class="number">-1</span>, <span class="number">14</span>], <span class="number">1</span>, <span class="string">Concat</span>, [<span class="number">1</span>]],  <span class="comment"># cat head P4</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">3</span>, <span class="string">C3</span>, [<span class="number">512</span>, <span class="literal">False</span>]],  <span class="comment"># 20 (P4/16-medium)</span></span><br><span class="line"></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">1</span>, <span class="string">Conv</span>, [<span class="number">512</span>, <span class="number">3</span>, <span class="number">2</span>]],</span><br><span class="line">   [[<span class="number">-1</span>, <span class="number">10</span>], <span class="number">1</span>, <span class="string">Concat</span>, [<span class="number">1</span>]],  <span class="comment"># cat head P5</span></span><br><span class="line">   [<span class="number">-1</span>, <span class="number">3</span>, <span class="string">C3</span>, [<span class="number">1024</span>, <span class="literal">False</span>]],  <span class="comment"># 23 (P5/32-large)</span></span><br><span class="line"></span><br><span class="line">   [[<span class="number">17</span>, <span class="number">20</span>, <span class="number">23</span>], <span class="number">1</span>, <span class="string">Detect</span>, [<span class="string">nc</span>, <span class="string">anchors</span>]],  <span class="comment"># Detect(P3, P4, P5)</span></span><br><span class="line">  ]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>utils/：主要的函数源码</li>
+</ul>
+<h2 id="其他">其他</h2>
+<p>运行train.py或者detect.py后将会生成runs文件夹，其中存放训练的权重、过程参数以及检测的结果。以训练次数递增。</p>
+<hr />
+<h1 id="自建数据集">自建数据集</h1>
+<p>数据集结构：</p>
+<ul>
+<li>myDatasets</li>
+<li>annotations</li>
+<li>images
+<ul>
+<li>xxxx.jpg</li>
+<li>......</li>
+</ul></li>
+<li>labels
+<ul>
+<li>xxxx.txt</li>
+<li>......</li>
+</ul></li>
+</ul>
+<p>训练集和测试集隔离：</p>
+<ul>
+<li>myDatasets
+<ul>
+<li>annotations</li>
+<li>images
+<ul>
+<li>train
+<ul>
+<li>xxxx.jpg</li>
+<li>......</li>
+</ul></li>
+<li>val
+<ul>
+<li>xxxx.jpg</li>
+<li>......</li>
+</ul></li>
+</ul></li>
+<li>labels
+<ul>
+<li>train
+<ul>
+<li>xxxx.txt</li>
+<li>......</li>
+</ul></li>
+<li>val
+<ul>
+<li>xxxx.jpg</li>
+<li>......</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>annotations中存放源图像的xml标注格式。使用如下脚本将xml格式转换为txt格式，并将结果存放在labels文件夹中:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">xml2txt.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">classes = [<span class="string">&quot;pipe&quot;</span>, <span class="string">&quot;bad&quot;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert</span>(<span class="params">size, box</span>):</span></span><br><span class="line">    dw = <span class="number">1.</span> / (size[<span class="number">0</span>])</span><br><span class="line">    dh = <span class="number">1.</span> / (size[<span class="number">1</span>])</span><br><span class="line">    x = (box[<span class="number">0</span>] + box[<span class="number">1</span>]) / <span class="number">2.0</span> - <span class="number">1</span></span><br><span class="line">    y = (box[<span class="number">2</span>] + box[<span class="number">3</span>]) / <span class="number">2.0</span> - <span class="number">1</span></span><br><span class="line">    w = box[<span class="number">1</span>] - box[<span class="number">0</span>]</span><br><span class="line">    h = box[<span class="number">3</span>] - box[<span class="number">2</span>]</span><br><span class="line">    x = x * dw</span><br><span class="line">    w = w * dw</span><br><span class="line">    y = y * dh</span><br><span class="line">    h = h * dh</span><br><span class="line">    <span class="keyword">return</span> x, y, w, h</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_annotation</span>(<span class="params">rootpath, xmlname</span>):</span></span><br><span class="line">    xmlpath = rootpath + <span class="string">&#x27;annotation/&#x27;</span></span><br><span class="line">    xmlfile = os.path.join(xmlpath, xmlname)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(xmlfile, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> in_file:</span><br><span class="line">        txtname = xmlname[:-<span class="number">4</span>] + <span class="string">&#x27;.txt&#x27;</span></span><br><span class="line">        txtpath = rootpath + <span class="string">&#x27;labels/&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(txtpath):</span><br><span class="line">            os.makedirs(txtpath)</span><br><span class="line">        txtfile = os.path.join(txtpath, txtname)</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(txtfile, <span class="string">&quot;w+&quot;</span>) <span class="keyword">as</span> out_file:</span><br><span class="line">            tree = ET.parse(in_file)</span><br><span class="line">            root = tree.getroot()</span><br><span class="line">            size = root.find(<span class="string">&#x27;size&#x27;</span>)</span><br><span class="line">            w = <span class="built_in">int</span>(size.find(<span class="string">&#x27;width&#x27;</span>).text)</span><br><span class="line">            h = <span class="built_in">int</span>(size.find(<span class="string">&#x27;height&#x27;</span>).text)</span><br><span class="line">            out_file.truncate()</span><br><span class="line">            <span class="keyword">for</span> obj <span class="keyword">in</span> root.<span class="built_in">iter</span>(<span class="string">&#x27;object&#x27;</span>):</span><br><span class="line">                difficult = obj.find(<span class="string">&#x27;difficult&#x27;</span>).text</span><br><span class="line">                cls = obj.find(<span class="string">&#x27;name&#x27;</span>).text</span><br><span class="line">                <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> classes <span class="keyword">or</span> <span class="built_in">int</span>(difficult) == <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                cls_id = classes.index(cls)</span><br><span class="line">                xmlbox = obj.find(<span class="string">&#x27;bndbox&#x27;</span>)</span><br><span class="line">                b = (<span class="built_in">float</span>(xmlbox.find(<span class="string">&#x27;xmin&#x27;</span>).text), <span class="built_in">float</span>(xmlbox.find(<span class="string">&#x27;xmax&#x27;</span>).text), <span class="built_in">float</span>(xmlbox.find(<span class="string">&#x27;ymin&#x27;</span>).text),</span><br><span class="line">                     <span class="built_in">float</span>(xmlbox.find(<span class="string">&#x27;ymax&#x27;</span>).text))</span><br><span class="line">                bb = convert((w, h), b)</span><br><span class="line">                out_file.write(<span class="built_in">str</span>(cls_id) + <span class="string">&quot; &quot;</span> + <span class="string">&quot; &quot;</span>.join([<span class="built_in">str</span>(a) <span class="keyword">for</span> a <span class="keyword">in</span> bb]) + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    rootpath = <span class="string">&#x27;./datasets/pipes/&#x27;</span>  <span class="comment"># 根目录</span></span><br><span class="line">    xmlpath = rootpath + <span class="string">&#x27;annotation/&#x27;</span></span><br><span class="line">    <span class="built_in">list</span> = os.listdir(xmlpath)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">        path = os.path.join(xmlpath, <span class="built_in">list</span>[i])</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&#x27;.xml&#x27;</span> <span class="keyword">in</span> path) <span class="keyword">or</span> (<span class="string">&#x27;.XML&#x27;</span> <span class="keyword">in</span> path):</span><br><span class="line">            convert_annotation(rootpath, <span class="built_in">list</span>[i])</span><br><span class="line">            print(<span class="string">&#x27;done&#x27;</span>, i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&#x27;not xml file&#x27;</span>, i)</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="训练模型">训练模型:</h1>
+<p>根据需要自定义参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --img 640 --batch 16 --epochs 100 --data .&#x2F;data&#x2F;coco128.yaml --cfg .&#x2F;models&#x2F;yolov5s.yaml --weights yolov5s.pt</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DL/" rel="tag"># DL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/26/PaddleDetect%E8%BF%90%E7%94%A8/" rel="prev" title="PaddleDetect运用">
+                  <i class="fa fa-chevron-left"></i> PaddleDetect运用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/28/OSError-WinError-1455/" rel="next" title="OSError:[WinError 1455]">
+                  OSError:[WinError 1455] <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

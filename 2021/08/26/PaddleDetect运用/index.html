@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PaddleDetect运用">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/08/26/PaddleDetect%E8%BF%90%E7%94%A8/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="----">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826Paddle.png">
+<meta property="article:published_time" content="2021-08-26T10:36:55.000Z">
+<meta property="article:modified_time" content="2022-05-25T08:55:29.728Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="DL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826Paddle.png">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/08/26/PaddleDetect%E8%BF%90%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/08/26/PaddleDetect%E8%BF%90%E7%94%A8/","path":"2021/08/26/PaddleDetect运用/","title":"PaddleDetect运用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PaddleDetect运用 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">环境要求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85paddlepaddle"><span class="nav-number">2.1.</span> <span class="nav-text">安装PaddlePaddle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81paddle%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="nav-number">2.2.</span> <span class="nav-text">验证Paddle是否安装成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85paddledetection"><span class="nav-number">2.3.</span> <span class="nav-text">安装PaddleDetection</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B6%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">数据集制作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">配置文件：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B"><span class="nav-number">6.</span> <span class="nav-text">预测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="nav-number">7.</span> <span class="nav-text">参数解释</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210826Paddle.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/08/26/PaddleDetect%E8%BF%90%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PaddleDetect运用 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PaddleDetect运用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-26 18:36:55" itemprop="dateCreated datePublished" datetime="2021-08-26T18:36:55+08:00">2021-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="简介">简介</h1>
+<p>PaddleDetection模块化地实现了多种主流目标检测算法，提供了丰富的数据增强策略、网络模块组件（如骨干网络）、损失函数等，并集成了模型压缩和跨平台高性能部署能力。</p>
+<h2 id="环境要求">环境要求</h2>
+<ul>
+<li>PaddlePaddle 2.1</li>
+<li>OS 64位操作系统</li>
+<li>Python 3(3.5.1+/3.6/3.7/3.8/3.9)，64位版本</li>
+<li>pip/pip3(9.0.1+)，64位版本</li>
+<li>CUDA &gt;= 10.1</li>
+<li>cuDNN &gt;= 7.6</li>
+</ul>
+<hr />
+<h1 id="安装">安装</h1>
+<h2 id="安装paddlepaddle"><a target="_blank" rel="noopener" href="https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html">安装PaddlePaddle</a></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># CUDA10.1</span><br><span class="line">python -m pip install paddlepaddle-gpu&#x3D;&#x3D;2.1.0.post101 -f https:&#x2F;&#x2F;paddlepaddle.org.cn&#x2F;whl&#x2F;mkl&#x2F;stable.html</span><br><span class="line"></span><br><span class="line"># CPU</span><br><span class="line">python -m pip install paddlepaddle -i https:&#x2F;&#x2F;mirror.baidu.com&#x2F;pypi&#x2F;simple</span><br></pre></td></tr></table></figure>
+<h2 id="验证paddle是否安装成功">验证Paddle是否安装成功</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 在您的Python解释器中确认PaddlePaddle安装成功</span><br><span class="line">&gt;&gt;&gt; import paddle</span><br><span class="line">&gt;&gt;&gt; paddle.utils.run_check()</span><br><span class="line"></span><br><span class="line"># 确认PaddlePaddle版本</span><br><span class="line">python -c &quot;import paddle; print(paddle.__version__)&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="安装paddledetection">安装PaddleDetection</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 克隆PaddleDetection仓库</span><br><span class="line">cd &lt;path&#x2F;to&#x2F;clone&#x2F;PaddleDetection&gt;</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;PaddlePaddle&#x2F;PaddleDetection.git</span><br><span class="line"></span><br><span class="line"># 编译安装paddledet</span><br><span class="line">cd PaddleDetection</span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line"># 安装其他依赖</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p><code>pycocotools</code>依赖可能安装失败，可采用第三方实现版本，自己编译:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install git+https:&#x2F;&#x2F;github.com&#x2F;philferriere&#x2F;cocoapi.git#subdirectory&#x3D;PythonAPI</span><br></pre></td></tr></table></figure>
+<p>此过程可能报错提示<code>error: Microsoft Visual C++ 14.0 or greater is required. Get it with .......</code>，此时需要安装<code>Microsoft Visual C++ build tool</code>，推荐使用离线版安装，否则会出现下载安装包速度缓慢、安装包损坏等问题。</p>
+<p>解决所用问题后安装完所有依赖，进行测试:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ppdet&#x2F;modeling&#x2F;tests&#x2F;test_architectures.py</span><br></pre></td></tr></table></figure>
+<p>出现如下的类似信息则说明安装完成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">W0826 18:48:00.794705  6988 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 7.5, Driver API Version: 11.4, Runtime API Version: 11.2</span><br><span class="line">W0826 18:48:00.816314  6988 device_context.cc:422] device: 0, cuDNN Version: 8.2.</span><br><span class="line">.....</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran 5 tests in 2.461s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="数据集制作">数据集制作</h1>
+<p>目录结构：</p>
+<ul>
+<li>dataset/
+<ul>
+<li>mydataset/
+<ul>
+<li>annotation/ 存放xml格式的标注文件</li>
+<li>images/ 存放原始图片文件</li>
+<li>ImageSets/ 数据集索引
+<ul>
+<li>label_list.txt 存放类别标签</li>
+<li>train.txt 训练集数据名称</li>
+<li>val.txt 验证集数据名称</li>
+</ul></li>
+<li>train.txt 最终的数据集索引格式(create_list.py制作)</li>
+<li>val.txt 最终的数据集索引格式(create_list.py制作)</li>
+<li>create_list.py 从ImageSets/Main/下的训练验证集制作数据索引</li>
+</ul></li>
+<li>get_list.py 按比例划分训练集验证集等</li>
+</ul></li>
+</ul>
+<p><strong>get_list.py示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">train_precent = <span class="number">0.9</span></span><br><span class="line">path = <span class="string">&#x27;./fruits&#x27;</span>  <span class="comment"># root path</span></span><br><span class="line">xml = path + <span class="string">&quot;/Annotations&quot;</span></span><br><span class="line">save = path + <span class="string">&quot;/Main&quot;</span></span><br><span class="line">total_xml = os.listdir(xml)</span><br><span class="line"></span><br><span class="line">num = <span class="built_in">len</span>(total_xml)</span><br><span class="line">tr = <span class="built_in">int</span>(num * train_precent)</span><br><span class="line">index = <span class="built_in">list</span>(<span class="built_in">range</span>(num))</span><br><span class="line">random.shuffle(index)</span><br><span class="line"></span><br><span class="line">ftrain = <span class="built_in">open</span>(path + <span class="string">&quot;/ImageSets/train.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">fval = <span class="built_in">open</span>(path + <span class="string">&quot;/ImageSets/val.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    name = total_xml[index[i]][:-<span class="number">4</span>] + <span class="string">&quot;\n&quot;</span></span><br><span class="line">    <span class="keyword">if</span> i &lt; tr:</span><br><span class="line">        ftrain.write(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        fval.write(name)</span><br><span class="line"></span><br><span class="line">ftrain.close()</span><br><span class="line">fval.close()</span><br></pre></td></tr></table></figure>
+<p><strong>create_list.py示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path <span class="keyword">as</span> osp</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_dir</span>(<span class="params">devkit_dir, <span class="built_in">type</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> osp.join(devkit_dir, <span class="built_in">type</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">walk_dir</span>(<span class="params">devkit_dir</span>):</span></span><br><span class="line">    filelist_dir = get_dir(devkit_dir, <span class="string">&#x27;ImageSets/&#x27;</span>)</span><br><span class="line">    annotation_dir = get_dir(devkit_dir, <span class="string">&#x27;Annotations&#x27;</span>)</span><br><span class="line">    img_dir = get_dir(devkit_dir, <span class="string">&#x27;JPEGImages&#x27;</span>)</span><br><span class="line">    trainval_list = []</span><br><span class="line">    test_list = []</span><br><span class="line">    added = <span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _, _, files <span class="keyword">in</span> os.walk(filelist_dir):</span><br><span class="line">        <span class="keyword">for</span> fname <span class="keyword">in</span> files:</span><br><span class="line">            img_ann_list = []</span><br><span class="line">            <span class="keyword">if</span> re.match(<span class="string">&#x27;train\.txt&#x27;</span>, fname):</span><br><span class="line">                img_ann_list = trainval_list</span><br><span class="line">            <span class="keyword">elif</span> re.match(<span class="string">&#x27;val\.txt&#x27;</span>, fname):</span><br><span class="line">                img_ann_list = test_list</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            fpath = osp.join(filelist_dir, fname)</span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">open</span>(fpath):</span><br><span class="line">                name_prefix = line.strip().split()[<span class="number">0</span>]</span><br><span class="line">                <span class="keyword">if</span> name_prefix <span class="keyword">in</span> added:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                added.add(name_prefix)</span><br><span class="line">                ann_path = osp.join(annotation_dir, name_prefix + <span class="string">&#x27;.xml&#x27;</span>)</span><br><span class="line">                img_path = osp.join(img_dir, name_prefix + <span class="string">&#x27;.jpg&#x27;</span>)</span><br><span class="line">                <span class="comment"># ann_path = osp.join(name_prefix + &#x27;.xml&#x27;)</span></span><br><span class="line">                <span class="comment"># img_path = osp.join(name_prefix + &#x27;.jpg&#x27;)</span></span><br><span class="line">                <span class="keyword">assert</span> os.path.isfile(ann_path), <span class="string">&#x27;file %s not found.&#x27;</span> % ann_path</span><br><span class="line">                <span class="keyword">assert</span> os.path.isfile(img_path), <span class="string">&#x27;file %s not found.&#x27;</span> % img_path</span><br><span class="line">                img_ann_list.append((img_path, ann_path))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> trainval_list, test_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prepare_filelist</span>(<span class="params">devkit_dir, output_dir</span>):</span></span><br><span class="line">    trainval_list = []</span><br><span class="line">    test_list = []</span><br><span class="line">    trainval, test = walk_dir(devkit_dir)</span><br><span class="line">    trainval_list.extend(trainval)</span><br><span class="line">    test_list.extend(test)</span><br><span class="line">    random.shuffle(trainval_list)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(osp.join(output_dir, <span class="string">&#x27;train.txt&#x27;</span>), <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> ftrainval:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> trainval_list:</span><br><span class="line">            ftrainval.write(item[<span class="number">0</span>] + <span class="string">&#x27; &#x27;</span> + item[<span class="number">1</span>] + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(osp.join(output_dir, <span class="string">&#x27;val.txt&#x27;</span>), <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> ftest:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> test_list:</span><br><span class="line">            ftest.write(item[<span class="number">0</span>] + <span class="string">&#x27; &#x27;</span> + item[<span class="number">1</span>] + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    prepare_filelist(devkit_dir=<span class="string">&#x27;./&#x27;</span>, output_dir=<span class="string">&#x27;./&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="配置文件">配置文件：</h1>
+<p>在configs文件夹中选择模型，根据模型中的配置文件做相应更改：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ppyolo_mbv3_small_coco.yaml</span></span><br><span class="line"><span class="attr">_BASE_:</span> [</span><br><span class="line">  <span class="string">&#x27;../datasets/voc.yml&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;../runtime.yml&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;./_base_/ppyolo_mbv3_small.yml&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;./_base_/optimizer_1x.yml&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;./_base_/ppyolo_reader.yml&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>如上所示，要调用此模型，需要对其中的五个配置文件进行配置。</p>
+<p><strong>数据集配置:</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># voc.yaml</span></span><br><span class="line"><span class="attr">metric:</span> <span class="string">VOC</span></span><br><span class="line"><span class="attr">map_type:</span> <span class="string">11point</span></span><br><span class="line"><span class="attr">num_classes:</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="attr">TrainDataset:</span></span><br><span class="line">  <span class="type">!VOCDataSet</span></span><br><span class="line">    <span class="attr">dataset_dir:</span> <span class="string">dataset/pipes</span> <span class="comment"># dataset/voc</span></span><br><span class="line">    <span class="attr">anno_path:</span> <span class="string">train.txt</span></span><br><span class="line">    <span class="attr">label_list:</span> <span class="string">ImageSets/Main/label_list.txt</span></span><br><span class="line">    <span class="attr">data_fields:</span> [<span class="string">&#x27;image&#x27;</span>, <span class="string">&#x27;gt_bbox&#x27;</span>, <span class="string">&#x27;gt_class&#x27;</span>, <span class="string">&#x27;difficult&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">EvalDataset:</span></span><br><span class="line">  <span class="type">!VOCDataSet</span></span><br><span class="line">    <span class="attr">dataset_dir:</span> <span class="string">dataset/pipes</span></span><br><span class="line">    <span class="attr">anno_path:</span> <span class="string">val.txt</span></span><br><span class="line">    <span class="attr">label_list:</span> <span class="string">ImageSets/Main/label_list.txt</span></span><br><span class="line">    <span class="attr">data_fields:</span> [<span class="string">&#x27;image&#x27;</span>, <span class="string">&#x27;gt_bbox&#x27;</span>, <span class="string">&#x27;gt_class&#x27;</span>, <span class="string">&#x27;difficult&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">TestDataset:</span></span><br><span class="line">  <span class="type">!ImageFolder</span></span><br><span class="line">    <span class="attr">anno_path:</span> <span class="string">dataset/voc/label_list.txt</span></span><br></pre></td></tr></table></figure>
+<p>其他配置文件自定义修改.......</p>
+<hr />
+<h1 id="训练模型">训练模型</h1>
+<p>开始训练：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python tools&#x2F;train.py -c configs&#x2F;ppyolo&#x2F;ppyolo_mbv3_small_coco.yml # 单卡</span><br><span class="line">python -m paddle.distributed.launch --gpus 0,1,2,3,4,5,6,7 tools&#x2F;train.py -c configs&#x2F;yolov3&#x2F;yolov3_mobilenet_v1_roadsign.yml # 多卡</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="预测">预测</h1>
+<p>推断图片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools&#x2F;infer.py -c configs&#x2F;yolov3&#x2F;yolov3_mobilenet_v1_roadsign.yml --infer_img&#x3D;demo&#x2F;000000570688.jpg -o weights&#x3D;https:&#x2F;&#x2F;paddledet.bj.bcebos.com&#x2F;models&#x2F;yolov3_mobilenet_v1_roadsign.pdparams</span><br></pre></td></tr></table></figure>
+<p>设置预测参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export CUDA_VISIBLE_DEVICES&#x3D;0 #windows和Mac下不需要执行该命令</span><br><span class="line">python tools&#x2F;infer.py -c configs&#x2F;yolov3&#x2F;yolov3_mobilenet_v1_roadsign.yml \</span><br><span class="line">                    --infer_img&#x3D;demo&#x2F;road554.png \</span><br><span class="line">                    --output_dir&#x3D;infer_output&#x2F; \</span><br><span class="line">                    --draw_threshold&#x3D;0.5 \</span><br><span class="line">                    -o weights&#x3D;output&#x2F;yolov3_mobilenet_v1_roadsign&#x2F;model_final \</span><br><span class="line">                    --use_vdl&#x3D;Ture</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="参数解释">参数解释</h1>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 8%" />
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>FLAG</th>
+<th>支持脚本</th>
+<th>用途</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-c</td>
+<td>ALL</td>
+<td>指定配置文件</td>
+<td>None</td>
+<td><strong>必选</strong>，例如-c configs/faster_rcnn/faster_rcnn_r50_fpn_1x_coco.yml</td>
+</tr>
+<tr class="even">
+<td>-o</td>
+<td>ALL</td>
+<td>设置或更改配置文件里的参数内容</td>
+<td>None</td>
+<td>相较于<code>-c</code>设置的配置文件有更高优先级，例如：<code>-o use_gpu=False</code></td>
+</tr>
+<tr class="odd">
+<td>--eval</td>
+<td>train</td>
+<td>是否边训练边测试</td>
+<td>False</td>
+<td>如需指定，直接<code>--eval</code>即可</td>
+</tr>
+<tr class="even">
+<td>-r/--resume_checkpoint</td>
+<td>train</td>
+<td>恢复训练加载的权重路径</td>
+<td>None</td>
+<td>例如：<code>-r output/faster_rcnn_r50_1x_coco/10000</code></td>
+</tr>
+<tr class="odd">
+<td>--slim_config</td>
+<td>ALL</td>
+<td>模型压缩策略配置文件</td>
+<td>None</td>
+<td>例如<code>--slim_config configs/slim/prune/yolov3_prune_l1_norm.yml</code></td>
+</tr>
+<tr class="even">
+<td>--use_vdl</td>
+<td>train/infer</td>
+<td>是否使用<a target="_blank" rel="noopener" href="https://github.com/paddlepaddle/visualdl">VisualDL</a>记录数据，进而在VisualDL面板中显示</td>
+<td>False</td>
+<td>VisualDL需Python&gt;=3.5</td>
+</tr>
+<tr class="odd">
+<td>--vdl_log_dir</td>
+<td>train/infer</td>
+<td>指定 VisualDL 记录数据的存储路径</td>
+<td>train:<code>vdl_log_dir/scalar</code> infer: <code>vdl_log_dir/image</code></td>
+<td>VisualDL需Python&gt;=3.5</td>
+</tr>
+<tr class="even">
+<td>--output_eval</td>
+<td>eval</td>
+<td>评估阶段保存json路径</td>
+<td>None</td>
+<td>例如 <code>--output_eval=eval_output</code>, 默认为当前路径</td>
+</tr>
+<tr class="odd">
+<td>--json_eval</td>
+<td>eval</td>
+<td>是否通过已存在的bbox.json或者mask.json进行评估</td>
+<td>False</td>
+<td>如需指定，直接<code>--json_eval</code>即可， json文件路径在<code>--output_eval</code>中设置</td>
+</tr>
+<tr class="even">
+<td>--classwise</td>
+<td>eval</td>
+<td>是否评估单类AP和绘制单类PR曲线</td>
+<td>False</td>
+<td>如需指定，直接<code>--classwise</code>即可</td>
+</tr>
+<tr class="odd">
+<td>--output_dir</td>
+<td>infer/export_model</td>
+<td>预测后结果或导出模型保存路径</td>
+<td><code>./output</code></td>
+<td>例如<code>--output_dir=output</code></td>
+</tr>
+<tr class="even">
+<td>--draw_threshold</td>
+<td>infer</td>
+<td>可视化时分数阈值</td>
+<td>0.5</td>
+<td>例如<code>--draw_threshold=0.7</code></td>
+</tr>
+<tr class="odd">
+<td>--infer_dir</td>
+<td>infer</td>
+<td>用于预测的图片文件夹路径</td>
+<td>None</td>
+<td><code>--infer_img</code>和<code>--infer_dir</code>必须至少设置一个</td>
+</tr>
+<tr class="even">
+<td>--infer_img</td>
+<td>infer</td>
+<td>用于预测的图片路径</td>
+<td>None</td>
+<td><code>--infer_img</code>和<code>--infer_dir</code>必须至少设置一个，<code>infer_img</code>具有更高优先级</td>
+</tr>
+<tr class="odd">
+<td>--save_txt</td>
+<td>infer</td>
+<td>是否在文件夹下将图片的预测结果保存到文本文件中</td>
+<td>False</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DL/" rel="tag"># DL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/25/Conda-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" rel="prev" title="Conda 虚拟环境">
+                  <i class="fa fa-chevron-left"></i> Conda 虚拟环境
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/26/YOLOV5%E8%BF%90%E7%94%A8/" rel="next" title="YOLOV5运用">
+                  YOLOV5运用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

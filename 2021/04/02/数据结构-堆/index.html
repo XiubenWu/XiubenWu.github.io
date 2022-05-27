@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在计算机的世界里，很多的应用场景只需要取得当前数据集中最大或者最小的元素，而对于数据集中其它数据，并不需要他们一定是有序的。堆就是一种帮助我们高效快速获取最大最小元素的数据结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-堆">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/04/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="在计算机的世界里，很多的应用场景只需要取得当前数据集中最大或者最小的元素，而对于数据集中其它数据，并不需要他们一定是有序的。堆就是一种帮助我们高效快速获取最大最小元素的数据结构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-02T07:17:31.000Z">
+<meta property="article:modified_time" content="2021-05-25T13:56:50.547Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/04/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/04/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/","path":"2021/04/02/数据结构-堆/","title":"数据结构-堆"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据结构-堆 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">堆的概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%A0%86%E4%B8%8E%E6%9C%80%E5%B0%8F%E5%A0%86"><span class="nav-number">2.</span> <span class="nav-text">最大堆与最小堆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">堆的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">堆的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E8%B0%83%E6%95%B4"><span class="nav-number">3.2.</span> <span class="nav-text">堆的调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E4%B8%8A%E8%B0%83%E6%95%B4"><span class="nav-number">3.2.1.</span> <span class="nav-text">向上调整</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E8%BF%90%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">堆的运用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/04/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据结构-堆 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构-堆
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-02 15:17:31" itemprop="dateCreated datePublished" datetime="2021-04-02T15:17:31+08:00">2021-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-25 21:56:50" itemprop="dateModified" datetime="2021-05-25T21:56:50+08:00">2021-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在计算机的世界里，很多的应用场景只需要取得当前数据集中最大或者最小的元素，而对于数据集中其它数据，并不需要他们一定是有序的。堆就是一种帮助我们高效快速获取最大最小元素的数据结构。 <span id="more"></span></p>
+<hr />
+<h1 id="堆的概念">堆的概念</h1>
+<p><strong>堆(heap)</strong> 是一个基于树的特殊数据结构，支持插入、删除、查询最值。它满足每一个子树的根节点一定保存着这棵子树中的最值。大根堆保存的就是最大值，小根堆保存的就是最小值。</p>
+<p>堆有很多种变体，包括二项式堆、斐波那契堆等，但是最常见的就是二叉堆，所以说堆可以看做一个(完全)二叉树，从另一方面来说，堆是二叉树的数组实现方式。堆的存储可以看成是数组存储的变形。<br />
+二叉堆就是一棵满足“堆性质”的完全二叉树。在使用数组来存储堆的情况下，左子节点的下标就是父节点下标乘以2，右子节点的下标就是父节点下标乘以2+1.这样的方法可以推广到k叉堆。针对数组索引从0开始的情况：<br />
+<span class="math inline">\(heapChildLeft = heap[(i+1)*2-1]\)</span><br />
+<span class="math inline">\(heapChildRight = heap[(i+1)*2]\)</span></p>
+<p><span class="math inline">\(heapParent = heap[i/2-1]\)</span></p>
+<p>数据在数组中分层排放，如<code>index = 0</code>为第一层，即根节点，<code>index = 1,2</code>为第二层，<code>index = 3,4,5,6</code>为第三层<code>index = 7,8,9,10,11,12,13,14</code>为第四层...以此类推。 ***</p>
+<h1 id="最大堆与最小堆">最大堆与最小堆</h1>
+<p>堆一般用于解决优先队列等优化问题，存储形式一般也是以最大堆和最小堆的形。 * 最大堆就是父节点的值恒大于子节点。最大值存放于根节点。 * 最小堆就是父节点的值恒小于子节点。最小值存放于根节点。</p>
+<h1 id="堆的基本操作">堆的基本操作</h1>
+<p>堆的主要操有<strong>创建</strong>、<strong>调整</strong>(向上或向下调整)、<strong>插入</strong>、<strong>删除</strong>等。</p>
+<h2 id="堆的创建">堆的创建</h2>
+<p>堆可以看做是由一个数组转化而来的。因此，堆的创建也可以进行一些转化。 * 第一步，将一个数组里面的元素通过下标按层·排序的方式构建一个完全二叉树 * 第二步，将这个二叉树通过向下调整的方法调整成为最小或最大堆。 ***</p>
+<h2 id="堆的调整">堆的调整</h2>
+<h3 id="向上调整">向上调整</h3>
+<p>一般在插入的时候需要用到向上调整，插入数据后原先堆的大小顺序有可能被改变，我们直接将要插入的节点放在最后，由<code>void insert(node temp)</code>实现。然后我们从这个节点开始向上维护堆，由<code>void shiftUp(ll son)</code>实现，让这个节点去到该去的地方，根据大小根堆的不同，调整判断交换的条件。调整方法：<br />
+需要调整的只是从该叶子节点到根节点的子树，先找到该节点的父亲节点，对于最小堆，如果小于父亲节点，那么就需要进行向上调整，使其调整之后满足小堆的性质，如此重复多次，直到整个堆都满足小堆的性质。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void shiftUp(ll son)</span><br><span class="line">&#123;</span><br><span class="line">	while(son&gt;1)</span><br><span class="line">	&#123;</span><br><span class="line">		if(heap[son].val&lt;heap[son&#x2F;2].val)</span><br><span class="line">		&#123;</span><br><span class="line">			swap(heap[son],heap[son&#x2F;2]);</span><br><span class="line">            son -&#x3D; 1;</span><br><span class="line">			son &gt;&gt;&#x3D;1;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void insert(node temp)</span><br><span class="line">&#123;</span><br><span class="line">	heap[++count1]&#x3D;temp;</span><br><span class="line">	up(count1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ### 向下调整 向下调整一般出现在删除的时候，我们直接将要删除的节点和最后的节点交换，并将count1减1，表示最后一个节点被舍弃，由<code>void Remove()</code>实现。然后我们从原来的那个节点的位置开始向上向下维护堆，由<code>void shiftUp(ll son)</code>和<code>void shiftDown(ll fa)</code>实现。调整方法：<br />
+将堆中最后一个元素替代堆顶元素，由于堆的元素个数是按下标控制，因此只需要将下标减一就可以将堆中最后一个元素删除此时，如果堆的结构被破坏，只需要进行简单的向下调整就可以使其重新满足小堆的性质，而其时间复杂度只有<code>logN</code>，因此用堆来进行排序也是可以行得通的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">void shiftDown(ll fa)</span><br><span class="line">&#123;</span><br><span class="line">	ll son&#x3D;fa*2;</span><br><span class="line">	while(son&lt;&#x3D;count1)</span><br><span class="line">	&#123;</span><br><span class="line">		if(son&lt;count1 &amp;&amp; heap[son].val&gt;heap[son+1].val)</span><br><span class="line">			son++;</span><br><span class="line">		if(heap[son].val&lt;heap[fa].val)</span><br><span class="line">		&#123;</span><br><span class="line">			swap(heap[son],heap[fa]);</span><br><span class="line">			fa&#x3D;son;</span><br><span class="line">			son&#x3D;fa*2;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">			break;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void Remove(ll p)</span><br><span class="line">&#123;</span><br><span class="line">	heap[p]&#x3D;heap[count1--];</span><br><span class="line">	up(p);down(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="堆的运用">堆的运用</h1>
+<p><strong>海量数据topk问题：100亿个数中找出最大的前k个数</strong><br />
+方法： 1. 创建一个有k个元素的小堆 2. 利用循环，将最后一个元素和第一个元素进行替换，然后进行向下调整使其满足小堆的性质，如果这个数比根节点都小，那就直接舍弃，否则进行调整，直到这个堆里面所有的数据都是你要找的最大的那几个数为止，这样再进行打印就可以了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88/" rel="prev" title="数据结构-栈">
+                  <i class="fa fa-chevron-left"></i> 数据结构-栈
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/06/%E5%A4%96%E9%93%BE%E5%9B%BE%E5%BA%8A-PicGo-Gitee/" rel="next" title="外链图床(PicGo+Gitee)">
+                  外链图床(PicGo+Gitee) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

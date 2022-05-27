@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="动态规划(Dynamic programming，简称DP)，是一种在多学科中常用的复杂问题求解方法，它是一种方法而不是一种算法。它的最基本思想及为将一个问题分解为多个子问题来进行求解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划">
+<meta property="og:url" content="https://www.xiubenwu.top/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="XBW&#39;s Blog">
+<meta property="og:description" content="动态规划(Dynamic programming，简称DP)，是一种在多学科中常用的复杂问题求解方法，它是一种方法而不是一种算法。它的最基本思想及为将一个问题分解为多个子问题来进行求解。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-14T03:24:50.000Z">
+<meta property="article:modified_time" content="2021-05-25T13:56:50.542Z">
+<meta property="article:author" content="XiubenWu">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.xiubenwu.top/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/","path":"2021/03/14/动态规划/","title":"动态规划"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>动态规划 | XBW's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XBW's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">More And More</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%8F%A0%E5%AD%90%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">重叠子问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E5%AD%90%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">最优子结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">状态转移方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E9%80%92%E6%8E%A8%E4%B8%8E%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2"><span class="nav-number">1.4.</span> <span class="nav-text">递归递推与记忆化搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.5.</span> <span class="nav-text">动态规划步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E7%A8%8B%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">例程详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">斐波那契数列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97"><span class="nav-number">2.2.</span> <span class="nav-text">最长递增子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%B6%E9%92%B1%E7%BD%AE%E6%8D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">零钱置换</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XiubenWu"
+      src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+  <p class="site-author-name" itemprop="name">XiubenWu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XiubenWu" title="Github → https:&#x2F;&#x2F;github.com&#x2F;XiubenWu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Github</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="tencent://message?uin=1347097895" title="QQ → tencent:&#x2F;&#x2F;message?uin&#x3D;1347097895" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/wuxiuben543" title="Wechat → wuxiuben543"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1347097895@qq.com" title="E-Mail → mailto:1347097895@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/System5431" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;System5431" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://studio.youtube.com/channel/UCJS5KyfA4tGFMZFVYk1MqWw" title="Youtube → https:&#x2F;&#x2F;studio.youtube.com&#x2F;channel&#x2F;UCJS5KyfA4tGFMZFVYk1MqWw" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/03/14/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
+      <meta itemprop="name" content="XiubenWu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="动态规划 | XBW's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          动态规划
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-14 11:24:50" itemprop="dateCreated datePublished" datetime="2021-03-14T11:24:50+08:00">2021-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-05-25 21:56:50" itemprop="dateModified" datetime="2021-05-25T21:56:50+08:00">2021-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>动态规划</strong>(Dynamic programming，简称DP)，是一种在多学科中常用的复杂问题求解方法，它是一种方法而不是一种算法。它的最基本思想及为将一个问题分解为多个子问题来进行求解。 <span id="more"></span></p>
+<h1 id="概述">概述</h1>
+<p>动态规划背后的基本思想非常简单。大致上，若要解一个给定问题，我们需要解其不同部分（即子问题），再根据子问题的解以得出原问题的解。动态规划往往用于优化递归问题，例如斐波那契数列，如果运用递归的方式来求解会重复计算很多相同的子问题，利用动态规划的思想可以减少计算量。<br />
+动态规划在查找有很多<strong>重叠子问题</strong>的情况的最优解时有效。它将问题重新组合成子问题。为了避免多次解决这些子问题，它们的结果都逐渐被<strong>计算并被保存</strong>，从简单的问题直到整个问题都被解决。因此，动态规划保存递归时的结果，因而不会在解决同样的问题时花费时间。<br />
+动态规划只能应用于有<strong>最优子结构</strong>的问题。最优子结构的意思是局部最优解能决定全局最优解（对有些问题这个要求并不能完全满足，故有时需要引入一定的近似）。简单地说，问题能够分解成子问题来解决。</p>
+<h2 id="重叠子问题">重叠子问题</h2>
+<p>像分治法一样，动态规划包含了对子问题的解决。动态规划主要用于不断地解决相同子问题。在动态规划中，子问题的计算解被存储在表中，使得这些不必重新计算。因此，当没有公共（重叠）子问题时，就不会使用动态规划。例如，二分搜索没有公共子问题。当存在重叠子问题的时候，使用动态规划就能以牺牲少量的空间复杂度来换取时间复杂度的大量减低。比较经典的一个重叠子问题就是斐波那契数列的递归解法。斐波那契数列递归解法与动态规划解法将会在后续的例程例程中出现。</p>
+<h2 id="最优子结构">最优子结构</h2>
+<p>最优子结构是依赖特定问题和子问题的分割方式而成立的条件。如果可以通过各子问题的最优解来求出整个问题的最优解，此时条件成立，认为这是一个最优子结构。反之，如果不能利用子问题的最优解获得整个问题的最优解，那么这种问题就不具有最优子结构。很多问题的最优子结构都表现出非常直观的形式，以至于都不需要另外的证明过程。不过，遇到结构不是很直观的问题时，需要尝试其他的证明方式(反正法等)。</p>
+<h2 id="状态转移方程">状态转移方程</h2>
+<p>动态规划中当前的状态往往依赖于前一阶段的状态和前一阶段的决策结果。例如我们知道了第<span class="math inline">\(i\)</span>个阶段的状态<span class="math inline">\(S_i\)</span>以及决策<span class="math inline">\(U_i\)</span>，那么第i+1阶段的状态<span class="math inline">\(S_{i+1}\)</span>也就确定了。所以解决动态规划问题的关键就是确定状态转移方程，一旦状态转移方程确定了，那么我们就可以根据方程式进行编码。方程可以表示为：<br />
+<span class="math inline">\(S_i = S_{i-1} + U_i\)</span><br />
+根据问题的不同，具体的形式也是多变的，例如最值问题中需要加上<span class="math inline">\(min和max\)</span>等。</p>
+<h2 id="递归递推与记忆化搜索">递归递推与记忆化搜索</h2>
+<p><strong>递归</strong>就是从上往下（从n到1），递归过程不记录中间计算所产生的数据，每次需要数据时会一直算到截止条件；<strong>递推</strong>则是从下往上（从1到n），递推过程记录中间数据，每次需要数据会从记录的数据拿，由于状态方程的关系，递推过程中每次需要的数据一般都会在前面的计算中保留下来；<strong>记忆化搜索</strong>则是在递归的基础上的改进，它依然是从上往下进行计算，只不过是在计算的时候对数据进行了保留，在需要数据的时候从缓存调取。<br />
+递推和记忆化搜索可以说是使用动态规划思路对递归算法的一种改进，都采用了时间换取空间，对于斐波那契数列这个问题来说，可以将时间复杂度从指数级降到一次级。动态规划最常见的实现形式为递推，某些地方不将记忆化搜索视为动态规划方法。</p>
+<h2 id="动态规划步骤">动态规划步骤</h2>
+<p><strong>1. 划分子问题</strong><br />
+<strong>2. 确定状态转移方程</strong><br />
+<strong>3. 自底而上计算最优解</strong><br />
+<strong>4. 根据所得最优解求解问题</strong></p>
+<h1 id="例程详解">例程详解</h1>
+<h2 id="斐波那契数列">斐波那契数列</h2>
+<p>公元1150年印度数学家Gopala和金月在研究箱子包装对象长宽刚好为1和2的可行方法数目时，首先描述这个数列。在西方，最先研究这个数列的人是比萨的列奥那多（意大利人斐波那契Leonardo Fibonacci），他描述兔子生长的数目时用上了这数列...(不扯了)<br />
+斐波那契数列是一个递增的数列，在数学上定义如下： * <span class="math inline">\(F_0 = 0\)</span> * <span class="math inline">\(F_1 = 1\)</span> * <span class="math inline">\(F_n = F_{n-1} + F_{n-2} (n&gt;=2)\)</span></p>
+<p>观察其表达式，可以很简单的写出它的递归形式 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> f(n - <span class="number">1</span>) + f(n - <span class="number">2</span>)</span><br></pre></td></tr></table></figure> 使用递归形式来进行计算，对于<span class="math inline">\(f(n-1)\)</span><span class="math inline">\(f(n-2)\)</span><span class="math inline">\(f(n-3)\)</span><span class="math inline">\(f(n-4)\)</span>......均需要一直递归计算到函数出口，即<span class="math inline">\(f(1)\)</span>和<span class="math inline">\(f(2)\)</span>，随着n的增大，计算量将随指数形式增长，时间复杂度为<span class="math inline">\(O(2^n)\)</span>.<br />
+如果采用动态规划来计算会怎么样呢。状态转移方程也很简单，直接用递推表达式就可以了：<br />
+<span class="math inline">\(d[i] = d[i-1] + d[i-2]\)</span> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DP</span>(<span class="params">n</span>):</span></span><br><span class="line">    dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n + <span class="number">1</span>)] <span class="comment"># 初始化数组</span></span><br><span class="line">    <span class="keyword">if</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>                  <span class="comment"># 赋初值</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">        dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>]   <span class="comment"># 递推</span></span><br><span class="line">    <span class="keyword">return</span> dp[n]                        <span class="comment"># 返回最后的值</span></span><br></pre></td></tr></table></figure> 可以看到使用动态规划后的时间复杂度为<span class="math inline">\(O(n)\)</span>. ## 路径数量 对于一个矩形区域的格子场地，将其按下表进行编号，从<span class="math inline">\(0,0\)</span>处开始移动，每次移动只能往左或往右移动一格，求在路径最短的情况下从<span class="math inline">\(0,0\)</span>移动到<span class="math inline">\(i,j\)</span>的不同最短路径的数量。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">...</th>
+<th style="text-align: center;">j</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">0,0</td>
+<td style="text-align: center;">0,1</td>
+<td style="text-align: center;">0,2</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">0,j</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">1,0</td>
+<td style="text-align: center;">1,1</td>
+<td style="text-align: center;">1,2</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">1,j</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">2,0</td>
+<td style="text-align: center;">2,1</td>
+<td style="text-align: center;">2,2</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">2,j</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">...</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>i</strong></td>
+<td style="text-align: center;">i,0</td>
+<td style="text-align: center;">i,1</td>
+<td style="text-align: center;">i,2</td>
+<td style="text-align: center;">...</td>
+<td style="text-align: center;">i,j</td>
+</tr>
+</tbody>
+</table>
+<p>既然要求最短路径，则不能移动过程中就不能越界(行超<span class="math inline">\(i\)</span>或列超<span class="math inline">\(j\)</span>)也不能折返，所以到达<span class="math inline">\((i，j)\)</span>之前的转态必然是在<span class="math inline">\((i-1,j)\)</span>或者<span class="math inline">\((i,j-1)\)</span>，从这两个路径移动到<span class="math inline">\((i，j)\)</span>也只有一种走法，于是可以得到转态转移方程：<br />
+<span class="math inline">\(dp[i][j] = dp[i-1][j] + dp[i][j-1]\)</span><br />
+还需要设定初值：<br />
+<span class="math inline">\(dp[0][0...j] = dp[0...i][0] = 1\)</span><br />
+之后就可以通过递推求解了： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DP</span>(<span class="params">row, col</span>):</span></span><br><span class="line">    dp = np.ones((row + <span class="number">1</span>, col + <span class="number">1</span>), dtype=<span class="built_in">int</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, row + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, col + <span class="number">1</span>):</span><br><span class="line">            dp[i][j] = dp[i - <span class="number">1</span>][j] + dp[i][j - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> dp[row][col]</span><br></pre></td></tr></table></figure> 解决此问题的时间复杂度为<span class="math inline">\(O(n^2)\)</span>.</p>
+<h2 id="最长递增子序列">最长递增子序列</h2>
+<p>给定一个一维的整数数组，求其中的最长的且严格递增的子序列的长度。<br />
+例如对于<code>a = [6,1,7,6,2,5,1,8]</code>，其中最长的且严格递增的为<code>[1,2,5,8]</code>所以长度为4，函数应返回4.<br />
+在此处，是否可以将状态<span class="math inline">\(dp[i]\)</span>定义为<span class="math inline">\(arr[0]\)</span>至<span class="math inline">\(arr[i]\)</span>的序列中最长严格单调增子序列的长度呢？咋一看好像没什么问题，往后递推的时候加上<span class="math inline">\(arr[i+1]\)</span>再计算<span class="math inline">\(arr[0]\)</span>至<span class="math inline">\(arr[i+1]\)</span>的单调子序列的长度。可是仔细想想我们无法判断<span class="math inline">\(arr[i+1]\)</span>加上去之后最长单调增子序列的长度是否增加，因为我们并不知道原先最长的子序列是拿几个，而且这样长度相等的子序列可能不止一个。那这个问题到底能不能使用动态规划来解决呢？当然是可以的。<br />
+我们将状态<span class="math inline">\(dp[i]\)</span>定义为<strong>包含</strong>元素<span class="math inline">\(arr[i]\)</span>在内的最长严格递增子序列的长度。这样在求<span class="math inline">\(dp[i+1]\)</span>的时候，从<span class="math inline">\(arr[0]\)</span>至<span class="math inline">\(arr[i]\)</span>中依次寻找比<span class="math inline">\(arr[i+1]\)</span>小的元素<span class="math inline">\(arr[j]\)</span>，再从这些元素对应的转态<span class="math inline">\(dp[j]\)</span>中找到最大(子序列最长)的一个<span class="math inline">\(max(dp[j])\)</span>，<span class="math inline">\(dp[i+1]\)</span>的值即为<span class="math inline">\(max(dp[j])+1\)</span>.最大长度子序列是数组<span class="math inline">\(dp\)</span>中最大的一个值(<strong>注意:不一定是最后一个值</strong>)。可以写出转态转移方程：<br />
+<span class="math inline">\(dp[i] = max(dp[0]...dp[i-1])+1\)</span><br />
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DP</span>(<span class="params">arr</span>):</span></span><br><span class="line">    dp = [-<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(arr))]</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(arr)):</span><br><span class="line">        max_dp = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt; arr[j]:</span><br><span class="line">                <span class="keyword">if</span> max_dp &lt; dp[j]:</span><br><span class="line">                    max_dp = dp[j]</span><br><span class="line">        dp[i] = max_dp + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(dp)</span><br></pre></td></tr></table></figure> 此方法的时间复杂度为<span class="math inline">\(O(n^2)\)</span>.此问题还可以使用贪心加二分查找的方式将时间复杂度降到<span class="math inline">\(O(nlog(n))\)</span>，此处不再做阐述。</p>
+<h2 id="零钱置换">零钱置换</h2>
+<p>(leetcode.322)<br />
+给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。 * <strong>示例 1：</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1, 2, 5], amount &#x3D; 11</span><br><span class="line">输出：3 </span><br><span class="line">解释：11 &#x3D; 5 + 5 + 1</span><br></pre></td></tr></table></figure> * <strong>示例 2：</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [2], amount &#x3D; 3</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure> * <strong>示例 3：</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure> * <strong>示例 4：</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 1</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure> * <strong>示例 5：</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 2</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure> 我们采用自下而上的方式进行思考。仍定义 <span class="math inline">\(F(i)\)</span> 为组成金额 <span class="math inline">\(i\)</span> 所需最少的硬币数量，假设在计算 <span class="math inline">\(F(i)\)</span> 之前，我们已经计算出 <span class="math inline">\(F(0)至F(i-1)\)</span>的答案。 则<span class="math inline">\(F(i)\)</span>对应的转移方程应为:<br />
+<span class="math inline">\(F(i) = min_{j=0...i-1}F(i-c_j)+1\)</span><br />
+其中 <span class="math inline">\(c_j\)</span>代表的是第 <span class="math inline">\(j\)</span> 枚硬币的面值，即我们枚举最后一枚硬币面额是 <span class="math inline">\(c_j\)</span>，那么需要从 <span class="math inline">\(i-c_j\)</span>这个金额的状态 <span class="math inline">\(F(i-c_j)\)</span> 转移过来，再算上枚举的这枚硬币数量 1 的贡献，由于要硬币数量最少，所以 <span class="math inline">\(F(i)\)</span> 为前面能转移过来的状态的最小值加上枚举的硬币数量 1 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DP</span>(<span class="params">coins, amount</span>):</span></span><br><span class="line">    dp = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(amount + <span class="number">1</span>)] <span class="comment"># 求最小值问题，先把转态都设为无穷大</span></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span> <span class="comment"># 0元仅需要0个硬币</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(amount + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            <span class="keyword">if</span> coin &lt;= i: <span class="comment"># i元必定能从i-coin的转态转移过来</span></span><br><span class="line">                dp[i] = <span class="built_in">min</span>(dp[i], dp[i - coin] + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> dp[amount] <span class="keyword">if</span> dp[amount] != <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">else</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>时间复杂度：<span class="math inline">\(O(Sn)\)</span>，其中 <span class="math inline">\(S\)</span> 是金额，<span class="math inline">\(n\)</span> 是面额数。我们一共需要计算 <span class="math inline">\(O(S)\)</span> 个状态，<span class="math inline">\(S\)</span> 为题目所给的总金额。对于每个状态，每次需要枚举 <span class="math inline">\(n\)</span> 个面额来转移状态，所以一共需要 <span class="math inline">\(O(Sn)\)</span> 的时间复杂度。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/09/%E6%96%87%E4%BB%B6%E8%BF%81%E7%A7%BB/" rel="prev" title="文件迁移">
+                  <i class="fa fa-chevron-left"></i> 文件迁移
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/18/%E8%B4%AA%E5%BF%83/" rel="next" title="贪心">
+                  贪心 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吴秀奔</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
