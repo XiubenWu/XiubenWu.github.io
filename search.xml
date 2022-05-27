@@ -8673,4 +8673,26 @@ S_i = \frac{e^{V_i}}{\sum_j e^{V_j}}
         <tag>DL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>图解自注意力机制</title>
+    <url>/2022/05/27/%E5%9B%BE%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<ul>
+<li>单头自注意力机制过程</li>
+</ul>
+<p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/pictures/2022/05/27_14_14_39_20220527selfattention1.png" /></p>
+<ul>
+<li>数据划分，分别做单头self-attention，再将结果拼接，便是多头自注意力</li>
+</ul>
+<figure>
+<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/pictures/2022/05/27_14_15_46_20220527selfattention2.png" alt="mutilhead" /><figcaption>mutilhead</figcaption>
+</figure>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+        <tag>DL</tag>
+      </tags>
+  </entry>
 </search>
