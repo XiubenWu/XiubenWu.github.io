@@ -2,7 +2,7 @@
 title: 薅羊毛之Google
 math: true
 excerpt: 白嫖google的GPU服务器用于训练模型
-date: 2021-07-27 21:00:33
+date: 2022-06-22 21:00:33
 tags:
   -	随笔
 categories:

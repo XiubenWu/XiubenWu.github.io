@@ -3,7 +3,7 @@ title: Pytorch的网络可视化
 excerpt: -----
 photos:
   -	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20220310pytorchnet0.jpg
-date: 2022-03-10 18:08:46
+date: 2022-07-10 18:08:46
 tags:
   - 随笔
 categories:

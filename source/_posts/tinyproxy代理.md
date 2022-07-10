@@ -3,7 +3,7 @@ title: tinyproxy代理
 excerpt: 访问代理
 photos:
 	-	https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20220124tinyproxy0.jpg
-date: 2022-01-24 00:01:57
+date: 2022-04-26 00:01:57
 tags:
 	-	随笔
 	-	server
@@ -403,7 +403,6 @@ curl -x ip:port url
 
 
 完成。
-
 
 
 
