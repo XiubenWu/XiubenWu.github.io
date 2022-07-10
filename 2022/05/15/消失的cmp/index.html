@@ -21,34 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.xiubenwu.top","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="白嫖google的GPU服务器用于训练模型">
+    <meta name="description" content="python3中的cmp函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="薅羊毛之Google">
-<meta property="og:url" content="https://www.xiubenwu.top/2021/07/27/%E8%96%85%E7%BE%8A%E6%AF%9B%E4%B9%8BGoogle/index.html">
+<meta property="og:title" content="消失的cmp">
+<meta property="og:url" content="https://www.xiubenwu.top/2022/05/15/%E6%B6%88%E5%A4%B1%E7%9A%84cmp/index.html">
 <meta property="og:site_name" content="XBW&#39;s Blog">
-<meta property="og:description" content="白嫖google的GPU服务器用于训练模型">
+<meta property="og:description" content="python3中的cmp函数">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab1.png">
-<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/202107272Colab2.png">
-<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab3.png">
-<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab4.png">
-<meta property="og:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab5.png">
-<meta property="article:published_time" content="2021-07-27T13:00:33.000Z">
-<meta property="article:modified_time" content="2022-05-25T08:55:29.748Z">
+<meta property="article:published_time" content="2022-05-15T08:11:57.000Z">
+<meta property="article:modified_time" content="2022-07-10T09:10:00.844Z">
 <meta property="article:author" content="XiubenWu">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab1.png">
 
 
-<link rel="canonical" href="https://www.xiubenwu.top/2021/07/27/%E8%96%85%E7%BE%8A%E6%AF%9B%E4%B9%8BGoogle/">
+<link rel="canonical" href="https://www.xiubenwu.top/2022/05/15/%E6%B6%88%E5%A4%B1%E7%9A%84cmp/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2021/07/27/%E8%96%85%E7%BE%8A%E6%AF%9B%E4%B9%8BGoogle/","path":"2021/07/27/薅羊毛之Google/","title":"薅羊毛之Google"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.xiubenwu.top/2022/05/15/%E6%B6%88%E5%A4%B1%E7%9A%84cmp/","path":"2022/05/15/消失的cmp/","title":"消失的cmp"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>薅羊毛之Google | XBW's Blog</title>
+<title>消失的cmp | XBW's Blog</title>
   
 
 
@@ -151,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAcolaboratory"><span class="nav-number">2.1.</span> <span class="nav-text">1.创建Colaboratory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%82%E8%BD%BDdrive%E4%BA%91%E7%9B%98"><span class="nav-number">2.3.</span> <span class="nav-text">3.挂载Drive云盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%BA%91%E7%9B%98"><span class="nav-number">2.3.1.</span> <span class="nav-text">连接云盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E4%BA%91%E7%9B%98"><span class="nav-number">2.3.2.</span> <span class="nav-text">挂载云盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.3.</span> <span class="nav-text">上传自己的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="nav-number">2.3.4.</span> <span class="nav-text">更改工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.5.</span> <span class="nav-text">运行模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#end"><span class="nav-number">3.</span> <span class="nav-text">End</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python2%E4%B8%AD%E7%9A%84cmp"><span class="nav-number">2.</span> <span class="nav-text">python2中的cmp</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python3%E4%B8%AD%E7%9A%84cmp"><span class="nav-number">3.</span> <span class="nav-text">python3中的cmp</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -241,7 +235,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2021/07/27/%E8%96%85%E7%BE%8A%E6%AF%9B%E4%B9%8BGoogle/">
+    <link itemprop="mainEntityOfPage" href="https://www.xiubenwu.top/2022/05/15/%E6%B6%88%E5%A4%B1%E7%9A%84cmp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/author.gif">
@@ -254,12 +248,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="薅羊毛之Google | XBW's Blog">
+      <meta itemprop="name" content="消失的cmp | XBW's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          薅羊毛之Google
+          消失的cmp
         </h1>
 
         <div class="post-meta-container">
@@ -270,14 +264,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-07-27 21:00:33" itemprop="dateCreated datePublished" datetime="2021-07-27T21:00:33+08:00">2021-07-27</time>
+      <time title="创建时间：2022-05-15 16:11:57" itemprop="dateCreated datePublished" datetime="2022-05-15T16:11:57+08:00">2022-05-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-25 16:55:29" itemprop="dateModified" datetime="2022-05-25T16:55:29+08:00">2022-05-25</time>
+      <time title="修改时间：2022-07-10 17:10:00" itemprop="dateModified" datetime="2022-07-10T17:10:00+08:00">2022-07-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +279,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+          <a href="/categories/%E7%88%AC%E5%9D%91/" itemprop="url" rel="index"><span itemprop="name">爬坑</span></a>
         </span>
     </span>
 
@@ -300,57 +294,30 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="简介">简介</h1>
-<p><a target="_blank" rel="noopener" href="https://colab.research.google.com/">Google Colab</a>是一个云端<strong>Jupyter</strong> 笔记本环境，它是完全<strong>免费</strong>的，唯一的限制条件是需要挂个梯子，毕竟是谷歌的东西。</p>
-<hr />
-<h1 id="使用方式">使用方式</h1>
-<h2 id="创建colaboratory">1.创建Colaboratory</h2>
-<p>在谷歌云盘中新建中选择<strong>更多——&gt;Google Colaboratory</strong>建立一个Jupyter文件。</p>
+<p>cmp是compare的缩写，顾名思义，它的作用用于比较。在python2或C/C++等语言中，cmp函数允许自定义排序函数，即接收两个参数，根据两个参数的关系来决定返回-1（参数1排在参数2之前），0（相等），1（参数1排在参数2之后）三种数值。cmp常用于对列表进行客制化排序。</p>
+<h1 id="python2中的cmp">python2中的cmp</h1>
+<p>在python2中，sorted排序有三个参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable[,cmp,[,key[,reverse=<span class="literal">True</span>]]])</span><br></pre></td></tr></table></figure>
+<p>默认情况下返回从小到大排序的列表。</p>
+<p>第一个参数是一个iterable，返回值是一个对iterable中元素进行排序后的列表(list)。</p>
+<p>可选的参数有三个，cmp、key和reverse，各自作用如下：</p>
 <ul>
-<li>创建文件</li>
+<li><p>cmp指定一个定制的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=比较函数&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra=%7B%22sourceType%22%3A%22article%22%2C%22sourceId%22%3A139574674%7D">比较函数</a>，这个函数接收两个参数（iterable的元素），如果第一个参数小于第二个参数，返回一个负数；如果第一个参数等于第二个参数，返回零；如果第一个参数大于第二个参数，返回一个正数。默认值为None。</p></li>
+<li><p>key指定一个接收一个参数的函数，这个函数用于从每个元素中提取一个用于比较的关键字。默认值为None。key参数的值应该是一个函数，这个函数接收一个参数并且返回一个用于比较的关键字。对复杂对象的比较通常是使用对象的切片作为关键字。</p></li>
+<li><p>reverse是一个<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=布尔值&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra=%7B%22sourceType%22%3A%22article%22%2C%22sourceId%22%3A139574674%7D">布尔值</a>。如果设置为True，列表元素将被倒序排列。</p></li>
 </ul>
-<figure>
-<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab1.png" alt="image-20210727211250174" /><figcaption>image-20210727211250174</figcaption>
-</figure>
+<h1 id="python3中的cmp">python3中的cmp</h1>
+<p>python3废弃了python2 中sorted函数的cmp参数，python3中的sorted形式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(iterable，key=<span class="literal">None</span>,reverse=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p>它的声明如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sorted</span>(<span class="params">*args, **kwargs</span>):</span> <span class="comment"># real signature unknown</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Return a new list containing all items from the iterable in ascending order.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    A custom key function can be supplied to customize the sort order, and the</span></span><br><span class="line"><span class="string">    reverse flag can be set to request the result in descending order.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>文件概况</li>
+<li>key主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse是一个布尔值。如果设置为True，列表元素将被倒序排列，默认为False。</li>
 </ul>
-<figure>
-<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/202107272Colab2.png" alt="image-20210727211535104" /><figcaption>image-20210727211535104</figcaption>
-</figure>
-<h2 id="基本使用">2.基本使用</h2>
-<p>此文件中的基本命令使用与Jupyter相同，但是它还支持dos命令，只需要加上!前缀即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!pwd</span><br><span class="line">!ls</span><br><span class="line">!pip install pyqt5</span><br></pre></td></tr></table></figure>
-<figure>
-<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab3.png" alt="image-20210727212306863" /><figcaption>image-20210727212306863</figcaption>
-</figure>
-<p>此运行环境本质上是一个linux虚拟机。新建的环境默认使用CPU我们需要将其更改为GPU，在<strong>代码执行程序——&gt;更改运行时类型</strong>中将其改为GPU：</p>
-<figure>
-<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab4.png" alt="image-20210727212827529" /><figcaption>image-20210727212827529</figcaption>
-</figure>
-<p><code>!nvidia-smi</code>查看一下Google所分配的GPU，是<strong>Tesla T4</strong>,16G的显存足以应付一般的模型。</p>
-<p>但是仅仅在上面简单的运行一些基础命令是不够的。我们需要将我们本地编写的工程文件移植到云端来运行。这需要挂载drive云盘。</p>
-<h2 id="挂载drive云盘">3.挂载Drive云盘</h2>
-<h3 id="连接云盘">连接云盘</h3>
-<p>首先安装一些必要的系统库，并进行授权。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">!apt-get install -y -qq software-properties-common python-software-properties module-init-tools</span><br><span class="line">!add-apt-repository -y ppa:alessandro-strada&#x2F;ppa 2&gt;&amp;1 &gt; &#x2F;dev&#x2F;null</span><br><span class="line">!apt-get update -qq 2&gt;&amp;1 &gt; &#x2F;dev&#x2F;null</span><br><span class="line">!apt-get -y install -qq google-drive-ocamlfuse fuse</span><br><span class="line">from google.colab import auth</span><br><span class="line">auth.authenticate_user()</span><br><span class="line">from oauth2client.client import GoogleCredentials</span><br><span class="line">creds &#x3D; GoogleCredentials.get_application_default()</span><br><span class="line">import getpass</span><br><span class="line">!google-drive-ocamlfuse -headless -id&#x3D;&#123;creds.client_id&#125; -secret&#x3D;&#123;creds.client_secret&#125; &lt; &#x2F;dev&#x2F;null 2&gt;&amp;1 | grep URL</span><br><span class="line">vcode &#x3D; getpass.getpass()</span><br><span class="line">!echo &#123;vcode&#125; | google-drive-ocamlfuse -headless -id&#x3D;&#123;creds.client_id&#125; -secret&#x3D;&#123;creds.client_secret&#125;</span><br></pre></td></tr></table></figure>
-<p>运行之后出现如下结果：</p>
-<figure>
-<img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20210727Colab5.png" alt="image-20210727214018841" /><figcaption>image-20210727214018841</figcaption>
-</figure>
-<p>此时需要点击链接登录google账号复制密匙进行授权(上图为授权完毕后的状态)。每一个Notebook需要进行一次授权。</p>
-<h3 id="挂载云盘">挂载云盘</h3>
-<p>使用如下命令创建并挂载云盘。运行如下命令后，Notebook运行环境中的drive文件与云盘根目录连接。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">!mkdir -p drive</span><br><span class="line">!google-drive-ocamlfuse drive</span><br></pre></td></tr></table></figure>
-<h3 id="上传自己的文件">上传自己的文件</h3>
-<p>在云盘中建立一个文件夹(例如test)，将自己的工程上传进去</p>
-<h3 id="更改工作目录">更改工作目录</h3>
-<p>使用os更改工作目录：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.chdir(<span class="string">&quot;drive/test&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="运行模型">运行模型</h3>
-<p>直接使用dos运行以编写好的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python3 test.py</span><br></pre></td></tr></table></figure>
-<h1 id="end">End</h1>
-<p>但是，Colab的GPU资源并不是无限制使用的，每天有一定的使用限制，而且Notebook有空闲超时自动断开的缺陷。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">例子：</span><br><span class="line">s &#x3D; &#39;asdf234GDSdsf23&#39; #排序:小写-大写-奇数-偶数</span><br><span class="line"> </span><br><span class="line">print(&quot;&quot;.join(sorted(s, key&#x3D;lambda x: (x.isdigit(),x.isdigit() and int(x) % 2 &#x3D;&#x3D; 0,x.isupper(),x))))</span><br><span class="line">原理：先比较元组的第一个值，FALSE&lt;TRUE，如果相等就比较元组的下一个值，以此类推。</span><br><span class="line"></span><br><span class="line">先看一下Boolean value 的排序：</span><br><span class="line">print(sorted([True,Flase]))&#x3D;&#x3D;&#x3D;&gt;结果[False,True]</span><br><span class="line">Boolean 的排序会将 False 排在前，True排在后 .</span><br><span class="line">1.x.isdigit()的作用是把数字放在后边,字母放在前边.</span><br><span class="line">2.x.isdigit() and int(x) % 2 &#x3D;&#x3D; 0的作用是保证奇数在前，偶数在后。</span><br><span class="line">3.x.isupper()的作用是在前面基础上,保证字母小写在前大写在后.</span><br><span class="line">4.最后的x表示在前面基础上,对所有类别数字或字母排序。</span><br><span class="line">最后结果：addffssDGS33224</span><br></pre></td></tr></table></figure>
+<p>在python3中，取消了cmp自定义排序函数。自定义排序只能从key入手，而key参数又只能够接收一个参数，如果要实现两个元素之间的自定义比较方式，可借助cmp_to_key函数。它是functools下的一个函数，用于将一个cmp函数变成一个key函数，从而赋给sorted中的key参数，实现自定义排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">例题：</span><br><span class="line">给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。</span><br><span class="line"></span><br><span class="line">注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。</span><br><span class="line">输入：nums &#x3D; [3,30,34,5,9]</span><br><span class="line">输出：&quot;9534330&quot;</span><br><span class="line">输入：nums &#x3D; [0,0]</span><br><span class="line">输出：&quot;0&quot;</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def largestNumber(self, nums) -&gt; str:</span><br><span class="line">    	from functools import cmp_to_key</span><br><span class="line">        if sum(nums)&#x3D;&#x3D;0: # 连续0情况</span><br><span class="line">            return &#39;0&#39;</span><br><span class="line">        nums &#x3D; sorted(nums, key&#x3D;cmp_to_key(lambda x, y: -1 if str(x) + str(y) &gt; str(y) + str(x) else 1))</span><br><span class="line">        return &quot;&quot;.join([str(x) for x in nums])</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -360,20 +327,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/07/27/%E5%BE%97%E5%88%B0%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/" rel="prev" title="得到子序列的最少操作次数">
-                  <i class="fa fa-chevron-left"></i> 得到子序列的最少操作次数
+                <a href="/2022/05/12/%E5%AE%B9%E5%99%A8%E5%8F%96%E6%B0%B4/" rel="prev" title="容器取水">
+                  <i class="fa fa-chevron-left"></i> 容器取水
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/08/11/XShell-%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="XShell 连接远程服务器">
-                  XShell 连接远程服务器 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/05/27/%E5%9B%BE%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" rel="next" title="图解自注意力机制">
+                  图解自注意力机制 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

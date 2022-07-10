@@ -982,7 +982,7 @@ dp[i](LoopNext(index))=\left\{
   </entry>
   <entry>
     <title>Pytorch的网络可视化</title>
-    <url>/2022/03/10/Pytorch%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
+    <url>/2022/07/10/Pytorch%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
     <content><![CDATA[<h1 id="概述">概述</h1>
 <p>有时候想要绘制一个神经网络的网络结构，可以通过代码中层的定义去用第三方软件依次绘制，但是这样费时费力。因此需要一种快速绘制的办法。</p>
 <hr />
@@ -1883,7 +1883,7 @@ dp[i](LoopNext(index))=\left\{
   </entry>
   <entry>
     <title>python函数调用关系分析</title>
-    <url>/2021/12/13/python%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90/</url>
+    <url>/2022/07/03/python%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p>在Pycharm的专业版中，提供了一个分析项目性能的工具<code>run-&gt;Profile</code>，可以将工程运行时各函数的调用次数和所用时间记录下来，提供静态数据和关系图表两种表达方式。</p>
 <p><img src="https://gitlab.com/XiubenWu/xiubenwu-images/-/raw/master/img/20211213pyviz1.png" /></p>
 <p>只需轻轻一点，统计数据和图表关系一览无遗，确实方便。但是此方法局限性很大，一是必须使用pycharm，这样使用其他ide如VS Code的用户就没法使用了；二是它不仅要使用pychram，还得是专业版，专业版是要收费的(破解和学生版除外)，这又是一道坎挡在了我们的路上。那么有其他的方法来进行类似的分析吗？当然是有的。</p>
@@ -2008,7 +2008,7 @@ dp[i](LoopNext(index))=\left\{
   </entry>
   <entry>
     <title>tinyproxy代理</title>
-    <url>/2022/01/24/tinyproxy%E4%BB%A3%E7%90%86/</url>
+    <url>/2022/04/26/tinyproxy%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<p>--</p>
 <p>使用校园网时github经常抽风上不去，于是考虑使用手中的服务器做一个代理，看了一下tinyproxy比较轻量简单，就决定是你了。</p>
 <h1 id="安装">安装</h1>
@@ -3929,7 +3929,7 @@ dp[i][j]=\begin{cases}dp[i-1][j-1]+1,a_1[i-1]=a_2[j-1]\\ max(dp[i-1][j],dp[i][j-
   </entry>
   <entry>
     <title>消失的cmp</title>
-    <url>/2021/12/04/%E6%B6%88%E5%A4%B1%E7%9A%84cmp/</url>
+    <url>/2022/05/15/%E6%B6%88%E5%A4%B1%E7%9A%84cmp/</url>
     <content><![CDATA[<h1 id="简介">简介</h1>
 <p>cmp是compare的缩写，顾名思义，它的作用用于比较。在python2或C/C++等语言中，cmp函数允许自定义排序函数，即接收两个参数，根据两个参数的关系来决定返回-1（参数1排在参数2之前），0（相等），1（参数1排在参数2之后）三种数值。cmp常用于对列表进行客制化排序。</p>
 <h1 id="python2中的cmp">python2中的cmp</h1>
@@ -4015,7 +4015,7 @@ dp[i][j]=\begin{cases}dp[i-1][j-1]+1,a_1[i-1]=a_2[j-1]\\ max(dp[i-1][j],dp[i][j-
   </entry>
   <entry>
     <title>薅羊毛之Google</title>
-    <url>/2021/07/27/%E8%96%85%E7%BE%8A%E6%AF%9B%E4%B9%8BGoogle/</url>
+    <url>/2022/06/22/%E8%96%85%E7%BE%8A%E6%AF%9B%E4%B9%8BGoogle/</url>
     <content><![CDATA[<h1 id="简介">简介</h1>
 <p><a href="https://colab.research.google.com/">Google Colab</a>是一个云端<strong>Jupyter</strong> 笔记本环境，它是完全<strong>免费</strong>的，唯一的限制条件是需要挂个梯子，毕竟是谷歌的东西。</p>
 <hr />
@@ -8693,6 +8693,47 @@ S_i = \frac{e^{V_i}}{\sum_j e^{V_j}}
       <tags>
         <tag>随笔</tag>
         <tag>DL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>容器取水</title>
+    <url>/2022/05/12/%E5%AE%B9%E5%99%A8%E5%8F%96%E6%B0%B4/</url>
+    <content><![CDATA[<p>一个经典的问题：使用容量为3升和5升的水桶取出4升的水，只可以进行如下操作： - 装满任意一个水桶； - 清空任意一个水桶； - 从一个水桶向另外一个水桶倒水，直到装满或者倒空；</p>
+<p>方法为：5升桶装满&gt;&gt;&gt;倒到3升桶&gt;&gt;&gt;3升桶倒掉&gt;&gt;&gt;5升桶剩下的2升倒到3升桶&gt;&gt;&gt;5升桶装满&gt;&gt;&gt;5升桶往装着2升水的3升桶倒入1升&gt;&gt;&gt;3升桶的水倒掉。最后在5升桶中还剩下4升水。</p>
+<p>把这个问题推广到更普遍的形式：有两个水壶，容量分别为 Capacity 1和 Capacity 2升。水的供应是无限的。确定是否有可能使用这两个壶准确得到 targetCapacity 升。倒水操作和之前所述一致。</p>
+<p>（lc365）</p>
+<hr />
+<h1 id="暴力遍历">暴力遍历</h1>
+<p>使用BFS暴力枚举各种情况，枚举过程需要记录已经出现过的水总量，遍历到已出现过的总量略过，到最后队列为空还未出现目标总量则说明无法取到相应容量的水。（开始时两个桶总量无法达到目标值则不可能达到）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">canMeasureWater</span>(<span class="params">Capacity1: <span class="built_in">int</span>, Capacity2: <span class="built_in">int</span>, targetCapacity: <span class="built_in">int</span></span>) -&gt; bool:</span></span><br><span class="line">    queue = deque()</span><br><span class="line">    queue.append((<span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line">    exists = <span class="built_in">set</span>()</span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        n = <span class="built_in">len</span>(queue)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            temp = queue.popleft()</span><br><span class="line">            <span class="keyword">if</span> temp[<span class="number">0</span>] == targetCapacity <span class="keyword">or</span> temp[<span class="number">1</span>] == targetCapacity <span class="keyword">or</span> temp[<span class="number">0</span>] + temp[<span class="number">1</span>] == targetCapacity:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            exists.add(temp)</span><br><span class="line">            <span class="keyword">if</span> (<span class="number">0</span>, temp[<span class="number">1</span>]) <span class="keyword">not</span> <span class="keyword">in</span> exists:</span><br><span class="line">                queue.append((<span class="number">0</span>, temp[<span class="number">1</span>]))</span><br><span class="line">            <span class="keyword">if</span> (temp[<span class="number">0</span>], <span class="number">0</span>) <span class="keyword">not</span> <span class="keyword">in</span> exists:</span><br><span class="line">                queue.append((temp[<span class="number">0</span>], <span class="number">0</span>))</span><br><span class="line">            <span class="keyword">if</span> (jug1Capacity, temp[<span class="number">1</span>]) <span class="keyword">not</span> <span class="keyword">in</span> exists:</span><br><span class="line">                queue.append((jug1Capacity, temp[<span class="number">1</span>]))</span><br><span class="line">            <span class="keyword">if</span> (temp[<span class="number">0</span>], jug2Capacity) <span class="keyword">not</span> <span class="keyword">in</span> exists:</span><br><span class="line">                queue.append((temp[<span class="number">0</span>], jug2Capacity))</span><br><span class="line">            f1t2 = (<span class="built_in">max</span>(temp[<span class="number">0</span>] + temp[<span class="number">1</span>] - jug2Capacity, <span class="number">0</span>), <span class="built_in">min</span>(jug2Capacity, temp[<span class="number">0</span>] + temp[<span class="number">1</span>]))</span><br><span class="line">            <span class="keyword">if</span> f1t2 <span class="keyword">not</span> <span class="keyword">in</span> exists:</span><br><span class="line">                queue.append(f1t2)</span><br><span class="line">            f2t1 = (<span class="built_in">min</span>(jug1Capacity, temp[<span class="number">0</span>] + temp[<span class="number">1</span>]), <span class="built_in">max</span>(<span class="number">0</span>, temp[<span class="number">0</span>] + temp[<span class="number">1</span>] - jug1Capacity))</span><br><span class="line">            <span class="keyword">if</span> f2t1 <span class="keyword">not</span> <span class="keyword">in</span> exists:</span><br><span class="line">                queue.append(f2t1)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<hr />
+<h1 id="迭代遍历">迭代遍历</h1>
+<p>观察规律可以发现，可以通过不断使用小桶倒水，大桶加水的方式来得到新的水总量。即设大桶容量为a小桶容量为b，初始可得a+b的水，通过小桶不断倒水，可以获取<code>a-b,a-2b...a-kb</code>的水，当水总量不足小桶容量时，往大桶加水，又可以得出<code>2a-kb,2a-(k+1)b...</code>最终我们可以获取<code>ma-nb</code>的水，当ma等于nb等于a和b的最小公倍数时，水总量为0，即将进入下一个循环，所以在此期间为找到目标水量，则无法得到目标水量。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">canMeasureWater</span>(<span class="params">x: <span class="built_in">int</span>, y: <span class="built_in">int</span>, z: <span class="built_in">int</span></span>) -&gt; bool:</span></span><br><span class="line">    a = <span class="built_in">min</span>(x,y)</span><br><span class="line">    b = <span class="built_in">max</span>(x,y)</span><br><span class="line">    c = a + b</span><br><span class="line">    <span class="keyword">while</span> c:</span><br><span class="line">        <span class="keyword">if</span> c==z:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> c&gt;=b:</span><br><span class="line">            c -= b</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            c += a</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<h1 id="数学推导">数学推导</h1>
+<p>我们认为，每次操作只会让桶里的<strong>水总量增加 x，增加 y，减少 x，或者减少 y</strong>。证明：</p>
+<blockquote>
+<p>首先要清楚，在题目所给的操作下，两个桶不可能同时有水且不满。因为观察所有题目中的操作，操作的结果都至少有一个桶是空的或者满的； 其次，对一个不满的桶加水是没有意义的。因为如果另一个桶是空的，那么这个操作的结果等价于直接从初始状态给这个桶加满水；而如果另一个桶是满的，那么这个操作的结果等价于从初始状态分别给两个桶加满； 再次，把一个不满的桶里面的水倒掉是没有意义的。因为如果另一个桶是空的，那么这个操作的结果等价于回到初始状态；而如果另一个桶是满的，那么这个操作的结果等价于从初始状态直接给另一个桶倒满。 因此，我们可以认为每次操作只会给水的总量带来 x 或者 y 的变化量。因此我们的目标可以改写成：找到一对整数 a, b，使得<span class="math inline">\(ax+by=z\)</span></p>
+</blockquote>
+<p>而只要满足 <span class="math inline">\(z\leq x+y\)</span>，且这样的 a, b存在，那么我们的目标就是可以达成的。这是因为：</p>
+<p>若 <span class="math inline">\(a\geq 0, b\geq 0\)</span>，那么显然可以达成目标。</p>
+<p>若$ a&lt; 0$，那么可以进行以下操作：</p>
+<ul>
+<li><p>往 y 壶倒水；</p></li>
+<li><p>把 y 壶的水倒入 x 壶；</p></li>
+<li><p>如果 y 壶不为空，那么 x 壶肯定是满的，把 x 壶倒空，然后再把 y 壶的水倒入 x 壶。</p></li>
+</ul>
+<p>重复以上操作直至某一步时 x 壶进行了 a 次倒空操作，y 壶进行了 b 次倒水操作。</p>
+<p>若 <span class="math inline">\(b\lt 0\)</span>，方法同上，x 与 y 互换。</p>
+<p>而贝祖定理告诉我们，<span class="math inline">\(ax+by=z\)</span>有解当且仅当 z 是 x, y的最大公约数的倍数。因此我们只需要找到 x, y 的最大公约数并判断 z 是否是它的倍数即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">canMeasureWater</span>(<span class="params">self, x: <span class="built_in">int</span>, y: <span class="built_in">int</span>, z: <span class="built_in">int</span></span>) -&gt; bool:</span></span><br><span class="line">    <span class="keyword">if</span> x + y &lt; z:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> x == <span class="number">0</span> <span class="keyword">or</span> y == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> z == <span class="number">0</span> <span class="keyword">or</span> x + y == z</span><br><span class="line">    <span class="keyword">return</span> z % math.gcd(x, y) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>题录</category>
+      </categories>
+      <tags>
+        <tag>题录</tag>
       </tags>
   </entry>
 </search>
