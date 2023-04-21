@@ -1,7 +1,7 @@
 ---
 title: Useful Websites
 excerpt: 不常用网站归档
-date: 2021-07-15 17:34:25
+date: 2023-04-15 17:34:25
 tags:
   -	随笔
 categories:
@@ -43,6 +43,8 @@ categories:
 [https://github.com/rougier/scientific-visualization-book](https://github.com/rougier/scientific-visualization-book)：matplotlib科学计算可视化教程
 
 [https://readpaper.com/](https://readpaper.com/)：文献阅读helper
+
+[ai-bot](https://ai-bot.cn/):各类AI工具集合网
 
 # 工具
 
