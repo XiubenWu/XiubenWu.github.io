@@ -1317,7 +1317,7 @@ dp[i](LoopNext(index))=\left\{
   </entry>
   <entry>
     <title>Useful Websites</title>
-    <url>/2021/07/15/Useful-Websites/</url>
+    <url>/2023/04/15/Useful-Websites/</url>
     <content><![CDATA[<h1 id="section">~~~~~~</h1>
 <p><a href="https://archive.ics.uci.edu/ml/index.php" class="uri">https://archive.ics.uci.edu/ml/index.php</a>:机器学习数据集大全</p>
 <p><a href="https://archive-beta.ics.uci.edu/" class="uri">https://archive-beta.ics.uci.edu/</a>:机器学习数据集大全(beta版)</p>
@@ -1334,6 +1334,7 @@ dp[i](LoopNext(index))=\left\{
 <p><a href="https://github.com/dair-ai/ml-visuals" class="uri">https://github.com/dair-ai/ml-visuals</a>:ML绘图资源</p>
 <p><a href="https://github.com/rougier/scientific-visualization-book" class="uri">https://github.com/rougier/scientific-visualization-book</a>：matplotlib科学计算可视化教程</p>
 <p><a href="https://readpaper.com/" class="uri">https://readpaper.com/</a>：文献阅读helper</p>
+<p><a href="https://ai-bot.cn/">ai-bot</a>:各类AI工具集合网</p>
 <h1 id="工具">工具</h1>
 <p><a href="https://github.com/julrog/nn_vis">神经网络可视化工具：3D、彩色、可定制，还能可视化参数重要性</a></p>
 <h1 id="tweak主题">Tweak主题</h1>
